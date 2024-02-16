@@ -9,15 +9,15 @@ import InnerContainer from '@/components/containers/InnerContainer/InnerContaine
 import MobileNav from '@/components/shared/MobileNav/MobileNav';
 
 // redux
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const Header = ({ modifyClasses = '' }) => {
-  // const { profileData, appLoading } = useSelector(store => store.auth);
+  const { profileData, appLoading } = useSelector(store => store.auth);
 
   return (
     <header className={`py-customXsm ${modifyClasses}`}>
       <InnerContainer>
-        <div className='grid grid-cols-1 gap-customXsm sm:gap-0 sm:grid-cols-2 items-center'>
+        <div className='grid grid-cols-1 gap-customXsm sm:gap-0 sm:grid-cols-[1fr_2fr] items-center'>
           {/* website logo */}
           <div className='justify-self-center sm:justify-self-start'>
             <BrandLogo modifyClasses='h-[3rem]' />
