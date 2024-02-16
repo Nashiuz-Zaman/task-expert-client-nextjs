@@ -20,7 +20,7 @@ const Header = ({ modifyClasses = '' }) => {
         <div className='grid grid-cols-1 gap-customXsm sm:gap-0 sm:grid-cols-2 items-center'>
           {/* website logo */}
           <div className='justify-self-center sm:justify-self-start'>
-            <BrandLogo imageModifyClasses='h-[3rem]' />
+            <BrandLogo modifyClasses='h-[3rem]' />
           </div>
 
           {/* auth related options login/logout etc */}

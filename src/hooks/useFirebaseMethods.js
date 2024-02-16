@@ -1,10 +1,10 @@
 'use client';
 
-// react-router
-import { useNavigate } from 'react-router-dom';
+// next js
+import { useRouter } from 'next/navigation';
 
 // hooks
-import useToast from './useToast';
+import useToast from '@/hooks/useToast';
 
 // redux
 import { useDispatch } from 'react-redux';
@@ -12,7 +12,7 @@ import {
   setUserShouldExist,
   setProfileData,
   setAppLoading,
-} from '../features/auth/authSlice';
+} from '@/lib/redux/features/auth/authSlice';
 
 // firebase
 import {
@@ -24,11 +24,11 @@ import {
 } from 'firebase/auth';
 
 // auth and google auth provider
-import { auth, googleAuthProvider } from './useAuth';
+import { auth, googleAuthProvider } from '@/hooks/useAuth';
 
 const useFirebaseMethods = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const router = useRouter();
   const { showToast } = useToast();
 
   // login with google
@@ -69,7 +69,7 @@ const useFirebaseMethods = () => {
         showToast('Logged Out Successfully', 'success');
       })
       .catch(error => console.error(error));
-    navigate('/');
+    router.push('/');
   };
 
   return {
