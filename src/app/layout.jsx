@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 
 // components
 import Backdrop from '@/components/shared/Backdrop/Backdrop';
+import AuthComponent from '@/components/shared/AuthComponent/AuthComponent';
 
 // redux
 import Providers from '@/lib/redux/Providers';
@@ -43,6 +44,9 @@ export default function RootLayout({ children }) {
             pauseOnHover
             theme='light'
           />
+
+          {/* auth Component */}
+          <AuthComponent />
 
           {/* backdrop component */}
           <Backdrop />
