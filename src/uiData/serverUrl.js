@@ -1,2 +1,2 @@
-export const serverUrl = import.meta.env.VITE_PROD_serverUrl;
-// export const serverUrl = import.meta.env.VITE_DEV_serverUrl;
+// export const serverUrl = process.env.NEXT_PUBLIC_PROD_SERVER_URL;
+export const serverUrl = process.env.NEXT_PUBLIC_DEV_SERVER_URL;
