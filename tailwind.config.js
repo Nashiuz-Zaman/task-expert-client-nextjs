@@ -14,7 +14,9 @@ module.exports = {
         '3xl': '1700px',
       },
       spacing: {
-        customXl: '16rem',
+        custom3xl: '20rem',
+        custom2xl: '17rem',
+        customXl: '13.5rem',
         customLg: '11rem',
         custom2md: '7.5rem',
         customMd: '6rem',
