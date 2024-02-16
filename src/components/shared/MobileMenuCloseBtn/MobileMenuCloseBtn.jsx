@@ -1,13 +1,13 @@
 // react
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 // react icon
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose } from 'react-icons/ai';
 
 const MobileMenuCloseBtn = ({ clickHandler }) => {
   return (
-    <button className="ml-auto w-max block mb-10" onClick={clickHandler}>
-      <AiOutlineClose className="text-3xl text-white"></AiOutlineClose>
+    <button className='ml-auto w-max block mb-10' onClick={clickHandler}>
+      <AiOutlineClose className='text-3xl text-white'></AiOutlineClose>
     </button>
   );
 };

@@ -15,20 +15,19 @@ import ButtonBtn from '@/components/shared/ButtonBtn/ButtonBtn';
 // hook
 import useMobileNavigation from '@/hooks/useMobileNavigation';
 import useEscapeClose from '@/hooks/useEscapeClose';
-// import useFirebaseMethods from './../../../hooks/useFirebaseMethods';
+import useFirebaseMethods from '@/hooks/useFirebaseMethods';
 
 // redux
 import { useSelector } from 'react-redux';
 
 // data
 import { navOptions } from '@/uiData/navigationOptions';
-import logoWhite from './../../../assets/websiteLogo/logo-white.webp';
 
 const MobileNav = ({ modifyClasses = '' }) => {
-  // const { profileData } = useSelector(store => store.auth);
+  const { profileData } = useSelector(store => store.auth);
   const { mobileNavOpen, openMobileNav, closeMobileNav } =
     useMobileNavigation();
-  // const { logout } = useFirebaseMethods();
+  const { logout } = useFirebaseMethods();
 
   // add escape key close functionality
   useEscapeClose(closeMobileNav);
@@ -51,25 +50,23 @@ const MobileNav = ({ modifyClasses = '' }) => {
         <MobileMenuCloseBtn clickHandler={closeMobileNav} />
 
         {/* brand logo part */}
-        <BrandLogo theme='dark' modifyClasses='block w-max mr-auto mb-10' />
+        <BrandLogo theme='dark' modifyClasses='block w-max mr-auto mb-10 h-9' />
 
         {/* regular part */}
         <ul className='flex flex-col gap-3'>
           {/* this part will be always shown */}
-          {navOptions &&
-            navOptions.map(option => {
-              // normal link
-              return (
-                <li key={option.id} onClick={closeMobileNav}>
-                  <Link className={linkClasses} href={option.url}>
-                    {option.text}
-                  </Link>
-                </li>
-              );
-            })}
+          {navOptions?.map(option => {
+            return (
+              <li key={option.id} onClick={closeMobileNav}>
+                <Link className={linkClasses} href={option.url}>
+                  {option.text}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
-        {/* {profileData && (
+        {profileData && (
           <ButtonBtn
             text='Sign Out'
             colorTheme='outlined'
@@ -79,7 +76,7 @@ const MobileNav = ({ modifyClasses = '' }) => {
             }}
             modifyClasses='mt-elementGapSm'
           />
-        )} */}
+        )}
       </nav>
     </div>
   );

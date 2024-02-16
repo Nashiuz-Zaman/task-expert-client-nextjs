@@ -1,5 +1,3 @@
-'use client';
-
 // react imports
 import PropTypes from 'prop-types';
 
@@ -11,20 +9,15 @@ import Image from 'next/image';
 import logoPrimary from '@/assets/websiteLogo/logo-primary.webp';
 import logoWhite from '@/assets/websiteLogo/logo-white.webp';
 
-const BrandLogo = ({
-  modifyClasses = '',
-  imageModifyClasses = '',
-  theme = 'light',
-}) => {
-  
+const BrandLogo = ({ modifyClasses = '', theme = 'light' }) => {
   return (
-    <Link className={`block w-max h-full ${modifyClasses}`} href='/'>
+    <Link className={`block w-max ${modifyClasses}`} href='/'>
       <Image
-        style={{ width: 'auto' }}
+        style={{ width: 'auto', height: 'inherit' }}
         priority={true}
         src={theme === 'light' ? logoPrimary : logoWhite}
         alt='Company Logo'
-        className={`block h-[3rem] ${imageModifyClasses}`}
+        className='block'
       />
     </Link>
   );
@@ -33,7 +26,7 @@ const BrandLogo = ({
 BrandLogo.propTypes = {
   modifyClasses: PropTypes.string,
   imageModifyClasses: PropTypes.string,
-  theme: PropTypes.bool,
+  theme: PropTypes.string,
 };
 
 export default BrandLogo;
