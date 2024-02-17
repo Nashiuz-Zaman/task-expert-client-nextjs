@@ -1,29 +1,52 @@
+'use client';
+
 // react
-import PropTypes from 'prop-types';
+import { useEffect, useCallback } from 'react';
 
 // components
 import LoginFormWithImage from '../LoginFormWithImage/LoginFormWithImage';
-// import InnerContainer from '@/components/containers/InnerContainer/InnerContainer';
+
+// hooks
+import useClickOutside from '@/hooks/useClickOutside';
+
+// redux
+import useRedux from '@/hooks/useRedux';
+import { setLoginFormOpen } from '@/lib/redux/features/form/formSlice';
+import { setBackdropOpen } from '@/lib/redux/features/backdrop/backdropSlice';
 
 // data
 import loginImg from './../../../assets/forms/login.webp';
 
-const LoginModal = ({ visible = false }) => {
+const LoginModal = () => {
+   const { dispatch, useSelector } = useRedux();
+   const { loginFormOpen } = useSelector(store => store.form);
+
+   const handleClickOutside = useCallback(e => {
+      if (!e.target.closest('.login-custom-focus')) {
+         dispatch(setLoginFormOpen(false));
+         dispatch(setBackdropOpen(false));
+      }
+   }, []);
+
+   useClickOutside(loginFormOpen, handleClickOutside);
+
+   useEffect(() => {
+      if (loginFormOpen) {
+         document.body.style.overflowY = 'hidden';
+      } else {
+         document.body.style.overflowY = 'auto';
+      }
+   }, [loginFormOpen]);
+
    return (
       <div
-         className={`fixed w-full transition-all duration-default opacity-100 visible top-1/2 left-1/2 -translate-y-full -translate-x-1/2 ${
-            visible ? '!opacity-100 !visible !-translate-y-1/2' : ''
+         className={`fixed w-full z-40 transition-all duration-default opacity-0 collapse top-1/2 left-1/2 -translate-y-full -translate-x-1/2 ${
+            loginFormOpen ? '!opacity-100 !visible !-translate-y-1/2' : ''
          }`}
       >
-         {/* <InnerContainer> */}
          <LoginFormWithImage imageSource={loginImg} />
-         {/* </InnerContainer> */}
       </div>
    );
-};
-
-LoginModal.propTypes = {
-   visible: PropTypes.bool,
 };
 
 export default LoginModal;
