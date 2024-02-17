@@ -8,6 +8,7 @@ import backdropReducer from '@/lib/redux/features/backdrop/backdropSlice';
 import mediaQueryReducer from '@/lib/redux/features/mediaQuery/mediaQuerySlice';
 import mobileNavReducer from '@/lib/redux/features/mobileNav/mobileNavSlice';
 import authReducer from '@/lib/redux/features/auth/authSlice';
+import formReducer from '@/lib/redux/features/form/formSlice';
 
 export const store = configureStore({
   reducer: {
@@ -15,5 +16,6 @@ export const store = configureStore({
     backdrop: backdropReducer,
     mediaQuery: mediaQueryReducer,
     mobileNav: mobileNavReducer,
+    form: formReducer,
   },
 });

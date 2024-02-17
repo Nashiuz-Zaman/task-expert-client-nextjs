@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
+  productionBrowserSourceMaps: false,
+  optimizeFonts: false,
   images: {
     remotePatterns: [
       {
