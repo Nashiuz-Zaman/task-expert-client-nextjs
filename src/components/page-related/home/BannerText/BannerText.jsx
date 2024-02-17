@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types';
 
 // component
-import LinkBtn from '@/components/shared/ButtonBtn/ButtonBtn';
+import LinkBtn from '@/components/shared/LinkBtn/LinkBtn';
 
 function BannerText({ heading, subheading }) {
   return (
@@ -21,7 +21,7 @@ function BannerText({ heading, subheading }) {
           <LinkBtn text="Let's Explore" url='/task-management' />
           <LinkBtn
             text='Learn More'
-            url='/#learn-more'
+            url='#learn-more'
             colorTheme='outlinedPrimary'
             hashed={true}
           />

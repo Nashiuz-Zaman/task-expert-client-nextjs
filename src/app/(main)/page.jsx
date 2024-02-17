@@ -12,7 +12,7 @@ const Home = () => {
         </InnerContainer>
       </section>
 
-      <section id='learn-more' className='mb-custom3xl'>
+      <section id='learn-more' className='mb-custom2xl'>
         <InnerContainer>
           <TargetAudience />
         </InnerContainer>
