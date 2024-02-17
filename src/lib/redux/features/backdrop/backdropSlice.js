@@ -4,20 +4,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  open: false,
+   backdropOpen: false,
 };
 
 const backdropSlice = createSlice({
-  name: 'backdrop',
-  initialState,
-  reducers: {
-    setOpen: (state, { payload }) => {
-      state.open = payload;
-    },
-  },
+   name: 'backdrop',
+   initialState,
+   reducers: {
+      setBackdropOpen: (state, { payload }) => {
+         state.backdropOpen = payload;
+      },
+   },
 });
 
 const { actions, reducer } = backdropSlice;
 
 export default reducer;
-export const { setOpen } = actions;
+export const { setBackdropOpen } = actions;
