@@ -7,7 +7,7 @@ import Image from 'next/image';
 // components
 import LoginForm from './LoginForm/LoginForm';
 
-const LoginFormWithImage = ({ imageSource, appLoading = false }) => {
+const LoginFormWithImage = ({ imageSource }) => {
    return (
       <div
          className={`grid grid-cols-1 2md:grid-cols-[1fr_max-content] rounded-2xl overflow-hidden mx-auto w-[90%] xsm:w-max 2md:w-[90%] lg:w-[56rem] 2xl:w-[60rem] shadow-medium login-custom-focus`}
@@ -33,7 +33,6 @@ const LoginFormWithImage = ({ imageSource, appLoading = false }) => {
 
 LoginFormWithImage.propTypes = {
    imageSource: PropTypes.any,
-   appLoading: PropTypes.bool,
 };
 
 export default LoginFormWithImage;

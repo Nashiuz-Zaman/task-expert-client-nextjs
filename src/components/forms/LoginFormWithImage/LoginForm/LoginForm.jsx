@@ -24,7 +24,7 @@ const LoginForm = ({ modifyClasses = '' }) => {
          className={`w-full bg-white mx-auto py-12 px-5 xsm:px-8 sm:px-10 2md:px-12 lg:px-10 ${modifyClasses}`}
       >
          {/* heading */}
-         <h2 className='capitalize mb-custom2xsm text-center text-2xl'>
+         <h2 className='capitalize mb-custom2xsm text-center text-2xl font-semibold'>
             Login to your account
          </h2>
 
@@ -58,6 +58,7 @@ const LoginForm = ({ modifyClasses = '' }) => {
                text='Sign In'
                modifyClasses='mx-auto block my-custom2xsm'
             />
+
             <p className='text-sm text-center xl:text-base'>
                Don&apos;t have an account?{' '}
                <button className='text-primary font-semibold'>Register</button>
