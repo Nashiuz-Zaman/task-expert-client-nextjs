@@ -13,6 +13,8 @@ const BrandLogo = ({ modifyClasses = '', theme = 'light' }) => {
   return (
     <Link className={`block w-max ${modifyClasses}`} href='/'>
       <Image
+        width={100}
+        height={40}
         style={{ width: 'auto', height: 'inherit' }}
         priority={true}
         src={theme === 'light' ? logoPrimary : logoWhite}
