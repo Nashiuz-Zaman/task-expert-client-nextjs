@@ -5,26 +5,26 @@ import TargetAudience from '@/components/page-related/home/TargetAudience/Target
 import LoginModal from '@/components/forms/LoginModal/LoginModal';
 
 const Home = () => {
-  return (
-    <>
-      <section className='mt-custom2md mb-customXl md:mb-custom2xl'>
-        <InnerContainer>
-          <Banner />
-        </InnerContainer>
-      </section>
+   return (
+      <>
+         <section className='mt-custom2md mb-customXl md:mb-custom2xl'>
+            <InnerContainer>
+               <Banner />
+            </InnerContainer>
+         </section>
 
-      <section id='learn-more' className='mb-customXl md:mb-custom2xl'>
-        <InnerContainer>
-          <TargetAudience />
-        </InnerContainer>
-      </section>
+         <section id='learn-more' className='mb-customXl md:mb-custom2xl'>
+            <InnerContainer>
+               <TargetAudience />
+            </InnerContainer>
+         </section>
 
-      {/* forms */}
-      <InnerContainer>
-        <LoginModal visible={true} />
-      </InnerContainer>
-    </>
-  );
+         {/* forms */}
+         <InnerContainer>
+            <LoginModal />
+         </InnerContainer>
+      </>
+   );
 };
 
 export default Home;
