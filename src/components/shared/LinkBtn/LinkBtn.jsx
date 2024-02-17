@@ -31,7 +31,7 @@ const LinkBtn = ({
   const blackClasses =
     'bg-blackLight border border-blackLight hover:bg-textPrimary hover:border-textPrimary text-white';
 
-  const allClasses = `block w-max transition-all duration-default rounded-defaultLg text-center px-6 py-2 3xl:text-xl 2xl:py-3 ${modifyClasses}`;
+  const allClasses = `block w-max transition-all duration-default rounded-defaultLg text-center px-6 py-2 3xl:text-xl 2xl:py-3 active:scale-[0.98] ${modifyClasses}`;
 
   return (
     <Link
