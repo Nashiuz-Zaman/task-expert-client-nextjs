@@ -3,6 +3,7 @@ import InnerContainer from '@/components/containers/InnerContainer/InnerContaine
 import Banner from '@/components/page-related/home/Banner/Banner';
 import TargetAudience from '@/components/page-related/home/TargetAudience/TargetAudience';
 import LoginModal from '@/components/forms/LoginModal/LoginModal';
+import RegistrationModal from '@/components/forms/RegistrationModal/RegtistrationModal';
 
 const Home = () => {
    return (
@@ -22,6 +23,7 @@ const Home = () => {
          {/* forms */}
          <InnerContainer>
             <LoginModal />
+            <RegistrationModal />
          </InnerContainer>
       </>
    );
