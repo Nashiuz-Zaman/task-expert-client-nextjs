@@ -1,16 +1,18 @@
+'use client';
+
 // react
 import PropTypes from 'prop-types';
 
-// next
+// react-router
 import Image from 'next/image';
 
 // components
-import LoginForm from './LoginForm/LoginForm';
+import RegistrationForm from './RegistrationForm/RegistrationForm';
 
-const LoginFormWithImage = ({ imageSource }) => {
+const RegistrationFormWithImage = ({ imageSource }) => {
    return (
       <div
-         className={`grid grid-cols-1 2md:grid-cols-[1fr_max-content] rounded-2xl overflow-hidden mx-auto w-[90%] xsm:w-max 2md:w-[90%] lg:w-[56rem] 2xl:w-[60rem] shadow-medium login-custom-focus`}
+         className={`grid grid-cols-1 2md:grid-cols-[1fr_max-content] rounded-2xl overflow-hidden mx-auto w-[90%] xsm:w-max 2md:w-[90%] lg:w-[56rem] 2xl:w-[60rem] shadow-medium registration-custom-focus`}
       >
          {/* image */}
          <div className='hidden 2md:block w-full h-full overflow-hidden'>
@@ -23,16 +25,16 @@ const LoginFormWithImage = ({ imageSource }) => {
             />
          </div>
 
-         {/* login form */}
+         {/* Registration form */}
          <div className='w-full flex items-center'>
-            <LoginForm />
+            <RegistrationForm />
          </div>
       </div>
    );
 };
 
-LoginFormWithImage.propTypes = {
+RegistrationFormWithImage.propTypes = {
    imageSource: PropTypes.any,
 };
 
-export default LoginFormWithImage;
+export default RegistrationFormWithImage;

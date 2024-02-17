@@ -1,23 +1,27 @@
-'use client';
-
-// react imports
+// react
 import PropTypes from 'prop-types';
 
-// component
+// components
 import ButtonBtn from '@/components/shared/ButtonBtn/ButtonBtn';
 import GoogleLoginBtn from '@/components/shared/GoogleLoginBtn/GoogleLoginBtn';
-import PasswordField from '@/components/shared/PasswordField/PasswordField';
+import FileUploadBtn from '@/components/shared/FileUploadBtn/FileUploadBtn';
 
 // hooks
+import useRegistrationForm from '@/hooks/useRegistrationForm';
 import useLoginForm from '@/hooks/useLoginForm';
+
+// react icons
+import { IoCloudUpload } from 'react-icons/io5';
 
 // redux
 import { useSelector } from 'react-redux';
 import InputField from '@/components/shared/InputField/InputField';
+import PasswordField from '@/components/shared/PasswordField/PasswordField';
 
-const LoginForm = ({ modifyClasses = '' }) => {
-   const { loginErrors } = useSelector(store => store.auth);
-   const { handleLoginEmail, handleLoginGoogle } = useLoginForm();
+const RegistrationForm = ({ modifyClasses }) => {
+   const { handleSubmit } = useRegistrationForm();
+   const { registrationErrors } = useSelector(store => store.auth);
+   const { handleLoginGoogle } = useLoginForm();
 
    return (
       <div
@@ -25,23 +29,35 @@ const LoginForm = ({ modifyClasses = '' }) => {
       >
          {/* heading */}
          <h2 className='capitalize mb-custom2xsm text-center text-2xl font-semibold'>
-            Login to your account
+            Sign up. It&apos;s <span className='text-primary'>Free!</span>
          </h2>
 
          {/* form */}
-         <form noValidate onSubmit={handleLoginEmail} className='w-full'>
+         <form noValidate onSubmit={handleSubmit} className='w-full'>
             <div className='w-full space-y-5 xsm:w-[17rem] 2md:w-full 2md:mx-0 mx-auto'>
-               {/* email */}
+               {/* username field */}
+               <InputField name='name' placeholder='Username' />
+
+               {/* photo upload button */}
+               <div className='grid grid-cols-2 items-center'>
+                  <p>Your Photo</p>
+
+                  <FileUploadBtn>
+                     Browse <IoCloudUpload size={25} />
+                  </FileUploadBtn>
+               </div>
+
+               {/* email field */}
                <InputField type='email' name='email' placeholder='Email' />
 
-               {/* password */}
+               {/* password field */}
                <PasswordField name='password' placeholder='Password' />
             </div>
 
             {/* show errors here */}
-            {loginErrors?.length > 0 && (
+            {registrationErrors?.length > 0 && (
                <div className='space-y-1 mt-4'>
-                  {loginErrors.map(error => {
+                  {registrationErrors.map(error => {
                      return (
                         <p
                            key={error}
@@ -55,19 +71,20 @@ const LoginForm = ({ modifyClasses = '' }) => {
             )}
 
             <ButtonBtn
-               text='Sign In'
+               text='Sign Up'
                modifyClasses='mx-auto block my-custom2xsm'
             />
 
             <p className='text-sm text-center xl:text-base'>
-               Don&apos;t have an account?{' '}
-               <button className='text-primary font-semibold'>Register</button>
+               Already have an account?{' '}
+               <button className='text-primary font-semibold'>Log In</button>
             </p>
          </form>
 
-         <p className='text-center my-4'>Or</p>
+         <p className='text-center  my-4'>Or</p>
 
          <GoogleLoginBtn
+            text='Sign up with Google'
             onClickFunction={handleLoginGoogle}
             modifyClasses='w-max mx-auto'
          />
@@ -75,8 +92,8 @@ const LoginForm = ({ modifyClasses = '' }) => {
    );
 };
 
-LoginForm.propTypes = {
+RegistrationForm.propTypes = {
    modifyClasses: PropTypes.string,
 };
 
-export default LoginForm;
+export default RegistrationForm;
