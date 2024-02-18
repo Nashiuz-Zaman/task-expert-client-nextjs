@@ -2,22 +2,35 @@
 
 // react imports
 import PropTypes from 'prop-types';
+import { useEffect, useRef } from 'react';
 
 // component
 import ButtonBtn from '@/components/shared/ButtonBtn/ButtonBtn';
 import GoogleLoginBtn from '@/components/shared/GoogleLoginBtn/GoogleLoginBtn';
 import PasswordField from '@/components/shared/PasswordField/PasswordField';
+import InputField from '@/components/shared/InputField/InputField';
 
 // hooks
 import useLoginForm from '@/hooks/useLoginForm';
+import useResetForm from '@/hooks/useResetForm';
 
 // redux
 import { useSelector } from 'react-redux';
-import InputField from '@/components/shared/InputField/InputField';
+import { setLoginErrors } from '@/lib/redux/features/auth/authSlice';
 
 const LoginForm = ({ modifyClasses = '' }) => {
    const { loginErrors } = useSelector(store => store.auth);
+   const { loginFormOpen } = useSelector(store => store.form);
    const { handleLoginEmail, handleLoginGoogle } = useLoginForm();
+   const { resetFormFieldsAndErrors } = useResetForm();
+   const formEl = useRef();
+
+   // clear form fields and errors when it disappears
+   useEffect(() => {
+      if (!loginFormOpen) {
+         resetFormFieldsAndErrors(formEl, setLoginErrors);
+      }
+   }, [loginFormOpen, resetFormFieldsAndErrors]);
 
    return (
       <div
@@ -29,7 +42,12 @@ const LoginForm = ({ modifyClasses = '' }) => {
          </h2>
 
          {/* form */}
-         <form noValidate onSubmit={handleLoginEmail} className='w-full'>
+         <form
+            ref={formEl}
+            noValidate
+            onSubmit={handleLoginEmail}
+            className='w-full'
+         >
             <div className='w-full space-y-5 xsm:w-[17rem] 2md:w-full 2md:mx-0 mx-auto'>
                {/* email */}
                <InputField type='email' name='email' placeholder='Email' />
