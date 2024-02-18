@@ -8,29 +8,13 @@ import BrandLogo from '@/components/shared/BrandLogo/Brandlogo';
 import InnerContainer from '@/components/containers/InnerContainer/InnerContainer';
 import MobileNav from '@/components/shared/MobileNav/MobileNav';
 
-// redux
-import useRedux from '@/hooks/useRedux';
-import {
-   setLoginFormOpen,
-   setRegistrationFormOpen,
-} from '@/lib/redux/features/form/formSlice';
-import { setBackdropOpen } from '@/lib/redux/features/backdrop/backdropSlice';
+// hooks
+import useFormVisiblity from '@/hooks/useFormVisiblity';
 
 const Header = ({ modifyClasses = '' }) => {
-   const { dispatch } = useRedux();
    // const { profileData, appLoading } = useSelector(store => store.auth);
-
-   const openLoginForm = e => {
-      e.preventDefault();
-      dispatch(setLoginFormOpen(true));
-      dispatch(setBackdropOpen(true));
-   };
-
-   const openSignupForm = e => {
-      e.preventDefault();
-      dispatch(setRegistrationFormOpen(true));
-      dispatch(setBackdropOpen(true));
-   };
+   const { openLoginFormWithBackdrop, openSignupFormWithBackdrop } =
+      useFormVisiblity();
 
    return (
       <header className={`pt-customXsm pb-customXsm ${modifyClasses}`}>
@@ -38,14 +22,14 @@ const Header = ({ modifyClasses = '' }) => {
             {/* login/ register/ account name */}
             <div className='flex gap-4 justify-center items-center 2md:justify-end lg:text-lg mb-customXsm 2md:mb-custom2xsm font-medium'>
                <button
-                  onClick={openLoginForm}
+                  onClick={openLoginFormWithBackdrop}
                   className='hover:text-primary transition-all duration-default'
                >
                   Login
                </button>
 
                <button
-                  onClick={openSignupForm}
+                  onClick={openSignupFormWithBackdrop}
                   className='hover:text-primary transition-all duration-default'
                >
                   Register

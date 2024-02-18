@@ -8,18 +8,17 @@ import RegistrationFormWithImage from '../RegistrationFormWithImage/Registration
 
 // hooks
 import useClickOutside from '@/hooks/useClickOutside';
+import useFormVisiblity from '@/hooks/useFormVisiblity';
 
 // redux
-import useRedux from '@/hooks/useRedux';
-import { setRegistrationFormOpen } from '@/lib/redux/features/form/formSlice';
-import { setBackdropOpen } from '@/lib/redux/features/backdrop/backdropSlice';
+import { useSelector } from 'react-redux';
 
 // data
 import registrationImg from './../../../assets/forms/registration.webp';
 
 const RegistrationModal = () => {
-   const { dispatch, useSelector } = useRedux();
    const { registrationFormOpen } = useSelector(store => store.form);
+   const { closeSignupFormWithBackdrop } = useFormVisiblity();
 
    const handleClickOutside = useCallback(
       e => {
@@ -30,10 +29,9 @@ const RegistrationModal = () => {
             return;
          }
 
-         dispatch(setRegistrationFormOpen(false));
-         dispatch(setBackdropOpen(false));
+         closeSignupFormWithBackdrop();
       },
-      [dispatch]
+      [closeSignupFormWithBackdrop]
    );
 
    useClickOutside(registrationFormOpen, handleClickOutside);

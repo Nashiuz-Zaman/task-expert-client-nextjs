@@ -13,6 +13,7 @@ import PasswordField from '@/components/shared/PasswordField/PasswordField';
 import useRegistrationForm from '@/hooks/useRegistrationForm';
 import useLoginForm from '@/hooks/useLoginForm';
 import useResetForm from '@/hooks/useResetForm';
+import useFormVisiblity from '@/hooks/useFormVisiblity';
 
 // react icons
 import { IoCloudUpload } from 'react-icons/io5';
@@ -27,6 +28,8 @@ const RegistrationForm = ({ modifyClasses }) => {
    const { registrationFormOpen } = useSelector(store => store.form);
    const { handleLoginGoogle } = useLoginForm();
    const { resetFormFieldsAndErrors } = useResetForm();
+   const { closeSignupFormWithBackdrop, openLoginFormWithBackdrop } =
+      useFormVisiblity();
    const formEl = useRef();
 
    // clear form fields and errors when it disappears
@@ -95,7 +98,16 @@ const RegistrationForm = ({ modifyClasses }) => {
 
             <p className='text-sm text-center xl:text-base'>
                Already have an account?{' '}
-               <button className='text-primary font-semibold'>Log In</button>
+               <button
+                  onClick={e => {
+                     e.preventDefault();
+                     closeSignupFormWithBackdrop(false);
+                     openLoginFormWithBackdrop(false);
+                  }}
+                  className='text-primary font-semibold'
+               >
+                  Log In
+               </button>
             </p>
          </form>
 

@@ -13,6 +13,7 @@ import InputField from '@/components/shared/InputField/InputField';
 // hooks
 import useLoginForm from '@/hooks/useLoginForm';
 import useResetForm from '@/hooks/useResetForm';
+import useFormVisiblity from '@/hooks/useFormVisiblity';
 
 // redux
 import { useSelector } from 'react-redux';
@@ -23,6 +24,8 @@ const LoginForm = ({ modifyClasses = '' }) => {
    const { loginFormOpen } = useSelector(store => store.form);
    const { handleLoginEmail, handleLoginGoogle } = useLoginForm();
    const { resetFormFieldsAndErrors } = useResetForm();
+   const { closeLoginFormWithBackdrop, openSignupFormWithBackdrop } =
+      useFormVisiblity();
    const formEl = useRef();
 
    // clear form fields and errors when it disappears
@@ -79,7 +82,16 @@ const LoginForm = ({ modifyClasses = '' }) => {
 
             <p className='text-sm text-center xl:text-base'>
                Don&apos;t have an account?{' '}
-               <button className='text-primary font-semibold'>Register</button>
+               <button
+                  onClick={e => {
+                     e.preventDefault();
+                     closeLoginFormWithBackdrop(false);
+                     openSignupFormWithBackdrop(false);
+                  }}
+                  className='text-primary font-semibold'
+               >
+                  Register
+               </button>
             </p>
          </form>
 

@@ -8,18 +8,17 @@ import LoginFormWithImage from '../LoginFormWithImage/LoginFormWithImage';
 
 // hooks
 import useClickOutside from '@/hooks/useClickOutside';
+import useFormVisiblity from '@/hooks/useFormVisiblity';
 
 // redux
-import useRedux from '@/hooks/useRedux';
-import { setLoginFormOpen } from '@/lib/redux/features/form/formSlice';
-import { setBackdropOpen } from '@/lib/redux/features/backdrop/backdropSlice';
+import { useSelector } from 'react-redux';
 
 // data
 import loginImg from './../../../assets/forms/login.webp';
 
 const LoginModal = () => {
-   const { dispatch, useSelector } = useRedux();
    const { loginFormOpen } = useSelector(store => store.form);
+   const { closeLoginFormWithBackdrop } = useFormVisiblity();
 
    const handleClickOutside = useCallback(
       e => {
@@ -30,10 +29,9 @@ const LoginModal = () => {
             return;
          }
 
-         dispatch(setLoginFormOpen(false));
-         dispatch(setBackdropOpen(false));
+         closeLoginFormWithBackdrop();
       },
-      [dispatch]
+      [closeLoginFormWithBackdrop]
    );
 
    useClickOutside(loginFormOpen, handleClickOutside);
