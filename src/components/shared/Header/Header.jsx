@@ -17,8 +17,8 @@ import {
 import { setBackdropOpen } from '@/lib/redux/features/backdrop/backdropSlice';
 
 const Header = ({ modifyClasses = '' }) => {
-   const { dispatch, useSelector } = useRedux();
-   const { profileData, appLoading } = useSelector(store => store.auth);
+   const { dispatch } = useRedux();
+   // const { profileData, appLoading } = useSelector(store => store.auth);
 
    const openLoginForm = e => {
       e.preventDefault();
