@@ -21,12 +21,20 @@ const LoginModal = () => {
    const { dispatch, useSelector } = useRedux();
    const { loginFormOpen } = useSelector(store => store.form);
 
-   const handleClickOutside = useCallback(e => {
-      if (!e.target.closest('.login-custom-focus')) {
+   const handleClickOutside = useCallback(
+      e => {
+         if (
+            e.target.closest('.login-custom-focus') ||
+            e.target.closest('.password-custom-focus')
+         ) {
+            return;
+         }
+
          dispatch(setLoginFormOpen(false));
          dispatch(setBackdropOpen(false));
-      }
-   }, []);
+      },
+      [dispatch]
+   );
 
    useClickOutside(loginFormOpen, handleClickOutside);
 

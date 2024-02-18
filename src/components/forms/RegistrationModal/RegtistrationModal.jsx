@@ -21,12 +21,20 @@ const RegistrationModal = () => {
    const { dispatch, useSelector } = useRedux();
    const { registrationFormOpen } = useSelector(store => store.form);
 
-   const handleClickOutside = useCallback(e => {
-      if (!e.target.closest('.registration-custom-focus')) {
+   const handleClickOutside = useCallback(
+      e => {
+         if (
+            e.target.closest('.registration-custom-focus') ||
+            e.target.closest('.password-custom-focus')
+         ) {
+            return;
+         }
+
          dispatch(setRegistrationFormOpen(false));
          dispatch(setBackdropOpen(false));
-      }
-   }, []);
+      },
+      [dispatch]
+   );
 
    useClickOutside(registrationFormOpen, handleClickOutside);
 
@@ -40,7 +48,7 @@ const RegistrationModal = () => {
 
    return (
       <div
-         className={`fixed w-full z-40 transition-all duration-default opacity-100 visible top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 ${
+         className={`fixed w-full z-40 transition-all duration-default opacity-0 collapse top-1/2 left-1/2 -translate-y-full -translate-x-1/2 ${
             registrationFormOpen
                ? '!opacity-100 !visible !-translate-y-1/2'
                : ''
