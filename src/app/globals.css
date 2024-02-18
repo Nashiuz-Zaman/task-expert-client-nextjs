@@ -3,65 +3,27 @@
 @tailwind utilities;
 
 html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 2.5rem;
+   scroll-behavior: smooth;
+   scroll-padding-top: 2.5rem;
 }
 
 ::selection {
-  @apply bg-primaryLightest text-textPrimary;
+   @apply bg-primaryLightest;
 }
 
-@keyframes rotate360 {
-  0% {
-    transform: rotateZ(0deg);
-  }
-
-  100% {
-    transform: rotateZ(360deg);
-  }
+button::selection {
+   color: initial;
+   @apply bg-transparent;
 }
 
-.before\:boxRotate::before {
-  animation: rotate360 10s linear infinite;
-}
-
-.clip-skills {
-  clip-path: polygon(0 7rem, 100% 0%, 100% calc(100% - 7rem), 0% 100%);
+a:link::selection,
+a:visited::selection {
+   color: auto;
+   @apply bg-transparent;
 }
 
 .no-backface-visibility {
-  backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-@keyframes riseUp {
-  0% {
-    box-shadow: 0 0px 0px -0px rgba(0, 0, 0, 0.1);
-  }
-
-  100% {
-    @apply shadow-large;
-  }
-}
-
-.form-animation {
-  animation: riseUp 2s ease-in forwards;
-}
-
-@keyframes float-up-down {
-  0%,
-  100% {
-    transform: scale(0.97);
-    box-shadow: 0 0px 10px 0px rgba(0, 0, 0, 0.15);
-  }
-
-  50% {
-    transform: scale(1);
-    box-shadow: 0 0px 30px 0px rgba(0, 0, 0, 0.3);
-  }
-}
-
-.float-animation {
-  animation: float-up-down 4s infinite linear;
+   backface-visibility: hidden;
+   -moz-backface-visibility: hidden;
+   -webkit-backface-visibility: hidden;
 }
