@@ -10,7 +10,10 @@ import MobileNav from '@/components/shared/MobileNav/MobileNav';
 
 // redux
 import useRedux from '@/hooks/useRedux';
-import { setLoginFormOpen } from '@/lib/redux/features/form/formSlice';
+import {
+   setLoginFormOpen,
+   setRegistrationFormOpen,
+} from '@/lib/redux/features/form/formSlice';
 import { setBackdropOpen } from '@/lib/redux/features/backdrop/backdropSlice';
 
 const Header = ({ modifyClasses = '' }) => {
@@ -20,6 +23,12 @@ const Header = ({ modifyClasses = '' }) => {
    const openLoginForm = e => {
       e.preventDefault();
       dispatch(setLoginFormOpen(true));
+      dispatch(setBackdropOpen(true));
+   };
+
+   const openSignupForm = e => {
+      e.preventDefault();
+      dispatch(setRegistrationFormOpen(true));
       dispatch(setBackdropOpen(true));
    };
 
@@ -34,7 +43,11 @@ const Header = ({ modifyClasses = '' }) => {
                >
                   Login
                </button>
-               <button className='hover:text-primary transition-all duration-default'>
+
+               <button
+                  onClick={openSignupForm}
+                  className='hover:text-primary transition-all duration-default'
+               >
                   Register
                </button>
             </div>
