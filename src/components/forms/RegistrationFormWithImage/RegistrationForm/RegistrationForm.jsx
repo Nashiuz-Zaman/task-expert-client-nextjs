@@ -1,27 +1,43 @@
 // react
 import PropTypes from 'prop-types';
+import { useEffect, useRef } from 'react';
 
 // components
 import ButtonBtn from '@/components/shared/ButtonBtn/ButtonBtn';
 import GoogleLoginBtn from '@/components/shared/GoogleLoginBtn/GoogleLoginBtn';
 import FileUploadBtn from '@/components/shared/FileUploadBtn/FileUploadBtn';
+import InputField from '@/components/shared/InputField/InputField';
+import PasswordField from '@/components/shared/PasswordField/PasswordField';
 
 // hooks
 import useRegistrationForm from '@/hooks/useRegistrationForm';
 import useLoginForm from '@/hooks/useLoginForm';
+import useResetForm from '@/hooks/useResetForm';
+import useFormVisiblity from '@/hooks/useFormVisiblity';
 
 // react icons
 import { IoCloudUpload } from 'react-icons/io5';
 
 // redux
 import { useSelector } from 'react-redux';
-import InputField from '@/components/shared/InputField/InputField';
-import PasswordField from '@/components/shared/PasswordField/PasswordField';
+import { setRegistrationErrors } from '@/lib/redux/features/auth/authSlice';
 
 const RegistrationForm = ({ modifyClasses }) => {
    const { handleSubmit } = useRegistrationForm();
    const { registrationErrors } = useSelector(store => store.auth);
+   const { registrationFormOpen } = useSelector(store => store.form);
    const { handleLoginGoogle } = useLoginForm();
+   const { resetFormFieldsAndErrors } = useResetForm();
+   const { closeSignupFormWithBackdrop, openLoginFormWithBackdrop } =
+      useFormVisiblity();
+   const formEl = useRef();
+
+   // clear form fields and errors when it disappears
+   useEffect(() => {
+      if (!registrationFormOpen) {
+         resetFormFieldsAndErrors(formEl, setRegistrationErrors);
+      }
+   }, [registrationFormOpen, resetFormFieldsAndErrors]);
 
    return (
       <div
@@ -33,7 +49,12 @@ const RegistrationForm = ({ modifyClasses }) => {
          </h2>
 
          {/* form */}
-         <form noValidate onSubmit={handleSubmit} className='w-full'>
+         <form
+            ref={formEl}
+            noValidate
+            onSubmit={handleSubmit}
+            className='w-full'
+         >
             <div className='w-full space-y-5 xsm:w-[17rem] 2md:w-full 2md:mx-0 mx-auto'>
                {/* username field */}
                <InputField name='name' placeholder='Username' />
@@ -77,7 +98,16 @@ const RegistrationForm = ({ modifyClasses }) => {
 
             <p className='text-sm text-center xl:text-base'>
                Already have an account?{' '}
-               <button className='text-primary font-semibold'>Log In</button>
+               <button
+                  onClick={e => {
+                     e.preventDefault();
+                     closeSignupFormWithBackdrop(false);
+                     openLoginFormWithBackdrop(false);
+                  }}
+                  className='text-primary font-semibold'
+               >
+                  Log In
+               </button>
             </p>
          </form>
 
