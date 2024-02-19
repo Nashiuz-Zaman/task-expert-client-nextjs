@@ -3,6 +3,9 @@
 // react
 import PropTypes from 'prop-types';
 
+// next
+import Link from 'next/link';
+
 // components
 import BrandLogo from '@/components/shared/BrandLogo/Brandlogo';
 import InnerContainer from '@/components/containers/InnerContainer/InnerContainer';
@@ -10,30 +13,70 @@ import MobileNav from '@/components/shared/MobileNav/MobileNav';
 
 // hooks
 import useFormVisiblity from '@/hooks/useFormVisiblity';
+import useFirebaseMethods from '@/hooks/useFirebaseMethods';
+
+// redux
+import { useSelector } from 'react-redux';
 
 const Header = ({ modifyClasses = '' }) => {
-   // const { profileData, appLoading } = useSelector(store => store.auth);
+   const { profileData } = useSelector(store => store.auth);
    const { openLoginFormWithBackdrop, openSignupFormWithBackdrop } =
       useFormVisiblity();
+   const { logout } = useFirebaseMethods();
+
+   // common btn classes
+   const btnClasses = 'hover:text-primary transition-all duration-default';
 
    return (
-      <header className={`pt-customXsm pb-customXsm ${modifyClasses}`}>
+      <header className={`pt-customXs pb-customXs ${modifyClasses}`}>
          <InnerContainer>
             {/* login/ register/ account name */}
-            <div className='flex gap-4 justify-center items-center 2md:justify-end lg:text-lg mb-customXsm 2md:mb-custom2xsm font-medium'>
-               <button
-                  onClick={openLoginFormWithBackdrop}
-                  className='hover:text-primary transition-all duration-default'
-               >
-                  Login
-               </button>
+            <div
+               className={`flex ${
+                  profileData
+                     ? 'flex-col gap-2 sm:flex-row sm:gap-4'
+                     : 'flex-row gap-4'
+               } justify-center items-center 2md:justify-end lg:text-lg mb-customXs 2md:mb-custom2xs font-medium`}
+            >
+               {/* if no user then login and registration btns are shown */}
+               {!profileData && (
+                  <>
+                     <button
+                        onClick={openLoginFormWithBackdrop}
+                        className={btnClasses}
+                     >
+                        Login
+                     </button>
 
-               <button
-                  onClick={openSignupFormWithBackdrop}
-                  className='hover:text-primary transition-all duration-default'
-               >
-                  Register
-               </button>
+                     <button
+                        onClick={openSignupFormWithBackdrop}
+                        className={btnClasses}
+                     >
+                        Register
+                     </button>
+                  </>
+               )}
+
+               {/* if user available then show name and go to dashboard and logout btns */}
+               {profileData && (
+                  <>
+                     <p>
+                        Logged in as:{' '}
+                        <span className='font-semibold'>
+                           {profileData.name}
+                        </span>
+                     </p>
+                     <Link
+                        href={'/dashboard'}
+                        className={`${btnClasses} underline text-primary`}
+                     >
+                        Visit Dashboard
+                     </Link>
+                     <button onClick={logout} className={btnClasses}>
+                        Sign Out
+                     </button>
+                  </>
+               )}
             </div>
 
             <div className='grid grid-cols-[1fr_3fr_1fr] 2md:grid-cols-2 items-center'>
