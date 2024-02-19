@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import useFirebaseMethods from './useFirebaseMethods';
 import useAxios from './useAxios';
 import useFormVisiblity from './useFormVisiblity';
+import useGetDashboardNavOptions from './useGetDashboardNavOptions';
 
 // normal axios import
 import axios from 'axios';
@@ -33,6 +34,7 @@ const useRegistrationForm = () => {
    const { axiosCustom } = useAxios();
    const router = useRouter();
    const { closeSignupFormWithBackdrop } = useFormVisiblity();
+   const { getDashboardNavOptions } = useGetDashboardNavOptions();
 
    // registration password validation
    const validatePassword = password => {
@@ -171,7 +173,10 @@ const useRegistrationForm = () => {
 
                   // if success
                   if (userCreationResponse.data.success) {
-                     dispatch(setProfileData(userCreationResponse.data.user));
+                     const profileData = userCreationResponse.data.user;
+                     getDashboardNavOptions(profileData.name);
+
+                     dispatch(setProfileData(profileData));
                      dispatch(setUserShouldExist(true));
                      localStorage.setItem(
                         'tokenExists',
