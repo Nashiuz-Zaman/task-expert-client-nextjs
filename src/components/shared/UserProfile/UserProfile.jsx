@@ -59,7 +59,7 @@ const UserProfile = ({ profile, logoutFunction }) => {
       image = profile.imageSource;
 
       return (
-         <div className='w-[3rem] cursor-pointer relative'>
+         <div className='h-8 md:h-10 xl:h-14 cursor-pointer relative'>
             {/* profile image container div */}
             <div
                onClick={handleShowInfoPanel}
