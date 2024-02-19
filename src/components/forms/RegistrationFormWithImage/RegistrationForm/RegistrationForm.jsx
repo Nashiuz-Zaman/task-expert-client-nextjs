@@ -23,7 +23,7 @@ import { useSelector } from 'react-redux';
 import { setRegistrationErrors } from '@/lib/redux/features/auth/authSlice';
 
 const RegistrationForm = ({ modifyClasses }) => {
-   const { handleSubmit } = useRegistrationForm();
+   const { handleSignup } = useRegistrationForm();
    const { registrationErrors } = useSelector(store => store.auth);
    const { registrationFormOpen } = useSelector(store => store.form);
    const { handleLoginGoogle } = useLoginForm();
@@ -41,10 +41,10 @@ const RegistrationForm = ({ modifyClasses }) => {
 
    return (
       <div
-         className={`w-full bg-white mx-auto py-12 px-5 xsm:px-8 sm:px-10 2md:px-12 lg:px-10 ${modifyClasses}`}
+         className={`w-full bg-white mx-auto py-12 px-5 xs:px-8 sm:px-10 2md:px-12 lg:px-10 ${modifyClasses}`}
       >
          {/* heading */}
-         <h2 className='capitalize mb-custom2xsm text-center text-2xl font-semibold'>
+         <h2 className='capitalize mb-custom2xs text-center text-2xl font-semibold'>
             Sign up. It&apos;s <span className='text-primary'>Free!</span>
          </h2>
 
@@ -52,10 +52,10 @@ const RegistrationForm = ({ modifyClasses }) => {
          <form
             ref={formEl}
             noValidate
-            onSubmit={handleSubmit}
+            onSubmit={handleSignup}
             className='w-full'
          >
-            <div className='w-full space-y-5 xsm:w-[17rem] 2md:w-full 2md:mx-0 mx-auto'>
+            <div className='w-full space-y-5 xs:w-[17rem] 2md:w-full 2md:mx-0 mx-auto'>
                {/* username field */}
                <InputField name='name' placeholder='Username' />
 
@@ -93,7 +93,7 @@ const RegistrationForm = ({ modifyClasses }) => {
 
             <ButtonBtn
                text='Sign Up'
-               modifyClasses='mx-auto block my-custom2xsm'
+               modifyClasses='mx-auto block my-custom2xs'
             />
 
             <p className='text-sm text-center xl:text-base'>

@@ -8,21 +8,23 @@ module.exports = {
    theme: {
       extend: {
          screens: {
-            '2xsm': '360px',
-            xsm: '480px',
+            '2xs': '360px',
+            xs: '480px',
             '2md': '850px',
             '3xl': '1700px',
          },
          spacing: {
-            custom3xl: '20rem',
-            custom2xl: '17rem',
-            customXl: '13.5rem',
+            custom4xl: '20rem',
+            custom3xl: '17rem',
+            custom2xl: '15rem',
+            customXl: '13rem',
             customLg: '11rem',
+            custom3md: '9rem',
             custom2md: '7.5rem',
             customMd: '6rem',
             customSm: '4.2rem',
-            customXsm: '2.8rem',
-            custom2xsm: '1.6rem',
+            customXs: '2.8rem',
+            custom2xs: '1.6rem',
          },
          boxShadow: {
             large: '0 10px 60px -5px rgba(0,0,0,0.3)',
