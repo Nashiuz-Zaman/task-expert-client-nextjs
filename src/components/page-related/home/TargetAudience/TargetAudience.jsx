@@ -1,7 +1,6 @@
 // imports
 import SectionHeading from '@/components/shared/SectionHeading/SectionHeading';
 import PhotoGallery2 from '@/components/shared/PhotoGallery2/PhotoGallery2';
-import LinkBtn from '@/components/shared/LinkBtn/LinkBtn';
 
 // data
 import { targetAudienceTextContent } from '@/uiData/homeUiContent';
@@ -29,12 +28,6 @@ const TargetAudience = () => {
          <p className='w-full md:w-[80%] lg:w-[60%] lg:text-xl font-medium mx-auto text-center leading-[1.6] mb-customXs'>
             {description}
          </p>
-
-         <LinkBtn
-            url='/register'
-            text="Sign Up - It's free!"
-            modifyClasses='mx-auto'
-         />
       </div>
    );
 };

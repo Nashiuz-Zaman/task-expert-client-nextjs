@@ -39,7 +39,7 @@ const MobileNav = ({ modifyClasses = '' }) => {
    return (
       //  mobile nav starts here
       <div>
-         <MobileMenuBtn size={35} openNavFunction={openMobileNav} />
+         <MobileMenuBtn openNavFunction={openMobileNav} />
 
          <nav
             className={`block h-screen fixed top-0 right-0 w-full sm:w-[50%] md:w-[40%] lg:w-[35%] 2xl:w-[20%] translate-x-full origin-center transition-all duration-default z-40 ${
