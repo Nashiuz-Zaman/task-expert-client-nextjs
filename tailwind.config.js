@@ -23,8 +23,9 @@ module.exports = {
             custom2md: '7.5rem',
             customMd: '6rem',
             customSm: '4.2rem',
-            customXs: '2.8rem',
-            custom2xs: '1.6rem',
+            customXs: '2.85rem',
+            custom2xs: '1.7rem',
+            custom3xs: '0.8rem',
          },
          boxShadow: {
             large: '0 10px 60px -5px rgba(0,0,0,0.3)',

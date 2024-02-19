@@ -8,6 +8,7 @@ import useFirebaseMethods from '@/hooks/useFirebaseMethods';
 import useAxios from '@/hooks/useAxios';
 import useToast from '@/hooks/useToast';
 import useFormVisiblity from './useFormVisiblity';
+import useGetDashboardNavOptions from './useGetDashboardNavOptions';
 
 // redux
 import { useDispatch } from 'react-redux';
@@ -25,6 +26,7 @@ const useLoginForm = () => {
    const { axiosCustom } = useAxios();
    const { closeLoginFormWithBackdrop, closeSignupFormWithBackdrop } =
       useFormVisiblity();
+   const { getDashboardNavOptions } = useGetDashboardNavOptions();
    const router = useRouter();
 
    const validateInputs = inputs => {
@@ -65,8 +67,13 @@ const useLoginForm = () => {
          );
 
          if (googleLoginResponse.data.success) {
+            const profileData = googleLoginResponse.data.user;
+
+            // generate dashboard navigation menu options
+            getDashboardNavOptions(profileData.name);
+
             // set profile data, user should exist and the jwt token
-            dispatch(setProfileData(googleLoginResponse.data.user));
+            dispatch(setProfileData(profileData));
             dispatch(setUserShouldExist(true));
             localStorage.setItem(
                'tokenExists',
@@ -118,7 +125,12 @@ const useLoginForm = () => {
             });
 
             if (loginResponse.data.success) {
-               dispatch(setProfileData(loginResponse.data.user));
+               const profileData = loginResponse.data.user;
+
+               // generate dashboard navigation menu options
+               getDashboardNavOptions(profileData.name);
+
+               dispatch(setProfileData(profileData));
                dispatch(setUserShouldExist(true));
                // set profile and the jwt token in the localstorage
                localStorage.setItem(

@@ -1,3 +1,6 @@
+// react
+import PropTypes from 'prop-types';
+
 // font
 import { Inter } from 'next/font/google';
 
@@ -26,7 +29,7 @@ export const metadata = {
       "Task Expert is all you'll ever need for seamless workflow management of your everyday responsibilities",
 };
 
-export default function RootLayout({ children }) {
+const RootLayout = ({ children }) => {
    return (
       <html lang='en'>
          <body className={`${inter.className} text-textPrimary`}>
@@ -56,4 +59,10 @@ export default function RootLayout({ children }) {
          </body>
       </html>
    );
-}
+};
+
+RootLayout.propTypes = {
+   children: PropTypes.any,
+};
+
+export default RootLayout;
