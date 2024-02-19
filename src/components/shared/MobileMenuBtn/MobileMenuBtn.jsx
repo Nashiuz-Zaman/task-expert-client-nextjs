@@ -2,22 +2,29 @@
 import PropTypes from 'prop-types';
 
 // icon
-import { RiMenu5Fill } from 'react-icons/ri';
+import { BiDotsHorizontalRounded } from 'react-icons/bi';
 
 const MobileMenuBtn = ({
    openNavFunction,
    theme = 'light',
    modifyClasses = '',
-   size = 24,
 }) => {
    return (
       <button
-         className={`block w-max ${
-            theme === 'light' ? 'text-textPrimary' : 'text-white'
+         className={`inline-block border group rounded-md md:rounded-lg xl:rounded-xl transition-all duration-default ${
+            theme === 'light'
+               ? 'border-textPrimary active:border-primary lg:hover:border-primary'
+               : 'border-white'
          }  ${modifyClasses}`}
          onClick={openNavFunction}
       >
-         <RiMenu5Fill size={size} style={{ color: 'inherit' }}></RiMenu5Fill>
+         <BiDotsHorizontalRounded
+            className={`block transition-all duration-default text-[1.4rem] md:text-[2rem] xl:text-[2.8rem] m-1 ${
+               theme === 'light'
+                  ? 'text-textPrimary active:text-primary lg:hover:text-primary'
+                  : 'text-white '
+            }`}
+         ></BiDotsHorizontalRounded>
       </button>
    );
 };
@@ -25,7 +32,6 @@ const MobileMenuBtn = ({
 MobileMenuBtn.propTypes = {
    openNavFunction: PropTypes.func,
    theme: PropTypes.string,
-   size: PropTypes.number,
    modifyClasses: PropTypes.string,
 };
 export default MobileMenuBtn;

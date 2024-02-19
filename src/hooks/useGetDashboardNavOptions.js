@@ -30,7 +30,6 @@ const useGetDashboardNavOptions = () => {
                },
             ],
          };
-         console.log(navOptions);
 
          dispatch(setDashboardNavOptions(navOptions));
       },

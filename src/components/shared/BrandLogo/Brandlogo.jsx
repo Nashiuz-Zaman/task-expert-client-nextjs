@@ -15,15 +15,18 @@ const BrandLogo = ({
    theme = 'light',
 }) => {
    return (
-      <Link onClick={onClickFunction} className={`block w-max ${modifyClasses}`} href='/'>
+      <Link
+         onClick={onClickFunction}
+         className={`block w-max h-8 md:h-10 xl:h-14 ${modifyClasses}`}
+         href='/'
+      >
          <Image
             width={500}
             height={200}
-            style={{ width: 'auto', height: 'inherit' }}
             priority={true}
             src={theme === 'light' ? logoPrimary : logoWhite}
             alt='Company Logo'
-            className='block'
+            className='block w-auto h-[inherit]'
             quality={100}
          />
       </Link>

@@ -85,7 +85,7 @@ const Header = ({ modifyClasses = '' }) => {
                <div className='2md:hidden'>&nbsp;</div>
 
                {/* website logo */}
-               <BrandLogo modifyClasses='h-[3rem] 2xl:h-[4rem] justify-self-center 2md:justify-self-start' />
+               <BrandLogo modifyClasses='justify-self-center 2md:justify-self-start' />
 
                {/* auth related options login/logout etc */}
                <div className='flex items-center gap-3 justify-self-end'>

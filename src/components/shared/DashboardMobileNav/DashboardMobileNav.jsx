@@ -44,7 +44,6 @@ const DashboardMobileNav = ({
       <div className={`${modifyClasses}`}>
          <MobileMenuBtn
             modifyClasses={MenuBtnModifyClasses}
-            size={35}
             theme='dark'
             openNavFunction={openDashboardMobileNav}
          />
