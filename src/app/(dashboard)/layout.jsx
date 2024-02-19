@@ -8,6 +8,7 @@ import DashboardNav from '@/components/shared/DashboardNav/DashboardNav';
 const DashboardLayout = ({ children }) => {
    return (
       <div className='h-screen flex flex-col'>
+         {/* dashboard header */}
          <DashboardHeader />
 
          {/* container below the header */}
@@ -18,7 +19,7 @@ const DashboardLayout = ({ children }) => {
             </div>
 
             {/* right side */}
-            <div className='h-[calc(100vh-5.5rem)] py-[4rem] px-[3rem] overflow-y-auto'>
+            <div className='h-[calc(100vh-5.5rem)] py-[4rem] px-8 overflow-y-auto'>
                {/* page  */}
                {children}
             </div>
