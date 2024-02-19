@@ -14,7 +14,7 @@ const BannerTextBtns = ({ modifyClasses = '' }) => {
    const { openSignupFormWithBackdrop } = useFormVisiblity();
    return (
       <div
-         className={`flex flex-col xsm:flex-row gap-2 justify-center items-center lg:justify-start lg:gap-3 ${modifyClasses}`}
+         className={`flex flex-col xs:flex-row gap-2 justify-center items-center lg:justify-start lg:gap-3 ${modifyClasses}`}
       >
          <LinkBtn text="Let's Explore" url='#learn-more' />
          <ButtonBtn

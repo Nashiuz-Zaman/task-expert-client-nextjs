@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 // hooks
 import useFirebaseMethods from './useFirebaseMethods';
 import useAxios from './useAxios';
+import useFormVisiblity from './useFormVisiblity';
 
 // normal axios import
 import axios from 'axios';
@@ -31,6 +32,7 @@ const useRegistrationForm = () => {
    const { signup, updateFirebaseProfile } = useFirebaseMethods();
    const { axiosCustom } = useAxios();
    const router = useRouter();
+   const { closeSignupFormWithBackdrop } = useFormVisiblity();
 
    // registration password validation
    const validatePassword = password => {
@@ -84,7 +86,7 @@ const useRegistrationForm = () => {
    };
 
    // function to run when the form is submitted
-   const handleSubmit = async e => {
+   const handleSignup = async e => {
       e.preventDefault();
       // reset errors
       dispatch(setRegistrationErrors([]));
@@ -175,6 +177,8 @@ const useRegistrationForm = () => {
                         'tokenExists',
                         userCreationResponse.data.tokenExists
                      );
+
+                     closeSignupFormWithBackdrop();
                      router.push('/');
                      dispatch(setAppLoading(false));
                   }
@@ -190,7 +194,7 @@ const useRegistrationForm = () => {
    };
 
    return {
-      handleSubmit,
+      handleSignup,
    };
 };
 
