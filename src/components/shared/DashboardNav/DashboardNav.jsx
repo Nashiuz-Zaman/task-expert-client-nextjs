@@ -12,8 +12,6 @@ import { useSelector } from 'react-redux';
 const DashboardNav = ({ modifyClasses = '' }) => {
    const { dashboardNavOptions } = useSelector(store => store.dashboard);
 
-   console.log(dashboardNavOptions);
-
    const linkClasses =
       'block text-lg font-medium translate-x-0 hover:font-bold hover:translate-x-2 transition-all duration-default';
 
@@ -23,9 +21,9 @@ const DashboardNav = ({ modifyClasses = '' }) => {
 
          {/* the navigation menu */}
          <ul className={`space-y-3`}>
-            {dashboardNavOptions?.map(option => {
+            {dashboardNavOptions?.options?.map((option, i) => {
                return (
-                  <li key={option.id}>
+                  <li key={i}>
                      <Link className={linkClasses} href={option.url}>
                         {option.text}
                      </Link>

@@ -14,8 +14,6 @@ import useFirebaseMethods from '@/hooks/useFirebaseMethods';
 // redux
 import { useSelector } from 'react-redux';
 
-
-
 const DashboardHeader = ({ modifyClasses = '' }) => {
    const { profileData } = useSelector(store => store.auth);
    const { logout } = useFirebaseMethods();
@@ -27,9 +25,7 @@ const DashboardHeader = ({ modifyClasses = '' }) => {
          <div className='basis-full flex items-center justify-between'>
             <div className='flex gap-4 items-center sm:flex-row sm:gap-6'>
                <DashboardMobileNav
-                  navOptions={dashboardNavOptions}
-                  modifyClasses='block xl:hidden'
-                  MenuBtnModifyClasses='text-white'
+                  modifyClasses='block xl:hidden'                
                />
 
                <BrandLogo theme='dark' modifyClasses='h-[2.5rem]' />
