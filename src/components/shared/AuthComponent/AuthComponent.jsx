@@ -4,9 +4,9 @@
 import useAuth from '@/hooks/useAuth';
 
 const AuthComponent = () => {
-  useAuth();
+   useAuth();
 
-  return true;
+   return;
 };
 
 export default AuthComponent;

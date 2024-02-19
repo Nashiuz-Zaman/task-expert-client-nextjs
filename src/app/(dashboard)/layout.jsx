@@ -3,11 +3,7 @@ import PropTypes from 'prop-types';
 
 // components
 import DashboardHeader from '@/components/shared/DashboardHeader/DashboardHeader';
-import DashboardFooter from '@/components/shared/DashboardFooter/DashboardFooter';
 import DashboardNav from '@/components/shared/DashboardNav/DashboardNav';
-
-// data
-import { dashboardNavOptions } from '@/uiData/navigationOptions';
 
 const DashboardLayout = ({ children }) => {
    return (
@@ -15,23 +11,17 @@ const DashboardLayout = ({ children }) => {
          <DashboardHeader />
 
          {/* container below the header */}
-         <div className='grow grid grid-cols-1 xl:grid-cols-[20rem_1fr]'>
+         <div className='grow grid grid-cols-1 xl:grid-cols-[22.5rem_1fr]'>
             {/* left side */}
             <div className='hidden xl:block bg-lightGray border-r border-lightBorder'>
-               <DashboardNav navOptions={dashboardNavOptions} />
+               <DashboardNav />
             </div>
 
-            {/* right side start */}
-            <div className='flex flex-col h-full'>
+            {/* right side */}
+            <div className='h-[calc(100vh-5.5rem)] py-[4rem] px-[3rem] overflow-y-auto'>
                {/* page  */}
-               <div className='h-[calc(100vh-11.0859375rem)] overflow-y-auto py-elementGapLg px-elementGapSm md:px-elementGapMd xl:px-elementGapLg'>
-                  {children}
-               </div>
-
-               {/* footer */}
-               <DashboardFooter />
+               {children}
             </div>
-            {/* right side end */}
          </div>
       </div>
    );
