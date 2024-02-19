@@ -9,7 +9,7 @@ import mediaQueryReducer from '@/lib/redux/features/mediaQuery/mediaQuerySlice';
 import mobileNavReducer from '@/lib/redux/features/mobileNav/mobileNavSlice';
 import authReducer from '@/lib/redux/features/auth/authSlice';
 import formReducer from '@/lib/redux/features/form/formSlice';
-import dashboardMobileNavReducer from '@/lib/redux/features/dashboardMobileNav/dashboardMobileNavSlice';
+import dashboardReducer from '@/lib/redux/features/dashboard/dashboardSlice';
 
 export const store = configureStore({
    reducer: {
@@ -18,6 +18,6 @@ export const store = configureStore({
       mediaQuery: mediaQueryReducer,
       mobileNav: mobileNavReducer,
       form: formReducer,
-      dashboardMobileNav: dashboardMobileNavReducer,
+      dashboard: dashboardReducer,
    },
 });
