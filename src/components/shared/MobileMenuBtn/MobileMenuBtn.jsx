@@ -1,22 +1,31 @@
 // react
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 // icon
-import { IoIosMenu } from "react-icons/io";
+import { RiMenu5Fill } from 'react-icons/ri';
 
-const MobileMenuBtn = ({ openNavFunction, modifyClasses = "" }) => {
-  return (
-    <button
-      className={`block w-max  ${modifyClasses}`}
-      onClick={openNavFunction}
-    >
-      <IoIosMenu className="text-4xl text-black"></IoIosMenu>
-    </button>
-  );
+const MobileMenuBtn = ({
+   openNavFunction,
+   theme = 'light',
+   modifyClasses = '',
+   size = 24,
+}) => {
+   return (
+      <button
+         className={`block w-max ${
+            theme === 'light' ? 'text-textPrimary' : 'text-white'
+         }  ${modifyClasses}`}
+         onClick={openNavFunction}
+      >
+         <RiMenu5Fill size={size} style={{ color: 'inherit' }}></RiMenu5Fill>
+      </button>
+   );
 };
 
 MobileMenuBtn.propTypes = {
-  openNavFunction: PropTypes.func,
-  modifyClasses: PropTypes.string,
+   openNavFunction: PropTypes.func,
+   theme: PropTypes.string,
+   size: PropTypes.number,
+   modifyClasses: PropTypes.string,
 };
 export default MobileMenuBtn;

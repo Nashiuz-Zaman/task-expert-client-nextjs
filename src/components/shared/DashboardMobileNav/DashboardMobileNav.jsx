@@ -44,12 +44,14 @@ const DashboardMobileNav = ({
       <div className={`${modifyClasses}`}>
          <MobileMenuBtn
             modifyClasses={MenuBtnModifyClasses}
+            size={35}
+            theme='dark'
             openNavFunction={openDashboardMobileNav}
          />
 
          {/* mobile navigation */}
          <nav
-            className={`block h-screen fixed top-0 left-0 w-full sm:w-[50%] md:w-[40%] lg:w-[35%] 2xl:w-[20%] -translate-x-full origin-center transition-all duration-default z-40 ${
+            className={`block h-screen fixed top-0 left-0 w-full sm:w-[50%] md:w-[40%] lg:w-[35%] 2xl:w-[20%] -translate-x-full origin-center transition-all duration-default z-40 overflow-x-hidden ${
                dashboardMobileNavOpen ? '!translate-x-0' : ''
             } p-8 bg-blackLight`}
          >
@@ -60,14 +62,18 @@ const DashboardMobileNav = ({
             />
 
             {/* brandlogo */}
-            <BrandLogo theme='dark' />
+            <BrandLogo
+               onClickFunction={closeDashboardMobileNav}
+               theme='dark'
+               modifyClasses='h-[3rem] mb-customXs'
+            />
 
             {/* the navigation menu */}
             <ul className='flex flex-col gap-3'>
                {/* this part will be always shown */}
-               {dashboardNavOptions?.map(option => {
+               {dashboardNavOptions?.options?.map((option, i) => {
                   return (
-                     <li key={option.id} onClick={closeDashboardMobileNav}>
+                     <li key={i} onClick={closeDashboardMobileNav}>
                         <Link className={linkClasses} href={option.url}>
                            {option.text}
                         </Link>
@@ -92,7 +98,6 @@ const DashboardMobileNav = ({
 };
 
 DashboardMobileNav.propTypes = {
-   navOptions: PropTypes.array,
    modifyClasses: PropTypes.string,
    MenuBtnModifyClasses: PropTypes.string,
 };

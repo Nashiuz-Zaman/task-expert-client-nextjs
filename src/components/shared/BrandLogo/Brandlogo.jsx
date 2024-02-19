@@ -9,9 +9,13 @@ import Image from 'next/image';
 import logoPrimary from '@/assets/websiteLogo/logo-primary.webp';
 import logoWhite from '@/assets/websiteLogo/logo-white.webp';
 
-const BrandLogo = ({ modifyClasses = '', theme = 'light' }) => {
+const BrandLogo = ({
+   onClickFunction = null,
+   modifyClasses = '',
+   theme = 'light',
+}) => {
    return (
-      <Link className={`block w-max ${modifyClasses}`} href='/'>
+      <Link onClick={onClickFunction} className={`block w-max ${modifyClasses}`} href='/'>
          <Image
             width={500}
             height={200}
@@ -27,8 +31,8 @@ const BrandLogo = ({ modifyClasses = '', theme = 'light' }) => {
 };
 
 BrandLogo.propTypes = {
+   onClickFunction: PropTypes.func,
    modifyClasses: PropTypes.string,
-   imageModifyClasses: PropTypes.string,
    theme: PropTypes.string,
 };
 

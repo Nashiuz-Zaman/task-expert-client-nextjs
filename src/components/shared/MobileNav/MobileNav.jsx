@@ -39,7 +39,7 @@ const MobileNav = ({ modifyClasses = '' }) => {
    return (
       //  mobile nav starts here
       <div>
-         <MobileMenuBtn openNavFunction={openMobileNav} />
+         <MobileMenuBtn size={35} openNavFunction={openMobileNav} />
 
          <nav
             className={`block h-screen fixed top-0 right-0 w-full sm:w-[50%] md:w-[40%] lg:w-[35%] 2xl:w-[20%] translate-x-full origin-center transition-all duration-default z-40 ${
@@ -52,10 +52,11 @@ const MobileNav = ({ modifyClasses = '' }) => {
                modifyClasses='mb-customXs'
             />
 
-            {/* brand logo part */}
+            {/* brand logo */}
             <BrandLogo
                theme='dark'
                modifyClasses='block w-max mx-auto sm:mx-0 sm:mr-auto mb-customXs h-9'
+               onClickFunction={closeMobileNav}
             />
 
             {/* regular part */}
