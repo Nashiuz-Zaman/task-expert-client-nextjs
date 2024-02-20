@@ -10,7 +10,9 @@ import mobileNavReducer from '@/lib/redux/features/mobileNav/mobileNavSlice';
 import authReducer from '@/lib/redux/features/auth/authSlice';
 import formReducer from '@/lib/redux/features/form/formSlice';
 import dashboardReducer from '@/lib/redux/features/dashboard/dashboardSlice';
+import taskReducer from '@/lib/redux/features/task/taskSlice';
 
+// store
 export const store = configureStore({
    reducer: {
       auth: authReducer,
@@ -19,5 +21,6 @@ export const store = configureStore({
       mobileNav: mobileNavReducer,
       form: formReducer,
       dashboard: dashboardReducer,
+      task: taskReducer,
    },
 });
