@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 // components
 import DashboardMobileNav from '../DashboardMobileNav/DashboardMobileNav';
 import UserProfile from '../UserProfile/UserProfile';
-import BrandLogo from '../BrandLogo/Brandlogo';
 
 // hooks
 import useFirebaseMethods from '@/hooks/useFirebaseMethods';
@@ -20,14 +19,10 @@ const DashboardHeader = ({ modifyClasses = '' }) => {
 
    return (
       <header
-         className={`h-[5.8rem] px-4 md:px-8 flex items-center bg-primary ${modifyClasses}`}
+         className={`h-[5.8rem] px-4 md:px-8 flex items-centers border-b border-lightBorder ${modifyClasses}`}
       >
          <div className='basis-full flex items-center justify-between'>
-            <div className='flex gap-3 sm:gap-5 items-center sm:flex-row'>
-               <DashboardMobileNav modifyClasses='block xl:hidden' />
-
-               <BrandLogo theme='dark' />
-            </div>
+            <DashboardMobileNav modifyClasses='block xl:hidden' />
 
             {/* if user is truthy, show the userprofile */}
             {profileData && (
