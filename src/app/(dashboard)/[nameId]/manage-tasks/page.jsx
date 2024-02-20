@@ -1,5 +1,14 @@
+// component
+import TaskUtilsHeader from '@/components/page-related/manage-tasks/TaskUtilsHeader/TaskUtilsHeader';
+
 const manageTasks = () => {
-   return <div>tasks</div>;
+   return (
+      <>
+         <section>
+            <TaskUtilsHeader />
+         </section>
+      </>
+   );
 };
 
 export default manageTasks;
