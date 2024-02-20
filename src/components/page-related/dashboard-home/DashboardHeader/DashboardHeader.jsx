@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 // components
 import DashboardMobileNav from '../DashboardMobileNav/DashboardMobileNav';
-import UserProfile from '../UserProfile/UserProfile';
+import UserProfile from '@/components/shared/UserProfile/UserProfile';
 
 // hooks
 import useFirebaseMethods from '@/hooks/useFirebaseMethods';

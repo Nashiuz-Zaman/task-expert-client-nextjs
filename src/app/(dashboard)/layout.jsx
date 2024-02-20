@@ -2,8 +2,8 @@
 import PropTypes from 'prop-types';
 
 // components
-import DashboardHeader from '@/components/shared/DashboardHeader/DashboardHeader';
-import DashboardNav from '@/components/shared/DashboardNav/DashboardNav';
+import DashboardHeader from '@/components/page-related/dashboard-home/DashboardHeader/DashboardHeader';
+import DashboardNav from '@/components/page-related/dashboard-home/DashboardNav/DashboardNav';
 
 const DashboardLayout = ({ children }) => {
    return (
