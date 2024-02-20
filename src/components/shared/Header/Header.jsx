@@ -67,8 +67,11 @@ const Header = ({ modifyClasses = '' }) => {
                            {profileData.name}
                         </span>
                      </p>
+
                      <Link
-                        href={dashboardNavOptions.profileRoute}
+                        href={
+                           dashboardNavOptions.profileRoute + '/manage-tasks'
+                        }
                         className={`${btnClasses} underline text-primary`}
                      >
                         Visit Dashboard
