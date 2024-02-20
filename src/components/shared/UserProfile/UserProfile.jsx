@@ -69,9 +69,9 @@ const UserProfile = ({ profile, logoutFunction, modifyClasses = '' }) => {
                )}
             </div>
 
-            {/* positioned div for display name */}
+            {/* positioned div for userpanel menu */}
             <div
-               className={`rounded-default w-[12rem] md:w-[15rem] bg-white border border-[#e5e5e5] shadow-xl p-4 absolute top-0 right-0 -translate-x-[1.5rem] translate-y-[2rem] transition-all duration-150 space-y-5 text-left cursor-default userpanel-focus ${
+               className={`rounded-default w-[12rem] md:w-[15rem] bg-white border border-[#e5e5e5] shadow-xl p-4 absolute z-20 top-0 right-0 -translate-x-[1.5rem] translate-y-[2rem] transition-all duration-150 space-y-5 text-left cursor-default userpanel-focus ${
                   showInfoPanel ? 'opacity-100 visible' : 'opacity-0 collapse'
                }`}
             >
