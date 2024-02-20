@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 // components
 import FilterBtn from '@/components/shared/FilterBtn/FilterBtn';
 import SortBtn from '@/components/shared/SortBtn/SortBtn';
+import Searchbar from '@/components/shared/Searchbar/Searchbar';
 
 const TaskUtilsHeader = ({ modifyClasses = '' }) => {
    return (
@@ -16,6 +17,7 @@ const TaskUtilsHeader = ({ modifyClasses = '' }) => {
          <div className='flex items-center gap-3'>
             <FilterBtn modifyClasses='!rounded-xl' />
             <SortBtn modifyClasses='!rounded-xl' />
+            <Searchbar modifyClasses='!rounded-xl' />
          </div>
       </div>
    );
