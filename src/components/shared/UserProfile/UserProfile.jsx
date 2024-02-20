@@ -2,7 +2,7 @@
 
 // react
 import PropTypes from 'prop-types';
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 
 // next
 import Link from 'next/link';
@@ -11,13 +11,14 @@ import Image from 'next/image';
 // component
 import ButtonBtn from '../ButtonBtn/ButtonBtn';
 
+// hooks
+import useClickOutside from '@/hooks/useClickOutside';
+
 //  react icon import
 import { FaUserCircle } from 'react-icons/fa';
 
-const UserProfile = ({ profile, logoutFunction }) => {
-   // hover state
+const UserProfile = ({ profile, logoutFunction, modifyClasses = '' }) => {
    const [showInfoPanel, setShowInfoPanel] = useState(false);
-   const infoRef = useRef(null);
 
    // function to control info panel
    const handleShowInfoPanel = () => {
@@ -26,29 +27,13 @@ const UserProfile = ({ profile, logoutFunction }) => {
       });
    };
 
-   // closing the profile div when clicked outside of it
-   useEffect(() => {
-      const handleClickOutside = e => {
-         if (!e.target.closest('.custom-focus')) {
-            setShowInfoPanel(false);
-         }
-      };
-
-      let timer;
-      if (showInfoPanel) {
-         timer = setTimeout(() => {
-            window.addEventListener('click', handleClickOutside);
-            clearTimeout(timer);
-         }, 300);
-      } else {
-         window.removeEventListener('click', handleClickOutside);
+   const handleClickOutside = e => {
+      if (!e.target.closest('.userpanel-focus')) {
+         setShowInfoPanel(false);
       }
+   };
 
-      return () => {
-         clearTimeout(timer);
-         window.removeEventListener('click', handleClickOutside);
-      };
-   }, [showInfoPanel]);
+   useClickOutside(showInfoPanel, handleClickOutside);
 
    // declare name and photo variables
    let name, image;
@@ -59,7 +44,9 @@ const UserProfile = ({ profile, logoutFunction }) => {
       image = profile.imageSource;
 
       return (
-         <div className='h-8 md:h-10 xl:h-14 cursor-pointer relative'>
+         <div
+            className={`h-8 md:h-10 xl:h-14 cursor-pointer relative ${modifyClasses}`}
+         >
             {/* profile image container div */}
             <div
                onClick={handleShowInfoPanel}
@@ -84,8 +71,7 @@ const UserProfile = ({ profile, logoutFunction }) => {
 
             {/* positioned div for display name */}
             <div
-               ref={infoRef}
-               className={`custom-focus rounded-default w-[12rem] md:w-[15rem] bg-white border border-[#e5e5e5] shadow-xl p-4 absolute top-0 right-0 -translate-x-[1.5rem] translate-y-[2rem] transition-all duration-150 space-y-5 text-left cursor-default ${
+               className={`rounded-default w-[12rem] md:w-[15rem] bg-white border border-[#e5e5e5] shadow-xl p-4 absolute top-0 right-0 -translate-x-[1.5rem] translate-y-[2rem] transition-all duration-150 space-y-5 text-left cursor-default userpanel-focus ${
                   showInfoPanel ? 'opacity-100 visible' : 'opacity-0 collapse'
                }`}
             >
@@ -110,7 +96,7 @@ const UserProfile = ({ profile, logoutFunction }) => {
 UserProfile.propTypes = {
    profile: PropTypes.object,
    logoutFunction: PropTypes.func,
-   justImage: PropTypes.bool,
+   modifyClasses: PropTypes.string,
 };
 
 export default UserProfile;
