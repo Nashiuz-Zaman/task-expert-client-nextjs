@@ -44,7 +44,7 @@ const MobileNav = ({ modifyClasses = '' }) => {
          <nav
             className={`block h-screen fixed top-0 right-0 w-full sm:w-[50%] md:w-[40%] lg:w-[35%] 2xl:w-[20%] translate-x-full origin-center transition-all duration-default z-40 ${
                mobileNavOpen ? '!translate-x-0' : ''
-            } p-8 bg-gradient-to-br from-primaryDark to bg-primary ${modifyClasses}`}
+            } p-8 bg-gradient-to-br from-secondary to-primary ${modifyClasses}`}
          >
             {/* X cross button to close nav */}
             <MobileMenuCloseBtn

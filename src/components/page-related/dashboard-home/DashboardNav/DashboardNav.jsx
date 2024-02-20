@@ -4,7 +4,7 @@
 import PropTypes from 'prop-types';
 
 // components
-import BrandLogo from '../BrandLogo/Brandlogo';
+import BrandLogo from '../../../shared/BrandLogo/Brandlogo';
 import PinnedTask from '@/components/page-related/dashboard-home/PinnedTask/PinnedTask';
 import DashboardNavHeading from '@/components/page-related/dashboard-home/DashboardNavHeading/DashboardNavHeading';
 import DashboardNavLink from '@/components/page-related/dashboard-home/DashboardNavLink/DashboardNavLink';

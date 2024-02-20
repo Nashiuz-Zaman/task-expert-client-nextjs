@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 // components
 import DashboardMobileNav from '../DashboardMobileNav/DashboardMobileNav';
-import UserProfile from '../UserProfile/UserProfile';
+import UserProfile from '@/components/shared/UserProfile/UserProfile';
 
 // hooks
 import useFirebaseMethods from '@/hooks/useFirebaseMethods';
@@ -26,7 +26,11 @@ const DashboardHeader = ({ modifyClasses = '' }) => {
 
             {/* if user is truthy, show the userprofile */}
             {profileData && (
-               <UserProfile profile={profileData} logoutFunction={logout} />
+               <UserProfile
+                  profile={profileData}
+                  modifyClasses='ml-auto'
+                  logoutFunction={logout}
+               />
             )}
          </div>
       </header>

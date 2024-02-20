@@ -44,7 +44,6 @@ const DashboardMobileNav = ({
       <div className={`${modifyClasses}`}>
          <MobileMenuBtn
             modifyClasses={MenuBtnModifyClasses}
-            theme='dark'
             openNavFunction={openDashboardMobileNav}
          />
 
@@ -52,7 +51,7 @@ const DashboardMobileNav = ({
          <nav
             className={`block h-screen fixed top-0 left-0 w-full sm:w-[50%] md:w-[40%] lg:w-[35%] 2xl:w-[20%] -translate-x-full origin-center transition-all duration-default z-40 overflow-x-hidden ${
                dashboardMobileNavOpen ? '!translate-x-0' : ''
-            } p-8 bg-blackLight`}
+            } p-8 bg-gradient-to-bl from-secondary to-primary`}
          >
             {/* close nav button */}
             <MobileMenuCloseBtn

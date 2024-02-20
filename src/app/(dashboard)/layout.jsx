@@ -2,8 +2,8 @@
 import PropTypes from 'prop-types';
 
 // components
-import DashboardHeader from '@/components/shared/DashboardHeader/DashboardHeader';
-import DashboardNav from '@/components/shared/DashboardNav/DashboardNav';
+import DashboardHeader from '@/components/page-related/dashboard-home/DashboardHeader/DashboardHeader';
+import DashboardNav from '@/components/page-related/dashboard-home/DashboardNav/DashboardNav';
 
 const DashboardLayout = ({ children }) => {
    return (
@@ -13,7 +13,12 @@ const DashboardLayout = ({ children }) => {
          <div className='h-full'>
             <DashboardHeader />
 
-            <div className='h-[calc(100vh-5.8rem)] overflow-y-auto'>
+            <div
+               style={{
+                  backgroundImage: `url('data:image/svg+xml;utf8,<svg viewBox="0 0 1270 500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="rgba(255, 134, 49, 1)" d="M 0 438 C 255.60000000000002 438 383.4 281 639 281 L 639 281 L 639 0 L 0 0 Z" stroke-width="0"></path> <path fill="rgba(255, 134, 49, 1)" d="M 638 281 C 890.8 281 1017.2 131 1270 131 L 1270 131 L 1270 0 L 638 0 Z" stroke-width="0"></path> </svg>')`,
+               }}
+               className='h-[calc(100vh-5.8rem)] relative overflow-y-auto !bg-cover !bg-no-repeat !bg-center'
+            >
                {/* page  */}
                {children}
             </div>
