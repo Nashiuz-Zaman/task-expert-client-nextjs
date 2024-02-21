@@ -7,12 +7,12 @@ import PropTypes from 'prop-types';
 import { store } from './store';
 import { Provider } from 'react-redux';
 
-const Providers = ({ children }) => {
+const ReduxProvider = ({ children }) => {
   return <Provider store={store}>{children}</Provider>;
 };
 
-Providers.propTypes = {
+ReduxProvider.propTypes = {
   children: PropTypes.any,
 };
 
-export default Providers;
+export default ReduxProvider;

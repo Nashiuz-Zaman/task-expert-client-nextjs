@@ -4,16 +4,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-   dashboardNavOptions: null,
    dashboardMobileNavOpen: false,
+   dashboardRoute: null,
 };
 
 const dashboardSlice = createSlice({
    name: 'dashboard',
    initialState,
    reducers: {
-      setDashboardNavOptions: (state, { payload }) => {
-         state.dashboardNavOptions = payload;
+      setDashboardRoute: (state, { payload }) => {
+         const route = `/${payload.name.toLowerCase().split(' ').join('-')}`;
+         state.dashboardRoute = route;
       },
       setDashboardMobileNavOpen: (state, { payload }) => {
          state.dashboardMobileNavOpen = payload;
@@ -23,4 +24,8 @@ const dashboardSlice = createSlice({
 
 const { reducer, actions } = dashboardSlice;
 export default reducer;
-export const { setDashboardMobileNavOpen, setDashboardNavOptions } = actions;
+export const {
+   setDashboardMobileNavOpen,
+   setDashboardRoute,
+   setDashboardNavOptions,
+} = actions;

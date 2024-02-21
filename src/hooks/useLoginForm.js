@@ -8,7 +8,6 @@ import useFirebaseMethods from '@/hooks/useFirebaseMethods';
 import useAxios from '@/hooks/useAxios';
 import useToast from '@/hooks/useToast';
 import useFormVisiblity from './useFormVisiblity';
-import useGetDashboardNavOptions from './useGetDashboardNavOptions';
 
 // redux
 import { useDispatch } from 'react-redux';
@@ -18,6 +17,7 @@ import {
    setProfileData,
    setLoginErrors,
 } from '@/lib/redux/features/auth/authSlice';
+import { setDashboardRoute } from '@/lib/redux/features/dashboard/dashboardSlice';
 
 const useLoginForm = () => {
    const dispatch = useDispatch();
@@ -26,7 +26,6 @@ const useLoginForm = () => {
    const { axiosCustom } = useAxios();
    const { closeLoginFormWithBackdrop, closeSignupFormWithBackdrop } =
       useFormVisiblity();
-   const { getDashboardNavOptions } = useGetDashboardNavOptions();
    const router = useRouter();
 
    const validateInputs = inputs => {
@@ -68,10 +67,7 @@ const useLoginForm = () => {
 
          if (googleLoginResponse.data.success) {
             const profileData = googleLoginResponse.data.user;
-
-            // generate dashboard navigation menu options
-            getDashboardNavOptions(profileData.name);
-
+            dispatch(setDashboardRoute(profileData));
             // set profile data, user should exist and the jwt token
             dispatch(setProfileData(profileData));
             dispatch(setUserShouldExist(true));
@@ -126,10 +122,7 @@ const useLoginForm = () => {
 
             if (loginResponse.data.success) {
                const profileData = loginResponse.data.user;
-
-               // generate dashboard navigation menu options
-               getDashboardNavOptions(profileData.name);
-
+               dispatch(setDashboardRoute(profileData));
                dispatch(setProfileData(profileData));
                dispatch(setUserShouldExist(true));
                // set profile and the jwt token in the localstorage

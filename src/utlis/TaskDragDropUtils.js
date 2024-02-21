@@ -1,3 +1,5 @@
+'use client';
+
 import { createDragDropContext } from '@/lib/drag-and-drop/ReusableDragDropProvider';
 
 export const {

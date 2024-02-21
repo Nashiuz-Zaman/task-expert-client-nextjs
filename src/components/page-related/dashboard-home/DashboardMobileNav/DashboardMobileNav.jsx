@@ -10,7 +10,7 @@ import Link from 'next/link';
 import MobileMenuCloseBtn from '@/components/shared/MobileMenuCloseBtn/MobileMenuCloseBtn';
 import MobileMenuBtn from '@/components/shared/MobileMenuBtn/MobileMenuBtn';
 import ButtonBtn from '@/components/shared/ButtonBtn/ButtonBtn';
-import BrandLogo from '@/components/shared/BrandLogo/Brandlogo';
+import BrandLogo from '@/components/shared/BrandLogo/BrandLogo';
 
 // hook
 import useDashboardMobileNav from '@/hooks/useDashboardMobileNav';

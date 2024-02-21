@@ -5,10 +5,10 @@ import { useEffect } from 'react';
 
 // hook
 import useAxios from '@/hooks/useAxios';
-import useGetDashboardNavOptions from './useGetDashboardNavOptions';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
+import { setDashboardRoute } from '@/lib/redux/features/dashboard/dashboardSlice';
 import {
    setUserShouldExist,
    setProfileData,
@@ -27,7 +27,6 @@ const useAuth = () => {
    const dispatch = useDispatch();
    const { userShouldExist, profileData } = useSelector(store => store.auth);
    const { axiosCustom } = useAxios();
-   const { getDashboardNavOptions } = useGetDashboardNavOptions();
 
    // if true, then user should exist
    useEffect(() => {
@@ -48,8 +47,7 @@ const useAuth = () => {
                });
 
                const tempProfileData = userCheckResponse.data.user;
-               getDashboardNavOptions(tempProfileData.name);
-
+               dispatch(setDashboardRoute(tempProfileData));
                dispatch(setProfileData(tempProfileData));
                dispatch(setAppLoading(false));
             } else {
@@ -64,13 +62,7 @@ const useAuth = () => {
       return () => {
          unSubscribe();
       };
-   }, [
-      dispatch,
-      userShouldExist,
-      profileData,
-      axiosCustom,
-      getDashboardNavOptions,
-   ]);
+   }, [dispatch, userShouldExist, profileData, axiosCustom]);
 };
 
 export default useAuth;
