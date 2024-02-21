@@ -31,7 +31,7 @@ const AllTasks = ({ modifyClasses = '' }) => {
 
    return (
       <div
-         className={`mx-4 md:mx-8 xl:mx-16 min-h-[70vh] flex flex-col shadow-large bg-white rounded-2xl  ${modifyClasses}`}
+         className={`mx-4 md:mx-8 xl:mx-16 min-h-[70vh] flex flex-col shadow-large bg-white rounded-2xl ${modifyClasses}`}
       >
          {isLoading && (
             <LoadingSpinner

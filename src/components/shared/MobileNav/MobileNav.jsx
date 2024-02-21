@@ -22,6 +22,7 @@ import { useSelector } from 'react-redux';
 
 // data
 import { navOptions } from '@/uiData/navigationOptions';
+import useClickOutside from '@/hooks/useClickOutside';
 
 const MobileNav = ({ modifyClasses = '' }) => {
    const { profileData } = useSelector(store => store.auth);
@@ -29,22 +30,29 @@ const MobileNav = ({ modifyClasses = '' }) => {
       useMobileNavigation();
    const { logout } = useFirebaseMethods();
 
+   const handleClickOutside = e => {
+      if (!e.target.closest('.mobilenav-focus')) {
+         closeMobileNav();
+      }
+   };
+   useClickOutside(mobileNavOpen, handleClickOutside);
+
    // add escape key close functionality
    useEscapeClose(closeMobileNav);
 
    // one single place for the link classes
    const linkClasses =
-      'leading-[normal] px-2 py-1 rounded-default text-white hover:text-primaryLightest font-medium transition-all duration-200';
+      'leading-[normal] px-2 py-1 rounded-default text-neutral-500 hover:text-primary font-medium transition-all duration-default';
 
    return (
       //  mobile nav starts here
-      <div>
+      <div className='mobilenav-focus'>
          <MobileMenuBtn openNavFunction={openMobileNav} />
 
          <nav
             className={`block h-screen fixed top-0 right-0 w-full sm:w-[50%] md:w-[40%] lg:w-[35%] 2xl:w-[20%] translate-x-full origin-center transition-all duration-default z-40 ${
                mobileNavOpen ? '!translate-x-0' : ''
-            } p-8 bg-primaryDark ${modifyClasses}`}
+            } p-8 bg-white ${modifyClasses}`}
          >
             {/* X cross button to close nav */}
             <MobileMenuCloseBtn
@@ -54,7 +62,6 @@ const MobileNav = ({ modifyClasses = '' }) => {
 
             {/* brand logo */}
             <BrandLogo
-               theme='dark'
                modifyClasses='block w-max mx-auto sm:mx-0 sm:mr-auto mb-customXs h-9'
                onClickFunction={closeMobileNav}
             />
@@ -76,7 +83,6 @@ const MobileNav = ({ modifyClasses = '' }) => {
             {profileData && (
                <ButtonBtn
                   text='Sign Out'
-                  colorTheme='outlined'
                   onClickFunction={() => {
                      logout();
                      closeMobileNav();

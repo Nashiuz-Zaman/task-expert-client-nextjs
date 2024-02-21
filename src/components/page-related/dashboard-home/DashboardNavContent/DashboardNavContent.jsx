@@ -1,19 +1,23 @@
 'use client';
 
+// react
+import PropTypes from 'prop-types';
+
 // icons
 import { Icon } from '@iconify/react';
 
-// redux
-import { useSelector } from 'react-redux';
+// components
 import DashboardNavHeading from '../DashboardNavHeading/DashboardNavHeading';
 import PinnedTask from '../PinnedTask/PinnedTask';
 import DashboardNavLink from '../DashboardNavLink/DashboardNavLink';
 
-const DashboardNavContent = () => {
+// redux
+import { useSelector } from 'react-redux';
+
+
+const DashboardNavContent = ({ modifyClasses = '' }) => {
    const { pinnedTasks } = useSelector(store => store.task);
    const { dashboardRoute } = useSelector(store => store.dashboard);
-
-   const inlineMarginClasses = 'mx-6';
 
    const primaryOptions = [
       {
@@ -36,7 +40,7 @@ const DashboardNavContent = () => {
       },
    ];
    return (
-      <div className='mx-6 space-y-12'>
+      <div className={`space-y-12 ${modifyClasses}`}>
          {/* pinned tasks */}
          <div>
             <DashboardNavHeading text='Pinned Task' modifyClasses='mb-6' />
@@ -82,6 +86,10 @@ const DashboardNavContent = () => {
          </div>
       </div>
    );
+};
+
+DashboardNavContent.propTypes = {
+   modifyClasses: PropTypes.string,
 };
 
 export default DashboardNavContent;
