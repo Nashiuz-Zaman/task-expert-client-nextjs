@@ -28,7 +28,7 @@ const useGetTimeData = () => {
       const dayOfTheMonth = parseInt(dateObj.getDate());
       const year = parseInt(dateObj.getFullYear());
 
-      return `${dayOfTheMonth}-${monthName}-${year}`;
+      return `${dayOfTheMonth} ${monthName} ${year}`;
    }, []);
 
    const padTime = useCallback((data = 0) => {

@@ -4,71 +4,40 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-// next
-import Image from 'next/image';
-
-// react icons
-import { IoTrashSharp, IoChevronDownOutline } from 'react-icons/io5';
+//  icons
+import { Icon } from '@iconify/react';
 
 // component
-import Accordion from '@/components/shared/Accordion/Accordion';
+import Priority from '@/components/shared/Priority/Priority';
+import EditBtn from '@/components/shared/EditBtn/EditBtn';
+import DeleteBtn from '@/components/shared/DeleteBtn/DeleteBtn';
+import PinBtn from '@/components/shared/PinBtn/PinBtn';
+import ViewDetailsBtn from '@/components/shared/ViewDetailsBtn/ViewDetailsBtn';
 
 // hook
 import useMethodsForTaskDatabase from '@/hooks/useMethodsForTaskDatabase';
+import useGetTimeData from '@/hooks/useGetTimeData';
 
 // redux
 import { useSelector } from 'react-redux';
 
 // utils
 import { useTaskDragDropProvider } from '@/utlis/TaskDragDropUtils';
-import { Icon } from '@iconify/react';
 
 const Task = ({ taskData }) => {
+   const { _id, title, description, deadline, priorityLevel } = taskData;
    const [isDragging, setIsDragging] = useState(false);
-   const [expanded, setExpanded] = useState(false);
-   const {
-      _id,
-      title,
-      description,
-      imageSource = null,
-      deadline,
-      priorityLevel,
-   } = taskData;
-
    const { deleteTask, updateTasks } = useMethodsForTaskDatabase();
-
    const { totalTasks } = useSelector(store => store.task);
-
    const { findDropzoneElementId, dropzoneElementRefs } =
       useTaskDragDropProvider();
+   const { getDayMonthNameYearStr } = useGetTimeData();
 
-   // priority data info
-   const priorities = [
-      {
-         text: 'Low',
-         bgColor: 'bg-green-100',
-         textColor: 'text-green-500',
-      },
-      {
-         text: 'Medium',
-         bgColor: 'bg-orange-100',
-         textColor: 'text-orange-500',
-      },
-      {
-         text: 'High',
-         bgColor: 'bg-red-100',
-         textColor: 'text-red-500',
-      },
-   ];
-
-   // set priority color and text
-   const priorityBgColor = priorities[priorityLevel]?.bgColor;
-   const priorityTextColor = priorities[priorityLevel]?.textColor;
-   const priorityText = priorities[priorityLevel]?.text;
+   const deadlineStr = getDayMonthNameYearStr(new Date(deadline));
 
    return (
       <div
-         className={`border border-inherit rounded-lg p-3 text-lg flex flex-col cursor-grab shadow-sm ${
+         className={`border border-inherit rounded-lg p-3 pb-4 text-lg flex flex-col cursor-grab shadow-sm ${
             isDragging
                ? 'opacity-30 !cursor-grabbing'
                : 'opacity-100 !cursor-pointer'
@@ -111,69 +80,35 @@ const Task = ({ taskData }) => {
             setIsDragging(false);
          }}
       >
-         <div className='flex items-center justify-between'>
-            {/* priority */}
-            <p
-               className={`w-max mb-[1.125rem] px-3 py-[6px] font-medium rounded-md text-sm ${priorityBgColor} ${priorityTextColor}`}
-               title={`${priorityText} priority task`}
-            >
-               {priorityText}
-            </p>
+         {/* priority and top buttons */}
+         <div className='flex items-center justify-between mb-[1.125rem]'>
+            <Priority priorityLevel={priorityLevel} />
 
             <div className='flex items-center gap-2 text-2xl'>
-               <button>
-                  <Icon className='text-neutral-500' icon='ic:round-edit' />
-               </button>
-               <button>
-                  <Icon className='text-neutral-500' icon='tabler:pin-filled' />
-               </button>
-               <button>
-                  <Icon
-                     className='text-red-600 text-xl'
-                     icon='icomoon-free:bin'
-                  />
-               </button>
+               <ViewDetailsBtn modifyClasses='text-xl' />
+               <EditBtn />
+               <PinBtn />
+               <DeleteBtn
+                  onClickFunction={() => {
+                     deleteTask(_id, totalTasks);
+                  }}
+               />
             </div>
          </div>
-         {/* title and delete button */}
-         <h4 className='font-extrabold text-lg mb-[1.125rem]'>{title}</h4>
 
-         <Image
-            width={500}
-            height={375}
-            className='w-full aspect-[16/7.5] object-cover rounded-lg'
-            src={imageSource}
-            alt='task image'
-         />
+         {/* title */}
+         <h4 className='font-extrabold text-lg mb-2 leading-none'>{title}</h4>
 
-         {/* expand Button
-         <button
-            onClick={() => {
-               setExpanded(prev => !prev);
-            }}
-            className='block w-full cursor-pointer pt-1 pb-2'
-         >
-            <IoChevronDownOutline
-               className={`text-lg w-max mx-auto transition-all duration-default ${
-                  expanded ? 'rotate-180' : 'rotate-0'
-               }`}
+         {/* deadline */}
+         <div title='Deadline' className='flex items-center gap-1'>
+            <Icon
+               className='text-neutral-500 text-xl'
+               icon='ph:calendar-fill'
             />
-         </button> */}
-
-         <Accordion expanded={expanded}>
-            {/* description */}
-            <div className='mb-2' title={description}>
-               <span className='block font-semibold '>Description:</span>
-               <p className='font-medium'>{description.substring(0, 55)}...</p>
-            </div>
-
-            {/* deadline */}
-            <div className='flex items-center justify-between mt-auto mb-4'>
-               <p>
-                  <span className='font-semibold'>Deadline:</span> {deadline}
-               </p>
-            </div>
-         </Accordion>
+            <span className='text-neutral-500 font-semibold text-sm !leading-none'>
+               {deadlineStr}
+            </span>
+         </div>
       </div>
    );
 };
