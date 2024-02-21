@@ -9,7 +9,7 @@ import Backdrop from '@/components/shared/Backdrop/Backdrop';
 import AuthComponent from '@/components/shared/AuthComponent/AuthComponent';
 
 // redux
-import Providers from '@/lib/redux/Providers';
+import ReduxProvider from '@/lib/redux/ReduxProvider';
 
 // react toastify
 import { ToastContainer } from 'react-toastify';
@@ -33,7 +33,7 @@ const RootLayout = ({ children }) => {
    return (
       <html lang='en'>
          <body className={`${inter.className} text-textPrimary`}>
-            <Providers>
+            <ReduxProvider>
                {/* react toastify */}
                <ToastContainer
                   position='top-center'
@@ -55,7 +55,7 @@ const RootLayout = ({ children }) => {
                {/* backdrop component */}
                <Backdrop />
                {children}
-            </Providers>
+            </ReduxProvider>
          </body>
       </html>
    );

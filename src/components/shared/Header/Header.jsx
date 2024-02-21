@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 
 // components
-import BrandLogo from '@/components/shared/BrandLogo/Brandlogo';
+import BrandLogo from '@/components/shared/BrandLogo/BrandLogo';
 import InnerContainer from '@/components/containers/InnerContainer/InnerContainer';
 import MobileNav from '@/components/shared/MobileNav/MobileNav';
 
@@ -20,7 +20,7 @@ import { useSelector } from 'react-redux';
 
 const Header = ({ modifyClasses = '' }) => {
    const { profileData } = useSelector(store => store.auth);
-   const { dashboardNavOptions } = useSelector(store => store.dashboard);
+   const { dashboardRoute } = useSelector(store => store.dashboard);
    const { openLoginFormWithBackdrop, openSignupFormWithBackdrop } =
       useFormVisiblity();
    const { logout } = useFirebaseMethods();
@@ -69,9 +69,7 @@ const Header = ({ modifyClasses = '' }) => {
                      </p>
 
                      <Link
-                        href={
-                           dashboardNavOptions.profileRoute + '/manage-tasks'
-                        }
+                        href={dashboardRoute + '/manage-tasks'}
                         className={`${btnClasses} underline text-primary`}
                      >
                         Visit Dashboard
