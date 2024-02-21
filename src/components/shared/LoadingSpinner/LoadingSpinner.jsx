@@ -1,46 +1,47 @@
 // react
-import PropTypes from "prop-types";
 
-// react icons
-import { ImSpinner8 } from "react-icons/im";
+import PropTypes from 'prop-types';
+
+// icons
+import { Icon } from '@iconify/react';
 
 const LoadingSpinner = ({
-  text = "Loading",
-  modifyClasses = "",
-  modifyInnerContainerClasses = "",
-  onlyLoader = false,
-  textSizeClass = "text-base",
-  loaderSizeClass = "text-base",
+   text = 'Loading',
+   modifyClasses = '',
+   modifyInnerContainerClasses = '',
+   onlyLoader = false,
+   textSizeClass = 'text-base',
+   loaderSizeClass = 'text-base',
 }) => {
-  return (
-    <div className={`${modifyClasses}`}>
-      <div
-        className={`flex flex-col md:flex-row justify-center items-center gap-3 ${modifyInnerContainerClasses}`}
-      >
-        {/* text */}
-        {!onlyLoader && (
-          <p style={{ color: "inherit" }} className={`${textSizeClass}`}>
-            {text}
-          </p>
-        )}
+   return (
+      <div className={`${modifyClasses}`}>
+         <div
+            className={`flex grow flex-col md:flex-row justify-center items-center gap-3 ${modifyInnerContainerClasses}`}
+         >
+            {/* text */}
+            {!onlyLoader && (
+               <p style={{ color: 'inherit' }} className={textSizeClass}>
+                  {text}
+               </p>
+            )}
 
-        {/* loading spinner */}
-        <ImSpinner8
-          style={{ color: "inherit" }}
-          className={`animate-spin ${loaderSizeClass}`}
-        />
+            {/* loading spinner */}
+            <Icon
+               className={loaderSizeClass}
+               icon='svg-spinners:3-dots-rotate'
+            />
+         </div>
       </div>
-    </div>
-  );
+   );
 };
 
 LoadingSpinner.propTypes = {
-  text: PropTypes.string,
-  onlyLoader: PropTypes.bool,
-  modifyInnerContainerClasses: PropTypes.string,
-  modifyClasses: PropTypes.string,
-  loaderSizeClass: PropTypes.string,
-  textSizeClass: PropTypes.string,
+   text: PropTypes.string,
+   onlyLoader: PropTypes.bool,
+   modifyInnerContainerClasses: PropTypes.string,
+   modifyClasses: PropTypes.string,
+   loaderSizeClass: PropTypes.string,
+   textSizeClass: PropTypes.string,
 };
 
 export default LoadingSpinner;
