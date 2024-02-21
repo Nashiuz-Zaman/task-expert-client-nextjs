@@ -25,7 +25,7 @@ import { useSelector } from 'react-redux';
 import { useTaskDragDropProvider } from '@/utlis/TaskDragDropUtils';
 
 const Task = ({ taskData }) => {
-   const { _id, title, description, deadline, priorityLevel } = taskData;
+   const { _id, title, deadline, priorityLevel } = taskData;
    const [isDragging, setIsDragging] = useState(false);
    const { deleteTask, updateTasks } = useMethodsForTaskDatabase();
    const { totalTasks } = useSelector(store => store.task);
