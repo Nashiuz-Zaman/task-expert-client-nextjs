@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation';
 import useFirebaseMethods from './useFirebaseMethods';
 import useAxios from './useAxios';
 import useFormVisiblity from './useFormVisiblity';
-import useGetDashboardNavOptions from './useGetDashboardNavOptions';
 
 // normal axios import
 import axios from 'axios';
@@ -25,6 +24,7 @@ import {
    setProfileData,
    setRegistrationErrors,
 } from '@/lib/redux/features/auth/authSlice';
+import { setDashboardRoute } from '@/lib/redux/features/dashboard/dashboardSlice';
 
 // custom hook body starts here
 const useRegistrationForm = () => {
@@ -34,7 +34,6 @@ const useRegistrationForm = () => {
    const { axiosCustom } = useAxios();
    const router = useRouter();
    const { closeSignupFormWithBackdrop } = useFormVisiblity();
-   const { getDashboardNavOptions } = useGetDashboardNavOptions();
 
    // registration password validation
    const validatePassword = password => {
@@ -174,8 +173,7 @@ const useRegistrationForm = () => {
                   // if success
                   if (userCreationResponse.data.success) {
                      const profileData = userCreationResponse.data.user;
-                     getDashboardNavOptions(profileData.name);
-
+                     dispatch(setDashboardRoute(profileData));
                      dispatch(setProfileData(profileData));
                      dispatch(setUserShouldExist(true));
                      localStorage.setItem(
