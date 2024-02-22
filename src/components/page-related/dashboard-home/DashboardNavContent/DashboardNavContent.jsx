@@ -14,7 +14,6 @@ import DashboardNavLink from '../DashboardNavLink/DashboardNavLink';
 // redux
 import { useSelector } from 'react-redux';
 
-
 const DashboardNavContent = ({ modifyClasses = '' }) => {
    const { pinnedTasks } = useSelector(store => store.task);
    const { dashboardRoute } = useSelector(store => store.dashboard);
@@ -40,9 +39,9 @@ const DashboardNavContent = ({ modifyClasses = '' }) => {
       },
    ];
    return (
-      <div className={`space-y-12 ${modifyClasses}`}>
+      <div className={`space-y-6 ${modifyClasses}`}>
          {/* pinned tasks */}
-         <div>
+         <div className='pb-6 border-b border-neutral-200'>
             <DashboardNavHeading text='Pinned Task' modifyClasses='mb-6' />
 
             {!pinnedTasks && (
@@ -54,7 +53,7 @@ const DashboardNavContent = ({ modifyClasses = '' }) => {
          </div>
 
          {/* dashboard pages */}
-         <div>
+         <div className='pb-6 border-b border-neutral-200'>
             <DashboardNavHeading text='Menu' modifyClasses='mb-6' />
 
             {/* the navigation menu */}

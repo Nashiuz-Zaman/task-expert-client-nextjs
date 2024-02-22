@@ -13,6 +13,15 @@ module.exports = {
             '2md': '850px',
             '3xl': '1700px',
          },
+         keyframes: {
+            'fade-in': {
+               '0%': { opacity: '0' },
+               '100%': { opacity: '1' },
+            },
+         },
+         animation: {
+            fadeIn: 'fade-in 0.3s ease-out forwards',
+         },
          spacing: {
             custom4xl: '20rem',
             custom3xl: '17rem',
