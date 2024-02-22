@@ -4,7 +4,7 @@
 import PropTypes from 'prop-types';
 
 // components
-import MobileMenuCloseBtn from '@/components/shared/MobileMenuCloseBtn/MobileMenuCloseBtn';
+import CloseBtn from '@/components/shared/CloseBtn/CloseBtn';
 import MobileMenuBtn from '@/components/shared/MobileMenuBtn/MobileMenuBtn';
 import ButtonBtn from '@/components/shared/ButtonBtn/ButtonBtn';
 import BrandLogo from '@/components/shared/BrandLogo/BrandLogo';
@@ -51,7 +51,7 @@ const DashboardMobileNav = ({
             } p-6 bg-white`}
          >
             {/* close nav button */}
-            <MobileMenuCloseBtn
+            <CloseBtn
                onClickFunction={closeDashboardMobileNav}
                modifyClasses='mb-customXs'
             />

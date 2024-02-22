@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 
 // components
-import MobileMenuCloseBtn from '@/components/shared/MobileMenuCloseBtn/MobileMenuCloseBtn';
+import CloseBtn from '@/components/shared/CloseBtn/CloseBtn';
 import BrandLogo from '@/components/shared/BrandLogo/BrandLogo';
 import MobileMenuBtn from '@/components/shared/MobileMenuBtn/MobileMenuBtn';
 import ButtonBtn from '@/components/shared/ButtonBtn/ButtonBtn';
@@ -55,7 +55,7 @@ const MobileNav = ({ modifyClasses = '' }) => {
             } p-8 bg-white ${modifyClasses}`}
          >
             {/* X cross button to close nav */}
-            <MobileMenuCloseBtn
+            <CloseBtn
                onClickFunction={closeMobileNav}
                modifyClasses='mb-customXs'
             />
