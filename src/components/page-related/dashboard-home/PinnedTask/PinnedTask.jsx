@@ -1,22 +1,42 @@
 // react
 import PropTypes from 'prop-types';
 
-// react icon
-import { TbPinnedFilled } from 'react-icons/tb';
+//  icon
+import { Icon } from '@iconify/react';
 
-const PinnedTask = ({ task, modifyClasses = '' }) => {
+// component
+import UnpinBtn from '@/components/shared/UnpinBtn/UnpinBtn';
+
+// redux
+import { useDispatch } from 'react-redux';
+import { removePinnedtask } from '@/lib/redux/features/task/taskSlice';
+
+const PinnedTask = ({ defaultValue = true, task, modifyClasses = '' }) => {
+   const dispatch = useDispatch();
+
    return (
       <div
-         title={task.title}
+         title={task?.title ?? 'No Pinned tasks'}
          className={`flex items-center gap-3 font-medium text-xl px-4 py-2 rounded-default text-neutral-500 border border-neutral-100 shadow-lg ${modifyClasses}`}
       >
-         <TbPinnedFilled className='text-3xl' />{' '}
-         <span className='truncate'>{task.title}</span>
+         {defaultValue && <Icon icon='bi:pin-fill' />}
+         <span className='truncate'>
+            {defaultValue ? 'No Pinned Tasks' : task.title}
+         </span>
+         {!defaultValue && (
+            <UnpinBtn
+               modifyClasses='!ml-auto'
+               onClickFunction={() => {
+                  dispatch(removePinnedtask(task?._id));
+               }}
+            />
+         )}
       </div>
    );
 };
 
 PinnedTask.propTypes = {
+   defaultValue: PropTypes.bool,
    task: PropTypes.object,
    modifyClasses: PropTypes.string,
 };
