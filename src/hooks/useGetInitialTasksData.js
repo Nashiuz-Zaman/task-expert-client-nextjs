@@ -16,12 +16,12 @@ import {
 const useGetInitialTasksData = () => {
    const { dispatch, useSelector } = useRedux();
    const { profileData } = useSelector(store => store.auth);
-   const { axiosCustom } = useAxios();
+   const { axiosPublic } = useAxios();
 
    useEffect(() => {
       const getInitialTasks = async email => {
          dispatch(setIsLoading(true));
-         const res = await axiosCustom.get(`/tasks?email=${email}`);
+         const res = await axiosPublic.get(`/tasks?email=${email}`);
          dispatch(setIsLoading(false));
 
          if (res.data.success) {
@@ -32,7 +32,7 @@ const useGetInitialTasksData = () => {
       if (profileData?.email) {
          getInitialTasks(profileData.email);
       }
-   }, [axiosCustom, profileData, dispatch]);
+   }, [axiosPublic, profileData, dispatch]);
 
    // useEffect(() => {
    //    if (isLoading) {

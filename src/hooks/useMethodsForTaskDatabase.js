@@ -11,11 +11,11 @@ import { setTotalTasks } from '@/lib/redux/features/task/taskSlice';
 const useMethodsForTaskDatabase = () => {
    const { dispatch, useSelector } = useRedux();
    const { profileData } = useSelector(store => store.auth);
-   const { axiosCustom } = useAxios();
+   const { axiosPublic } = useAxios();
    const { showToast } = useToast();
 
    const createTask = async newTaskInfo => {
-      const res = await axiosCustom.post(`/tasks`, newTaskInfo);
+      const res = await axiosPublic.post(`/tasks`, newTaskInfo);
       if (res.data.success) {
          showToast('Todo Added Successfully', 'success');
          // closeCreateForm();
@@ -53,7 +53,7 @@ const useMethodsForTaskDatabase = () => {
          lastUpdated,
       };
 
-      const res = await axiosCustom.patch(
+      const res = await axiosPublic.patch(
          `/tasks/update/${draggedTaskId}`,
          updatedTask
       );
@@ -73,7 +73,7 @@ const useMethodsForTaskDatabase = () => {
       const remainingTasks = tasks.filter(task => task._id !== _id);
       dispatch(setTotalTasks(remainingTasks));
 
-      const res = await axiosCustom.delete(
+      const res = await axiosPublic.delete(
          `/tasks/delete/${_id}?email=${profileData.email}`
       );
       if (res.data.success) {
