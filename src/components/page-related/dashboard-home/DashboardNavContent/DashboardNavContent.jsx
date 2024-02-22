@@ -38,18 +38,23 @@ const DashboardNavContent = ({ modifyClasses = '' }) => {
          url: `${dashboardRoute}/settings`,
       },
    ];
+
    return (
       <div className={`space-y-6 ${modifyClasses}`}>
          {/* pinned tasks */}
          <div className='pb-6 border-b border-neutral-200'>
             <DashboardNavHeading text='Pinned Task' modifyClasses='mb-6' />
 
-            {!pinnedTasks && (
-               <PinnedTask
-                  modifyClasses='ml-4'
-                  task={{ title: 'No pinned task' }}
-               />
-            )}
+            {!pinnedTasks?.length && <PinnedTask modifyClasses='ml-4' />}
+            {pinnedTasks?.length > 0 &&
+               pinnedTasks.map(task => (
+                  <PinnedTask
+                     key={task._id}
+                     defaultValue={false}
+                     task={task}
+                     modifyClasses='ml-4'
+                  />
+               ))}
          </div>
 
          {/* dashboard pages */}

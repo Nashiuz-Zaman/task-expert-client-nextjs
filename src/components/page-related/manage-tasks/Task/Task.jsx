@@ -19,12 +19,14 @@ import useMethodsForTaskDatabase from '@/hooks/useMethodsForTaskDatabase';
 import useGetTimeData from '@/hooks/useGetTimeData';
 
 // redux
-import { useSelector } from 'react-redux';
+import useRedux from '@/hooks/useRedux';
+import { addPinnedtask } from '@/lib/redux/features/task/taskSlice';
 
 // utils
 import { useTaskDragDropProvider } from '@/utlis/TaskDragDropUtils';
 
 const Task = ({ taskData }) => {
+   const { dispatch, useSelector } = useRedux();
    const { _id, title, deadline, priorityLevel } = taskData;
    const [isDragging, setIsDragging] = useState(false);
    const { deleteTask, updateTasks } = useMethodsForTaskDatabase();
@@ -87,7 +89,11 @@ const Task = ({ taskData }) => {
             <div className='flex items-center gap-2 text-2xl'>
                <ViewDetailsBtn modifyClasses='text-xl' />
                <EditBtn />
-               <PinBtn />
+               <PinBtn
+                  onClickFunction={() => {
+                     dispatch(addPinnedtask({ _id, title }));
+                  }}
+               />
                <DeleteBtn
                   onClickFunction={() => {
                      deleteTask(_id, totalTasks);
