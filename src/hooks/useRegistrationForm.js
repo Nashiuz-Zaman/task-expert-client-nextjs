@@ -31,7 +31,7 @@ const useRegistrationForm = () => {
    // initial data and function extractions
    const dispatch = useDispatch();
    const { signup, updateFirebaseProfile } = useFirebaseMethods();
-   const { axiosCustom } = useAxios();
+   const { axiosPublic } = useAxios();
    const router = useRouter();
    const { closeSignupFormWithBackdrop } = useFormVisiblity();
 
@@ -116,7 +116,7 @@ const useRegistrationForm = () => {
       // if there are no basic errors code will reach this line
       try {
          dispatch(setAppLoading(true));
-         const userExistsResponse = await axiosCustom.post(
+         const userExistsResponse = await axiosPublic.post(
             '/users/checkExistence',
             {
                email: dataObject.email,
@@ -165,7 +165,7 @@ const useRegistrationForm = () => {
                   };
 
                   // create user api call
-                  const userCreationResponse = await axiosCustom.post(
+                  const userCreationResponse = await axiosPublic.post(
                      '/users',
                      user
                   );

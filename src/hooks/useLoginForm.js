@@ -23,7 +23,7 @@ const useLoginForm = () => {
    const dispatch = useDispatch();
    const { loginEmail, loginGoogle } = useFirebaseMethods();
    const { showToast } = useToast();
-   const { axiosCustom } = useAxios();
+   const { axiosPublic } = useAxios();
    const { closeLoginFormWithBackdrop, closeSignupFormWithBackdrop } =
       useFormVisiblity();
    const router = useRouter();
@@ -60,7 +60,7 @@ const useLoginForm = () => {
          };
 
          // check with database if the google user already exists
-         const googleLoginResponse = await axiosCustom.post(
+         const googleLoginResponse = await axiosPublic.post(
             '/google-login',
             googleUser
          );
@@ -116,7 +116,7 @@ const useLoginForm = () => {
 
          //  if firebase login is successful, check database for profile data
          if (result.user) {
-            const loginResponse = await axiosCustom.post('/login', {
+            const loginResponse = await axiosPublic.post('/login', {
                email: result.user.email,
             });
 
