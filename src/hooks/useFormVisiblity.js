@@ -8,7 +8,9 @@ import { useDispatch } from 'react-redux';
 import {
    setLoginFormOpen,
    setRegistrationFormOpen,
+   setTaskCreateFormOpen,
 } from '@/lib/redux/features/form/formSlice';
+
 import { setBackdropOpen } from '@/lib/redux/features/backdrop/backdropSlice';
 
 const useFormVisiblity = () => {
@@ -58,11 +60,21 @@ const useFormVisiblity = () => {
       [dispatch]
    );
 
+   const openTaskCreateForm = useCallback(() => {
+      dispatch(setTaskCreateFormOpen(true));
+   }, [dispatch]);
+
+   const closeTaskCreateForm = useCallback(() => {
+      dispatch(setTaskCreateFormOpen(false));
+   }, [dispatch]);
+
    return {
       openLoginFormWithBackdrop,
       openSignupFormWithBackdrop,
       closeLoginFormWithBackdrop,
       closeSignupFormWithBackdrop,
+      openTaskCreateForm,
+      closeTaskCreateForm,
    };
 };
 

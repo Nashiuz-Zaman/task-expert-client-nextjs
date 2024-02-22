@@ -2,6 +2,7 @@
 
 // component
 import AllTasks from '@/components/page-related/manage-tasks/AllTasks/AllTasks';
+import TaskCreateForm from '@/components/forms/TaskCreateForm/TaskCreateForm';
 import TaskUtilsHeader from '@/components/page-related/manage-tasks/TaskUtilsHeader/TaskUtilsHeader';
 
 // utils
@@ -10,8 +11,10 @@ import { TaskDragDropProvider } from '@/utlis/TaskDragDropUtils';
 const manageTasks = () => {
    return (
       <>
-         <section className='mb-customSm'>
+         {/* make this section's postion relative for the form below */}
+         <section className='mb-customSm relative'>
             <TaskUtilsHeader />
+            <TaskCreateForm />
          </section>
 
          <section>

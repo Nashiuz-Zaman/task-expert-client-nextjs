@@ -71,8 +71,8 @@ const UserProfile = ({ profile, logoutFunction, modifyClasses = '' }) => {
 
             {/* positioned div for userpanel menu */}
             <div
-               className={`rounded-2xl w-[12rem] md:w-[15rem] bg-white border border-[#e5e5e5] shadow-xl p-4 absolute z-20 bottom-0 right-0  translate-y-[105%] transition-all duration-150 space-y-5 text-left cursor-default userpanel-focus ${
-                  showInfoPanel ? 'opacity-100 visible' : 'opacity-0 collapse'
+               className={`rounded-2xl w-[12rem] md:w-[15rem] bg-white border border-[#e5e5e5] shadow-xl p-4 absolute z-20 bottom-0 right-0  translate-y-[105%] space-y-5 text-left cursor-default userpanel-focus ${
+                  showInfoPanel ? 'block' : 'hidden'
                }`}
             >
                <p className='font-semibold md:text-lg'>{name}</p>
