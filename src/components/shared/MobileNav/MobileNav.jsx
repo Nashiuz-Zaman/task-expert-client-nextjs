@@ -16,16 +16,14 @@ import ButtonBtn from '@/components/shared/ButtonBtn/ButtonBtn';
 import useMobileNavigation from '@/hooks/useMobileNavigation';
 import useEscapeClose from '@/hooks/useEscapeClose';
 import useFirebaseMethods from '@/hooks/useFirebaseMethods';
+import useClickOutside from '@/hooks/useClickOutside';
 
 // redux
 import { useSelector } from 'react-redux';
 
-// data
-import { navOptions } from '@/uiData/navigationOptions';
-import useClickOutside from '@/hooks/useClickOutside';
-
 const MobileNav = ({ modifyClasses = '' }) => {
    const { profileData } = useSelector(store => store.auth);
+   const { dashboardRoute } = useSelector(store => store.dashboard);
    const { mobileNavOpen, openMobileNav, closeMobileNav } =
       useMobileNavigation();
    const { logout } = useFirebaseMethods();
@@ -43,6 +41,16 @@ const MobileNav = ({ modifyClasses = '' }) => {
    // one single place for the link classes
    const linkClasses =
       'leading-[normal] px-2 py-1 rounded-default text-neutral-500 hover:text-primary font-medium transition-all duration-default';
+
+   const links = [
+      { id: 0, text: 'Home', url: '/' },
+      { id: 1, text: 'Dashboard', url: `${dashboardRoute}/manage-tasks` },
+      {
+         id: 2,
+         text: 'Meet The Developer',
+         url: 'https://nashiuz-zaman.web.app/',
+      },
+   ];
 
    return (
       //  mobile nav starts here
@@ -68,16 +76,18 @@ const MobileNav = ({ modifyClasses = '' }) => {
 
             {/* regular part */}
             <ul className='flex flex-col items-center sm:items-start gap-3'>
+               <li></li>
                {/* this part will be always shown */}
-               {navOptions?.map(option => {
-                  return (
-                     <li key={option.id} onClick={closeMobileNav}>
-                        <Link className={linkClasses} href={option.url}>
-                           {option.text}
-                        </Link>
-                     </li>
-                  );
-               })}
+               {dashboardRoute &&
+                  links?.map(option => {
+                     return (
+                        <li key={option.id} onClick={closeMobileNav}>
+                           <Link className={linkClasses} href={option.url}>
+                              {option.text}
+                           </Link>
+                        </li>
+                     );
+                  })}
             </ul>
 
             {profileData && (
