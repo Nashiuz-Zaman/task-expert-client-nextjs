@@ -3,6 +3,9 @@
 // shared components
 import ButtonBtn from '../../shared/ButtonBtn/ButtonBtn';
 import CloseBtn from '@/components/shared/CloseBtn/CloseBtn';
+import SelectField from '@/components/shared/SelectField/SelectField';
+import InputField2 from '@/components/shared/InputField2/InputField2';
+import TextareaField from './../../shared/TextareaField/TextareaField';
 
 // custom hooks
 import useMethodsForTaskDatabase from '@/hooks/useMethodsForTaskDatabase';
@@ -12,6 +15,9 @@ import useClickOutside from '@/hooks/useClickOutside';
 
 // redux
 import { useSelector } from 'react-redux';
+
+// data
+import { priorityOptions } from '@/uiData/formsUiData';
 
 const TaskCreateForm = () => {
    const { profileData } = useSelector(store => store.auth);
@@ -29,12 +35,6 @@ const TaskCreateForm = () => {
    useEscapeClose(closeTaskCreateForm);
    useClickOutside(taskCreateFormOpen, handleClickOutside);
 
-   // common css classes
-   const labelClasses = 'block mb-1 font-bold';
-   const inputClasses =
-      'block rounded-default !w-full text-sm lg:text-base p-1 md:p-2 font-inherit bg-lightGray';
-
-   // all form values come from their inputs but date comes from the state
    const handleCreateTask = e => {
       e.preventDefault();
 
@@ -58,6 +58,7 @@ const TaskCreateForm = () => {
       };
 
       createTask(taskData);
+      closeTaskCreateForm();
       form.reset();
    };
 
@@ -65,7 +66,7 @@ const TaskCreateForm = () => {
       <div
          className={`${
             taskCreateFormOpen ? 'block' : 'hidden'
-         } translate-x-4 md:translate-x-8 shadow-medium w-[19rem] absolute bottom-0 translate-y-[calc(100%-2px)] left-0 p-4 bg-white z-40 rounded-xl task-create-form-focus`}
+         } translate-x-4 md:translate-x-8 shadow-xl w-[19rem] absolute bottom-0 translate-y-[calc(100%-2px)] left-0 p-4 bg-white border border-neutral-200 z-40 rounded-xl task-create-form-focus`}
       >
          <CloseBtn
             onClickFunction={closeTaskCreateForm}
@@ -75,50 +76,29 @@ const TaskCreateForm = () => {
          {/* form starts here */}
          <form onSubmit={handleCreateTask} className='block space-y-3'>
             {/* title */}
-            <div>
-               <label className={labelClasses}>Title</label>
-               <input
-                  name='title'
-                  className={inputClasses}
-                  type='text'
-                  required
-               />
-            </div>
+            <InputField2 label='Title' name='title' placeholder='Task Title' />
 
             {/* description */}
-            <div>
-               <label className={labelClasses}>Description</label>
-               <textarea
-                  name='description'
-                  className={`${inputClasses} h-12`}
-                  required
-               ></textarea>
-            </div>
+            <TextareaField
+               label='Description'
+               name='description'
+               placeholder='Task Description'
+            />
 
             {/* deadline */}
-            <div>
-               <label className={labelClasses}>Deadline</label>
-               <input
-                  name='deadline'
-                  className={inputClasses}
-                  type='text'
-                  placeholder='dd-mm-yyyy'
-                  required
-               />
-            </div>
+            <InputField2
+               label='Deadline'
+               name='deadline'
+               placeholder='DD-MMM-YYYY'
+            />
 
             {/* priority */}
-            <div>
-               <label className={labelClasses}>Priority</label>
-               <select
-                  className={`block w-full text-sm lg:text-base rounded-default p-[5px] md:p-[8.5px] lg:p-[9px] bg-lightGray`}
-                  name='priority'
-               >
-                  <option value='0'>Low</option>
-                  <option value='1'>Moderate</option>
-                  <option value='2'>High</option>
-               </select>
-            </div>
+            <SelectField
+               label='Priority'
+               name='priority'
+               options={priorityOptions}
+               defaultValueData={0}
+            />
 
             {/* submit button */}
             <ButtonBtn text='Add Task' modifyClasses='!ml-auto !mt-5' />
