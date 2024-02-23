@@ -17,10 +17,12 @@ import ViewDetailsBtn from '@/components/shared/ViewDetailsBtn/ViewDetailsBtn';
 // hook
 import useMethodsForTaskDatabase from '@/hooks/useMethodsForTaskDatabase';
 import useGetTimeData from '@/hooks/useGetTimeData';
+import useFormVisiblity from '@/hooks/useFormVisiblity';
 
 // redux
 import useRedux from '@/hooks/useRedux';
-import { addPinnedtask } from '@/lib/redux/features/task/taskSlice';
+
+import { pinTask, setTaskToEdit } from '@/lib/redux/features/task/taskSlice';
 
 // utils
 import { useTaskDragDropProvider } from '@/utlis/TaskDragDropUtils';
@@ -34,6 +36,7 @@ const Task = ({ taskData }) => {
    const { findDropzoneElementId, dropzoneElementRefs } =
       useTaskDragDropProvider();
    const { getDayMonthNameYearStr } = useGetTimeData();
+   const { openTaskEditForm } = useFormVisiblity();
 
    const deadlineStr = getDayMonthNameYearStr(new Date(deadline));
 
@@ -88,10 +91,15 @@ const Task = ({ taskData }) => {
 
             <div className='flex items-center gap-2 text-2xl'>
                <ViewDetailsBtn modifyClasses='text-xl' />
-               <EditBtn />
+               <EditBtn
+                  onClickFunction={() => {
+                     dispatch(setTaskToEdit(taskData));
+                     openTaskEditForm();
+                  }}
+               />
                <PinBtn
                   onClickFunction={() => {
-                     dispatch(addPinnedtask({ _id, title }));
+                     dispatch(pinTask({ _id, title }));
                   }}
                />
                <DeleteBtn
@@ -106,7 +114,7 @@ const Task = ({ taskData }) => {
          <h4 className='font-extrabold text-lg mb-2 leading-none'>{title}</h4>
 
          {/* deadline */}
-         <div title='Deadline' className='flex items-center gap-1'>
+         <div title='Deadline' className='flex w-max items-center gap-1'>
             <Icon
                className='text-neutral-500 text-xl'
                icon='ph:calendar-fill'

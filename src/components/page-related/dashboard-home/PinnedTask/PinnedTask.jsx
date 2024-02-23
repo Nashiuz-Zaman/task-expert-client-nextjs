@@ -9,7 +9,7 @@ import UnpinBtn from '@/components/shared/UnpinBtn/UnpinBtn';
 
 // redux
 import { useDispatch } from 'react-redux';
-import { removePinnedtask } from '@/lib/redux/features/task/taskSlice';
+import { unpinTask } from '@/lib/redux/features/task/taskSlice';
 
 const PinnedTask = ({ defaultValue = true, task, modifyClasses = '' }) => {
    const dispatch = useDispatch();
@@ -27,7 +27,7 @@ const PinnedTask = ({ defaultValue = true, task, modifyClasses = '' }) => {
             <UnpinBtn
                modifyClasses='!ml-auto'
                onClickFunction={() => {
-                  dispatch(removePinnedtask(task?._id));
+                  dispatch(unpinTask(task?._id));
                }}
             />
          )}

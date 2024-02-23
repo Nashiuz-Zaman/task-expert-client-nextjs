@@ -6,6 +6,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
    totalTasks: null,
    statusSpecificTasks: null,
+   taskToEdit: null,
    pinnedTasks: [],
    isLoading: true,
 };
@@ -17,19 +18,22 @@ const taskSlice = createSlice({
       setTotalTasks: (state, { payload }) => {
          state.totalTasks = payload;
       },
+      setTaskToEdit: (state, { payload }) => {
+         state.taskToEdit = payload;
+      },
       setPinnedTasks: (state, { payload }) => {
          state.pinnedTasks = payload;
       },
-      addPinnedtask: (state, { payload }) => {
+      pinTask: (state, { payload }) => {
          const { _id } = payload;
 
-               if (state.pinnedTasks.findIndex(task => task._id === _id) !== -1) {
+         if (state.pinnedTasks.findIndex(task => task._id === _id) !== -1) {
             return;
          }
 
          state.pinnedTasks.push(payload);
       },
-      removePinnedtask: (state, { payload }) => {
+      unpinTask: (state, { payload }) => {
          state.pinnedTasks = state.pinnedTasks.filter(
             task => task._id !== payload
          );
@@ -49,8 +53,9 @@ export default reducer;
 export const {
    setTotalTasks,
    setPinnedTasks,
-   addPinnedtask,
-   removePinnedtask,
+   pinTask,
+   unpinTask,
    setStatusSpecificTasks,
    setIsLoading,
+   setTaskToEdit,
 } = actions;
