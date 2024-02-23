@@ -9,6 +9,7 @@ import {
    setLoginFormOpen,
    setRegistrationFormOpen,
    setTaskCreateFormOpen,
+   setTaskEditFormOpen,
 } from '@/lib/redux/features/form/formSlice';
 
 import { setBackdropOpen } from '@/lib/redux/features/backdrop/backdropSlice';
@@ -68,6 +69,16 @@ const useFormVisiblity = () => {
       dispatch(setTaskCreateFormOpen(false));
    }, [dispatch]);
 
+   const openTaskEditForm = useCallback(() => {
+      dispatch(setTaskEditFormOpen(true));
+      dispatch(setBackdropOpen(true));
+   }, [dispatch]);
+
+   const closeTaskEditForm = useCallback(() => {
+      dispatch(setTaskEditFormOpen(false));
+      dispatch(setBackdropOpen(false));
+   }, [dispatch]);
+
    return {
       openLoginFormWithBackdrop,
       openSignupFormWithBackdrop,
@@ -75,6 +86,8 @@ const useFormVisiblity = () => {
       closeSignupFormWithBackdrop,
       openTaskCreateForm,
       closeTaskCreateForm,
+      openTaskEditForm,
+      closeTaskEditForm,
    };
 };
 
