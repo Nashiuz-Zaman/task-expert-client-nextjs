@@ -8,7 +8,7 @@ import { useEffect, useRef } from 'react';
 import ButtonBtn from '@/components/shared/ButtonBtn/ButtonBtn';
 import GoogleLoginBtn from '@/components/shared/GoogleLoginBtn/GoogleLoginBtn';
 import PasswordField from '@/components/shared/PasswordField/PasswordField';
-import InputField from '@/components/shared/InputField/InputField';
+import InputField1 from '@/components/shared/InputField1/InputField1';
 
 // hooks
 import useLoginForm from '@/hooks/useLoginForm';
@@ -53,7 +53,7 @@ const LoginForm = ({ modifyClasses = '' }) => {
          >
             <div className='w-full space-y-5 xs:w-[17rem] 2md:w-full 2md:mx-0 mx-auto'>
                {/* email */}
-               <InputField type='email' name='email' placeholder='Email' />
+               <InputField1 type='email' name='email' placeholder='Email' />
 
                {/* password */}
                <PasswordField name='password' placeholder='Password' />

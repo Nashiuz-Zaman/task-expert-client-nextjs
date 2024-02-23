@@ -7,6 +7,7 @@ import TaskUtilsHeader from '@/components/page-related/manage-tasks/TaskUtilsHea
 
 // utils
 import { TaskDragDropProvider } from '@/utlis/TaskDragDropUtils';
+import TaskEditForm from '@/components/forms/TaskEditForm/TaskEditForm';
 
 const manageTasks = () => {
    return (
@@ -15,6 +16,7 @@ const manageTasks = () => {
          <section className='mb-customSm relative'>
             <TaskUtilsHeader />
             <TaskCreateForm />
+            <TaskEditForm />
          </section>
 
          <section>
