@@ -6,7 +6,7 @@ import { useEffect, useRef } from 'react';
 import ButtonBtn from '@/components/shared/ButtonBtn/ButtonBtn';
 import GoogleLoginBtn from '@/components/shared/GoogleLoginBtn/GoogleLoginBtn';
 import FileUploadBtn from '@/components/shared/FileUploadBtn/FileUploadBtn';
-import InputField from '@/components/shared/InputField/InputField';
+import InputField1 from '@/components/shared/InputField1/InputField1';
 import PasswordField from '@/components/shared/PasswordField/PasswordField';
 
 // hooks
@@ -57,7 +57,7 @@ const RegistrationForm = ({ modifyClasses }) => {
          >
             <div className='w-full space-y-5 xs:w-[17rem] 2md:w-full 2md:mx-0 mx-auto'>
                {/* username field */}
-               <InputField name='name' placeholder='Username' />
+               <InputField1 name='name' placeholder='Username' />
 
                {/* photo upload button */}
                <div className='grid grid-cols-2 items-center'>
@@ -69,7 +69,7 @@ const RegistrationForm = ({ modifyClasses }) => {
                </div>
 
                {/* email field */}
-               <InputField type='email' name='email' placeholder='Email' />
+               <InputField1 type='email' name='email' placeholder='Email' />
 
                {/* password field */}
                <PasswordField name='password' placeholder='Password' />
