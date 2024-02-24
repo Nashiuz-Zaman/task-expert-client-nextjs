@@ -58,6 +58,7 @@ module.exports = {
             blackLight: '#111',
             darkThemeBg: '#202124',
          },
+
          borderRadius: {
             default: '5px',
             defaultLg: '10px',
