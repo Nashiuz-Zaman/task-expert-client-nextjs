@@ -10,7 +10,7 @@ import LoadingSpinner from '@/components/shared/LoadingSpinner/LoadingSpinner';
 // hooks
 import useGetInitialTasksData from '@/hooks/useGetInitialTasksData';
 import useTaskSeparator from '@/hooks/useTaskSeparator';
-import useMethodsForTaskDatabase from '@/hooks/useMethodsForTaskDatabase';
+
 
 // redux
 import { useSelector } from 'react-redux';
@@ -23,11 +23,9 @@ const AllTasks = ({ modifyClasses = '' }) => {
    useGetInitialTasksData();
    const { dropzoneElementRefs } = useTaskDragDropProvider();
    const { totalTasks, isLoading } = useSelector(store => store.task);
-   const { sortToLatest } = useMethodsForTaskDatabase();
    const { getStatusSpecificTasks } = useTaskSeparator();
 
-   const totalTasksSeparated =
-      totalTasks && getStatusSpecificTasks(sortToLatest(totalTasks));
+   const totalTasksSeparated = totalTasks && getStatusSpecificTasks(totalTasks);
 
    return (
       <div
