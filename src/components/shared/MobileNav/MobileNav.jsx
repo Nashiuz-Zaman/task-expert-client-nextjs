@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 // next
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 // components
 import CloseBtn from '@/components/shared/CloseBtn/CloseBtn';
@@ -16,19 +17,20 @@ import ButtonBtn from '@/components/shared/ButtonBtn/ButtonBtn';
 import useMobileNavigation from '@/hooks/useMobileNavigation';
 import useEscapeClose from '@/hooks/useEscapeClose';
 import useFirebaseMethods from '@/hooks/useFirebaseMethods';
+import useClickOutside from '@/hooks/useClickOutside';
+import useFormVisiblity from '@/hooks/useFormVisiblity';
 
 // redux
 import { useSelector } from 'react-redux';
 
-// data
-import { navOptions } from '@/uiData/navigationOptions';
-import useClickOutside from '@/hooks/useClickOutside';
-
 const MobileNav = ({ modifyClasses = '' }) => {
    const { profileData } = useSelector(store => store.auth);
+   const { dashboardRoute } = useSelector(store => store.dashboard);
    const { mobileNavOpen, openMobileNav, closeMobileNav } =
       useMobileNavigation();
    const { logout } = useFirebaseMethods();
+   const router = useRouter();
+   const { openLoginFormWithBackdrop } = useFormVisiblity();
 
    const handleClickOutside = e => {
       if (!e.target.closest('.mobilenav-focus')) {
@@ -42,7 +44,7 @@ const MobileNav = ({ modifyClasses = '' }) => {
 
    // one single place for the link classes
    const linkClasses =
-      'leading-[normal] px-2 py-1 rounded-default text-neutral-500 hover:text-primary font-medium transition-all duration-default';
+      'leading-[normal] px-2 py-1 rounded-default text-neutral-500 hover:text-primary font-medium transition-all duration-default capitalize';
 
    return (
       //  mobile nav starts here
@@ -68,16 +70,38 @@ const MobileNav = ({ modifyClasses = '' }) => {
 
             {/* regular part */}
             <ul className='flex flex-col items-center sm:items-start gap-3'>
-               {/* this part will be always shown */}
-               {navOptions?.map(option => {
-                  return (
-                     <li key={option.id} onClick={closeMobileNav}>
-                        <Link className={linkClasses} href={option.url}>
-                           {option.text}
-                        </Link>
-                     </li>
-                  );
-               })}
+               <li onClick={closeMobileNav}>
+                  <Link className={linkClasses} href={'/'}>
+                     home
+                  </Link>
+               </li>
+
+               <li>
+                  <button
+                     className={linkClasses}
+                     onClick={() => {
+                        if (!profileData) {
+                           closeMobileNav();
+                           openLoginFormWithBackdrop();
+                           return;
+                        }
+
+                        router.push(`${dashboardRoute}/manage-tasks`);
+                        closeMobileNav();
+                     }}
+                  >
+                     Dashboard
+                  </button>
+               </li>
+
+               <li onClick={closeMobileNav}>
+                  <Link
+                     className={linkClasses}
+                     href={'https://nashiuz-zaman.web.app/'}
+                  >
+                     Meet The Developer
+                  </Link>
+               </li>
             </ul>
 
             {profileData && (

@@ -8,7 +8,7 @@ import RegistrationModal from '@/components/forms/RegistrationModal/Regtistratio
 const Home = () => {
    return (
       <>
-         <section className='mt-custom2md mb-customXl md:mb-custom3xl'>
+         <section className='mt-customXs lg:mt-customMd xl:mt-custom2md mb-customXl md:mb-custom2xl'>
             <InnerContainer>
                <Banner />
             </InnerContainer>

@@ -16,3 +16,21 @@ export const priorityOptions = [
       value: 2,
    },
 ];
+
+export const statusOptions = [
+   {
+      id: 0,
+      text: 'Todo',
+      value: 0,
+   },
+   {
+      id: 1,
+      text: 'Ongoing',
+      value: 1,
+   },
+   {
+      id: 2,
+      text: 'Completed',
+      value: 2,
+   },
+];

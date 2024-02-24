@@ -1,5 +1,8 @@
 'use client';
 
+// react
+import { useCallback } from 'react';
+
 // hook
 import useAxios from './useAxios';
 import useToast from './useToast';
@@ -8,14 +11,25 @@ import useToast from './useToast';
 import useRedux from './useRedux';
 import { setTotalTasks } from '@/lib/redux/features/task/taskSlice';
 
+// data
+import { statusOptions } from '@/uiData/formsUiData';
+
 const useMethodsForTaskDatabase = () => {
    const { dispatch, useSelector } = useRedux();
    const { profileData } = useSelector(store => store.auth);
    const { axiosPublic } = useAxios();
    const { showToast } = useToast();
 
-   const createTask = async newTaskInfo => {
-      const res = await axiosPublic.post(`/tasks`, newTaskInfo);
+   const sortByLatest = useCallback(arr => {
+      const sortedArr = [...arr].sort(
+         (a, b) => new Date(a.lastUpdated) - new Date(b.lastUpdated)
+      );
+
+      return sortedArr;
+   }, []);
+
+   const createTask = async newTaskData => {
+      const res = await axiosPublic.post(`/tasks`, newTaskData);
       if (res.data.success) {
          showToast('Todo Added Successfully', 'success');
          // closeCreateForm();
@@ -24,32 +38,51 @@ const useMethodsForTaskDatabase = () => {
       return;
    };
 
-   const sortToLatest = arr => {
-      const sortedArr = [...arr].sort(
-         (a, b) => new Date(a.lastUpdated) - new Date(b.lastUpdated)
-      );
+   const editTask = useCallback(
+      async (editedTaskId, editedTaskData, totalTasks) => {
+         // return an updated array with the new data for the edited task only
+         const updatedTasksAfterEdit = totalTasks.map(task => {
+            if (task._id === editedTaskId) {
+               return { ...task, ...editedTaskData };
+            }
 
-      return sortedArr;
-   };
+            return task;
+         });
 
-   const updateTasks = async (draggedTaskId, updatedStatus, tasks) => {
+         // set the new array to the total tasks state in redux
+         dispatch(setTotalTasks(updatedTasksAfterEdit));
+
+         // update in the database
+         const res = await axiosPublic.put(
+            `/tasks/edit/${editedTaskId}`,
+            editedTaskData
+         );
+
+         if (res.data.status === 'success') {
+            showToast('Task Edited', 'success');
+         }
+      },
+      [axiosPublic, dispatch, showToast]
+   );
+
+   const updateTasks = async (draggedTaskId, statusLevel, totalTasks) => {
       // find latest time
       const lastUpdated = new Date().toISOString();
+      const statusLevelText = statusOptions[statusLevel].text;
 
       // create a new array
-      const updatedTasks = tasks.map(task => {
+      const updatedTasksAfterStatusChange = totalTasks.map(task => {
          return task._id === draggedTaskId
-            ? { ...task, statusLevel: updatedStatus, lastUpdated }
+            ? { ...task, statusLevel, lastUpdated }
             : task;
       });
 
       // update redux task state with new array
-      dispatch(setTotalTasks(updatedTasks));
+      dispatch(setTotalTasks(sortByLatest(updatedTasksAfterStatusChange)));
 
       // send the update information to the database
       const updatedTask = {
-         _id: draggedTaskId,
-         statusLevel: updatedStatus,
+         statusLevel,
          lastUpdated,
       };
 
@@ -59,10 +92,8 @@ const useMethodsForTaskDatabase = () => {
       );
 
       // show success toast on success
-      if (res.data.success) {
-         showToast('Tasks Updated Successfully', 'success');
-
-         dispatch(setTotalTasks(res.data.updatedTasks));
+      if (res.data.status === 'success') {
+         showToast(`Task moved to ${statusLevelText}`, 'success');
          return true;
       }
 
@@ -84,10 +115,11 @@ const useMethodsForTaskDatabase = () => {
    };
 
    return {
-      sortToLatest,
+      sortByLatest,
       updateTasks,
       deleteTask,
       createTask,
+      editTask,
    };
 };
 
