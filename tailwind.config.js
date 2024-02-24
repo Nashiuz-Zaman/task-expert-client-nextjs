@@ -18,9 +18,35 @@ module.exports = {
                '0%': { opacity: '0' },
                '100%': { opacity: '1' },
             },
+            'fade-in-from-right': {
+               '0%': {
+                  opacity: '0',
+                  position: 'relative',
+                  transform: 'translateX(20%)',
+               },
+               '100%': {
+                  opacity: '1',
+                  position: 'relative',
+                  transform: 'translateX(0)',
+               },
+            },
+            'fade-in-from-left': {
+               '0%': {
+                  opacity: '0',
+                  position: 'relative',
+                  transform: 'translateX(-20%)',
+               },
+               '100%': {
+                  opacity: '1',
+                  position: 'relative',
+                  transform: 'translateX(0)',
+               },
+            },
          },
          animation: {
             fadeIn: 'fade-in 0.3s ease-out forwards',
+            fadeInFromRight: 'fade-in-from-right 0.7s ease-out forwards',
+            fadeInFromLeft: 'fade-in-from-left 0.7s ease-out forwards',
          },
          spacing: {
             custom4xl: '20rem',
