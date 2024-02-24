@@ -61,8 +61,12 @@ const Task = ({ taskData }) => {
             );
             // make the website body scrollable again
             document.body.style.overflowY = 'auto';
+
+            const statusLevel =
+               status === 'todo' ? 0 : status === 'ongoing' ? 1 : 2;
+
             if (status) {
-               updateTasks(_id, status, totalTasks);
+               updateTasks(_id, statusLevel, totalTasks);
             }
             setIsDragging(false);
          }}

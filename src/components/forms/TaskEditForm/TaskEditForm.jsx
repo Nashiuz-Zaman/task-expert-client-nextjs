@@ -11,7 +11,6 @@ import SelectField from '@/components/shared/SelectField/SelectField';
 import useMethodsForTaskDatabase from '@/hooks/useMethodsForTaskDatabase';
 import useEscapeClose from '../../../hooks/useEscapeClose';
 import useFormVisiblity from '@/hooks/useFormVisiblity';
-import useClickOutside from '@/hooks/useClickOutside';
 import useGetTimeData from '@/hooks/useGetTimeData';
 
 // redux
@@ -23,12 +22,11 @@ import { priorityOptions } from '@/uiData/formsUiData';
 
 const TaskEditForm = () => {
    const { dispatch, useSelector } = useRedux();
-   const { profileData } = useSelector(store => store.auth);
    const { taskEditFormOpen } = useSelector(store => store.form);
-   const { taskToEdit } = useSelector(store => store.task);
-   const { createTask } = useMethodsForTaskDatabase();
+   const { taskToEdit, totalTasks } = useSelector(store => store.task);
    const { closeTaskEditForm } = useFormVisiblity();
    const { getDayMonthNameYearStr } = useGetTimeData();
+   const { editTask } = useMethodsForTaskDatabase();
    const deadlineStr = getDayMonthNameYearStr(new Date(taskToEdit?.deadline))
       .split(' ')
       .join('-');
@@ -39,15 +37,8 @@ const TaskEditForm = () => {
       dispatch(setTaskToEdit(null));
    };
 
-   const handleClickOutside = e => {
-      if (!e.target.closest('.task-edit-form-focus')) {
-         handleCloseForm();
-      }
-   };
-
    // add support clicking outside and escape key press
    useEscapeClose(handleCloseForm);
-   useClickOutside(taskEditFormOpen, handleClickOutside);
 
    // all form values come from their inputs but date comes from the state
    const handleEditTask = e => {
@@ -55,24 +46,21 @@ const TaskEditForm = () => {
 
       // take all the necessary values
       const form = e.target;
-      const title = form.title.value;
-      const description = form.description.value;
-      const deadline = form.deadline.value;
-      const priorityLevel = parseInt(form.priority.value);
-      const date = new Date().toISOString();
+      const title = form.title.value.trim();
+      const description = form.description.value.trim();
+      const deadline = form.deadline.value.trim();
+      const priorityLevel = parseInt(form.priority.value.trim());
 
       // Task data summarized
-      const taskData = {
+      const editedTaskData = {
          title,
          description,
-         statusLevel: 0,
          deadline,
          priorityLevel,
-         lastUpdated: date,
-         email: profileData.email,
       };
 
-      createTask(taskData);
+      editTask(taskToEdit._id, editedTaskData, totalTasks);
+      handleCloseForm();
       form.reset();
    };
 
