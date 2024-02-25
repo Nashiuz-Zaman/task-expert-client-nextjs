@@ -20,7 +20,6 @@ import { useSelector } from 'react-redux';
 
 const Header = ({ modifyClasses = '' }) => {
    const { profileData } = useSelector(store => store.auth);
-   const { dashboardRoute } = useSelector(store => store.dashboard);
    const { openLoginFormWithBackdrop, openSignupFormWithBackdrop } =
       useFormVisiblity();
    const { logout } = useFirebaseMethods();
@@ -69,7 +68,7 @@ const Header = ({ modifyClasses = '' }) => {
                      </p>
 
                      <Link
-                        href={dashboardRoute + '/manage-tasks'}
+                        href={'/manage-tasks'}
                         className={`${btnClasses} underline text-primary`}
                      >
                         Visit Dashboard

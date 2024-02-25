@@ -16,18 +16,17 @@ import { useSelector } from 'react-redux';
 
 const DashboardNavContent = ({ modifyClasses = '' }) => {
    const { pinnedTasks } = useSelector(store => store.task);
-   const { dashboardRoute } = useSelector(store => store.dashboard);
 
    const primaryOptions = [
       {
          text: 'Manage Tasks',
          icon: <Icon icon='fluent:tasks-app-20-filled' />,
-         url: `${dashboardRoute}/manage-tasks`,
+         url: `/manage-tasks`,
       },
       {
          text: 'Analytics',
          icon: <Icon icon='solar:chart-2-bold' />,
-         url: `${dashboardRoute}/analytics`,
+         url: `/analytics`,
       },
    ];
 
@@ -35,7 +34,7 @@ const DashboardNavContent = ({ modifyClasses = '' }) => {
       {
          text: 'Settings',
          icon: <Icon icon='solar:settings-bold' />,
-         url: `${dashboardRoute}/settings`,
+         url: `/settings`,
       },
    ];
 

@@ -17,7 +17,6 @@ import {
    setProfileData,
    setLoginErrors,
 } from '@/lib/redux/features/auth/authSlice';
-import { setDashboardRoute } from '@/lib/redux/features/dashboard/dashboardSlice';
 
 const useLoginForm = () => {
    const dispatch = useDispatch();
@@ -67,7 +66,6 @@ const useLoginForm = () => {
 
          if (googleLoginResponse.data.success) {
             const profileData = googleLoginResponse.data.user;
-            dispatch(setDashboardRoute(profileData));
             // set profile data, user should exist and the jwt token
             dispatch(setProfileData(profileData));
             dispatch(setUserShouldExist(true));
@@ -122,7 +120,6 @@ const useLoginForm = () => {
 
             if (loginResponse.data.success) {
                const profileData = loginResponse.data.user;
-               dispatch(setDashboardRoute(profileData));
                dispatch(setProfileData(profileData));
                dispatch(setUserShouldExist(true));
                // set profile and the jwt token in the localstorage

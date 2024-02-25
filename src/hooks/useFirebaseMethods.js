@@ -13,7 +13,6 @@ import {
    setProfileData,
    setAppLoading,
 } from '@/lib/redux/features/auth/authSlice';
-import { setDashboardRoute } from '@/lib/redux/features/dashboard/dashboardSlice';
 
 // firebase
 import {
@@ -64,7 +63,6 @@ const useFirebaseMethods = () => {
       signOut(auth)
          .then(() => {
             dispatch(setProfileData(null));
-            dispatch(setDashboardRoute(null));
             dispatch(setUserShouldExist(false));
             localStorage.removeItem('tokenExists');
             dispatch(setAppLoading(false));
