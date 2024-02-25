@@ -28,7 +28,7 @@ const Banner = () => {
                height={450}
                priority={true}
                src={bannerImg}
-               className='!w-full !h-full !object-cover rounded-l-full rounded-tr-full shadow-lg'
+               className='!w-full !h-full !object-cover rounded-l-full rounded-tr-full shadow-medium'
                alt='Woman working on a laptop'
             />
          </div>

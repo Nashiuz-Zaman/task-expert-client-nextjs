@@ -16,7 +16,6 @@ import ViewDetailsBtn from '@/components/shared/ViewDetailsBtn/ViewDetailsBtn';
 
 // hook
 import useMethodsForTaskDatabase from '@/hooks/useMethodsForTaskDatabase';
-import useGetTimeData from '@/hooks/useGetTimeData';
 import useFormVisiblity from '@/hooks/useFormVisiblity';
 
 // redux
@@ -25,7 +24,8 @@ import useRedux from '@/hooks/useRedux';
 import { pinTask, setTaskToEdit } from '@/lib/redux/features/task/taskSlice';
 
 // utils
-import { useTaskDragDropProvider } from '@/utlis/TaskDragDropUtils';
+import { useTaskDragDropProvider } from '@/utils/TaskDragDropUtils';
+import { getDayMonthNameYearStr } from '@/utils/dateTimeMethods';
 
 const Task = ({ taskData }) => {
    const { dispatch, useSelector } = useRedux();
@@ -35,10 +35,8 @@ const Task = ({ taskData }) => {
    const { totalTasks } = useSelector(store => store.task);
    const { findDropzoneElementId, dropzoneElementRefs } =
       useTaskDragDropProvider();
-   const { getDayMonthNameYearStr } = useGetTimeData();
    const { openTaskEditForm } = useFormVisiblity();
-
-   const deadlineStr = getDayMonthNameYearStr(new Date(deadline));
+   const deadlineStr = getDayMonthNameYearStr(deadline);
 
    return (
       <div

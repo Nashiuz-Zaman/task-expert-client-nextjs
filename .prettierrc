@@ -1,6 +1,6 @@
 {
-    "singleQuote": true,
-    "tabWidth": 3,
-    "jsxSingleQuote": true,
-    "arrowParens": "avoid"
+   "singleQuote": true,
+   "tabWidth": 3,
+   "jsxSingleQuote": true,
+   "arrowParens": "avoid"
 }

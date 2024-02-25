@@ -9,6 +9,7 @@ import LoginFormWithImage from '../LoginFormWithImage/LoginFormWithImage';
 // hooks
 import useClickOutside from '@/hooks/useClickOutside';
 import useFormVisiblity from '@/hooks/useFormVisiblity';
+import useStopScrolling from '@/hooks/useStopScrolling';
 
 // redux
 import { useSelector } from 'react-redux';
@@ -19,6 +20,11 @@ import loginImg from './../../../assets/forms/login.webp';
 const LoginModal = () => {
    const { loginFormOpen } = useSelector(store => store.form);
    const { closeLoginFormWithBackdrop } = useFormVisiblity();
+   const { stopYAxisScrolling } = useStopScrolling();
+
+   useEffect(() => {
+      stopYAxisScrolling(loginFormOpen);
+   }, [loginFormOpen, stopYAxisScrolling]);
 
    const handleClickOutside = useCallback(
       e => {
@@ -33,16 +39,7 @@ const LoginModal = () => {
       },
       [closeLoginFormWithBackdrop]
    );
-
    useClickOutside(loginFormOpen, handleClickOutside);
-
-   useEffect(() => {
-      if (loginFormOpen) {
-         document.body.style.overflowY = 'hidden';
-      } else {
-         document.body.style.overflowY = 'auto';
-      }
-   }, [loginFormOpen]);
 
    return (
       <div

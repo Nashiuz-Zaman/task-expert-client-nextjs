@@ -8,7 +8,6 @@ import useAxios from '@/hooks/useAxios';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { setDashboardRoute } from '@/lib/redux/features/dashboard/dashboardSlice';
 import {
    setUserShouldExist,
    setProfileData,
@@ -47,7 +46,6 @@ const useAuth = () => {
                });
 
                const tempProfileData = userCheckResponse.data.user;
-               dispatch(setDashboardRoute(tempProfileData));
                dispatch(setProfileData(tempProfileData));
                dispatch(setAppLoading(false));
             } else {

@@ -9,6 +9,7 @@ import RegistrationFormWithImage from '../RegistrationFormWithImage/Registration
 // hooks
 import useClickOutside from '@/hooks/useClickOutside';
 import useFormVisiblity from '@/hooks/useFormVisiblity';
+import useStopScrolling from '@/hooks/useStopScrolling';
 
 // redux
 import { useSelector } from 'react-redux';
@@ -19,6 +20,11 @@ import registrationImg from './../../../assets/forms/registration.webp';
 const RegistrationModal = () => {
    const { registrationFormOpen } = useSelector(store => store.form);
    const { closeSignupFormWithBackdrop } = useFormVisiblity();
+   const { stopYAxisScrolling } = useStopScrolling();
+
+   useEffect(() => {
+      stopYAxisScrolling(registrationFormOpen);
+   }, [registrationFormOpen, stopYAxisScrolling]);
 
    const handleClickOutside = useCallback(
       e => {
@@ -33,16 +39,7 @@ const RegistrationModal = () => {
       },
       [closeSignupFormWithBackdrop]
    );
-
    useClickOutside(registrationFormOpen, handleClickOutside);
-
-   useEffect(() => {
-      if (registrationFormOpen) {
-         document.body.style.overflowY = 'hidden';
-      } else {
-         document.body.style.overflowY = 'auto';
-      }
-   }, [registrationFormOpen]);
 
    return (
       <div

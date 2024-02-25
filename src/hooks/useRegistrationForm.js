@@ -24,7 +24,6 @@ import {
    setProfileData,
    setRegistrationErrors,
 } from '@/lib/redux/features/auth/authSlice';
-import { setDashboardRoute } from '@/lib/redux/features/dashboard/dashboardSlice';
 
 // custom hook body starts here
 const useRegistrationForm = () => {
@@ -173,7 +172,6 @@ const useRegistrationForm = () => {
                   // if success
                   if (userCreationResponse.data.success) {
                      const profileData = userCreationResponse.data.user;
-                     dispatch(setDashboardRoute(profileData));
                      dispatch(setProfileData(profileData));
                      dispatch(setUserShouldExist(true));
                      localStorage.setItem(

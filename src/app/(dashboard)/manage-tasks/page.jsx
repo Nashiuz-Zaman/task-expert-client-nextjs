@@ -4,7 +4,7 @@ import TaskCreateForm from '@/components/forms/TaskCreateForm/TaskCreateForm';
 import TaskUtilsHeader from '@/components/page-related/manage-tasks/TaskUtilsHeader/TaskUtilsHeader';
 
 // utils
-import { TaskDragDropProvider } from '@/utlis/TaskDragDropUtils';
+import { TaskDragDropProvider } from '@/utils/TaskDragDropUtils';
 import TaskEditForm from '@/components/forms/TaskEditForm/TaskEditForm';
 
 const ManageTasks = () => {
