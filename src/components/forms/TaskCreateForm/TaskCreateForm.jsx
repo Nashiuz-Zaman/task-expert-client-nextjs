@@ -90,6 +90,7 @@ const TaskCreateForm = () => {
                label='Deadline'
                name='deadline'
                placeholder='DD-MMM-YYYY'
+               maxLength={11}
             />
 
             {/* priority */}

@@ -11,12 +11,11 @@ import LoadingSpinner from '@/components/shared/LoadingSpinner/LoadingSpinner';
 import useGetInitialTasksData from '@/hooks/useGetInitialTasksData';
 import useTaskSeparator from '@/hooks/useTaskSeparator';
 
-
 // redux
 import { useSelector } from 'react-redux';
 
 // utils
-import { useTaskDragDropProvider } from '@/utlis/TaskDragDropUtils';
+import { useTaskDragDropProvider } from '@/utils/TaskDragDropUtils';
 
 const AllTasks = ({ modifyClasses = '' }) => {
    // fetch initial tasks data
