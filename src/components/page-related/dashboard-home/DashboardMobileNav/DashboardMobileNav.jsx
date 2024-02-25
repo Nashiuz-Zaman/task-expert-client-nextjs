@@ -2,6 +2,7 @@
 
 // react
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 
 // components
 import CloseBtn from '@/components/shared/CloseBtn/CloseBtn';
@@ -15,6 +16,7 @@ import useDashboardMobileNav from '@/hooks/useDashboardMobileNav';
 import useEscapeClose from '@/hooks/useEscapeClose';
 import useFirebaseMethods from '@/hooks/useFirebaseMethods';
 import useClickOutside from '@/hooks/useClickOutside';
+import useStopScrolling from '@/hooks/useStopScrolling';
 
 const DashboardMobileNav = ({
    modifyClasses = '',
@@ -27,6 +29,11 @@ const DashboardMobileNav = ({
       closeDashboardMobileNav,
    } = useDashboardMobileNav();
    const { logout } = useFirebaseMethods();
+   const { stopYAxisScrolling } = useStopScrolling();
+
+   useEffect(() => {
+      stopYAxisScrolling(dashboardMobileNavOpen);
+   }, [dashboardMobileNavOpen, stopYAxisScrolling]);
 
    const handleClickOutside = e => {
       if (!e.target.closest('.dashboard-mobilenav-focus')) {

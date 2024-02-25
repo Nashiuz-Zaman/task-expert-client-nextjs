@@ -2,6 +2,7 @@
 
 // react
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 
 // next
 import Link from 'next/link';
@@ -19,30 +20,34 @@ import useEscapeClose from '@/hooks/useEscapeClose';
 import useFirebaseMethods from '@/hooks/useFirebaseMethods';
 import useClickOutside from '@/hooks/useClickOutside';
 import useFormVisiblity from '@/hooks/useFormVisiblity';
+import useStopScrolling from '@/hooks/useStopScrolling';
 
 // redux
 import { useSelector } from 'react-redux';
 
 const MobileNav = ({ modifyClasses = '' }) => {
    const { profileData } = useSelector(store => store.auth);
-   const { dashboardRoute } = useSelector(store => store.dashboard);
    const { mobileNavOpen, openMobileNav, closeMobileNav } =
       useMobileNavigation();
    const { logout } = useFirebaseMethods();
    const router = useRouter();
    const { openLoginFormWithBackdrop } = useFormVisiblity();
+   const { stopYAxisScrolling } = useStopScrolling();
+
+   useEffect(() => {
+      stopYAxisScrolling(mobileNavOpen);
+   }, [mobileNavOpen, stopYAxisScrolling]);
 
    const handleClickOutside = e => {
       if (!e.target.closest('.mobilenav-focus')) {
          closeMobileNav();
       }
    };
-   useClickOutside(mobileNavOpen, handleClickOutside);
 
-   // add escape key close functionality
+   useClickOutside(mobileNavOpen, handleClickOutside);
    useEscapeClose(closeMobileNav);
 
-   // one single place for the link classes
+   // common classes
    const linkClasses =
       'leading-[normal] px-2 py-1 rounded-default text-neutral-500 hover:text-primary font-medium transition-all duration-default capitalize';
 
@@ -86,7 +91,7 @@ const MobileNav = ({ modifyClasses = '' }) => {
                            return;
                         }
 
-                        router.push(`${dashboardRoute}/manage-tasks`);
+                        router.push(`/manage-tasks`);
                         closeMobileNav();
                      }}
                   >
