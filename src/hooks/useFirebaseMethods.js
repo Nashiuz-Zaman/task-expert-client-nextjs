@@ -3,9 +3,6 @@
 // next js
 import { useRouter } from 'next/navigation';
 
-// hooks
-import useToast from '@/hooks/useToast';
-
 // redux
 import { useDispatch } from 'react-redux';
 import {
@@ -23,13 +20,15 @@ import {
    signInWithPopup,
 } from 'firebase/auth';
 
+// utils
+import { showToast } from '@/utils/toastify';
+
 // auth and google auth provider
 import { auth, googleAuthProvider } from '@/hooks/useAuth';
 
 const useFirebaseMethods = () => {
    const dispatch = useDispatch();
    const router = useRouter();
-   const { showToast } = useToast();
 
    // login with google
    const loginGoogle = () => {

@@ -5,11 +5,13 @@ import { useCallback } from 'react';
 
 // hook
 import useAxios from './useAxios';
-import useToast from './useToast';
 
 // redux
 import useRedux from './useRedux';
 import { setTotalTasks } from '@/lib/redux/features/task/taskSlice';
+
+// utils
+import { showToast } from '@/utils/toastify';
 
 // data
 import { statusOptions } from '@/uiData/formsUiData';
@@ -18,7 +20,6 @@ const useMethodsForTaskDatabase = () => {
    const { dispatch, useSelector } = useRedux();
    const { profileData } = useSelector(store => store.auth);
    const { axiosPublic } = useAxios();
-   const { showToast } = useToast();
 
    const sortByLatest = useCallback(arr => {
       const sortedArr = [...arr].sort(
