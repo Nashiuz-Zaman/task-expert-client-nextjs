@@ -5,11 +5,12 @@ import { useRouter } from 'next/navigation';
 
 // hooks
 import useFirebaseMethods from './useFirebaseMethods';
-import useAxios from './useAxios';
+
 import useFormVisiblity from './useFormVisiblity';
 
-// normal axios import
+// axios
 import axios from 'axios';
+import { axiosPublic } from './useAxios';
 
 // img bb api related
 const imageUploadAPIKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY;
@@ -30,7 +31,6 @@ const useRegistrationForm = () => {
    // initial data and function extractions
    const dispatch = useDispatch();
    const { signup, updateFirebaseProfile } = useFirebaseMethods();
-   const { axiosPublic } = useAxios();
    const router = useRouter();
    const { closeSignupFormWithBackdrop } = useFormVisiblity();
 

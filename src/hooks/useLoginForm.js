@@ -5,8 +5,10 @@ import { useRouter } from 'next/navigation';
 
 // custom hook
 import useFirebaseMethods from '@/hooks/useFirebaseMethods';
-import useAxios from '@/hooks/useAxios';
 import useFormVisiblity from './useFormVisiblity';
+
+// axios
+import { axiosPublic } from './useAxios';
 
 // redux
 import { useDispatch } from 'react-redux';
@@ -23,7 +25,6 @@ import { showToast } from '@/utils/toastify';
 const useLoginForm = () => {
    const dispatch = useDispatch();
    const { loginEmail, loginGoogle } = useFirebaseMethods();
-   const { axiosPublic } = useAxios();
    const { closeLoginFormWithBackdrop, closeSignupFormWithBackdrop } =
       useFormVisiblity();
    const router = useRouter();

@@ -4,7 +4,7 @@
 import { useEffect } from 'react';
 
 // hooks
-import useAxios from './useAxios';
+import { axiosPublic } from './useAxios';
 
 // redux
 import useRedux from './useRedux';
@@ -16,7 +16,6 @@ import {
 const useGetInitialTasksData = () => {
    const { dispatch, useSelector } = useRedux();
    const { profileData } = useSelector(store => store.auth);
-   const { axiosPublic } = useAxios();
 
    useEffect(() => {
       const getInitialTasks = async email => {
@@ -24,7 +23,7 @@ const useGetInitialTasksData = () => {
          const res = await axiosPublic.get(`/tasks?email=${email}`);
          dispatch(setIsLoading(false));
 
-         if (res.data.success) {
+         if (res.data.status === 'success') {
             dispatch(setTotalTasks(res.data.data));
          }
       };
@@ -32,20 +31,7 @@ const useGetInitialTasksData = () => {
       if (profileData?.email) {
          getInitialTasks(profileData.email);
       }
-   }, [axiosPublic, profileData, dispatch]);
-
-   // useEffect(() => {
-   //    if (isLoading) {
-   //       dispatch(setIsLoading(true));
-   //    }
-
-   //    if (!isLoading) {
-   //       dispatch(setTotalTasks(data));
-   //       dispatch(setIsLoading(false));
-   //    }
-   // }, [dispatch, isLoading, data]);
-
-   // return { isLoading };
+   }, [profileData, dispatch]);
 };
 
 export default useGetInitialTasksData;

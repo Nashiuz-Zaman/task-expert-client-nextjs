@@ -3,8 +3,8 @@
 // react
 import { useCallback } from 'react';
 
-// hook
-import useAxios from './useAxios';
+// axios
+import { axiosPublic } from './useAxios';
 
 // redux
 import useRedux from './useRedux';
@@ -19,7 +19,6 @@ import { statusOptions } from '@/uiData/formsUiData';
 const useMethodsForTaskDatabase = () => {
    const { dispatch, useSelector } = useRedux();
    const { profileData } = useSelector(store => store.auth);
-   const { axiosPublic } = useAxios();
 
    const sortByLatest = useCallback(arr => {
       const sortedArr = [...arr].sort(
@@ -63,43 +62,46 @@ const useMethodsForTaskDatabase = () => {
             showToast('Task Edited', 'success');
          }
       },
-      [axiosPublic, dispatch, showToast]
+      [dispatch]
    );
 
-   const updateTasks = async (draggedTaskId, statusLevel, totalTasks) => {
-      // find latest time
-      const lastUpdated = new Date().toISOString();
-      const statusLevelText = statusOptions[statusLevel].text;
+   const updateTasks = useCallback(
+      async (draggedTaskId, statusLevel, totalTasks) => {
+         // find latest time
+         const lastUpdated = new Date().toISOString();
+         const statusLevelText = statusOptions[statusLevel].text;
 
-      // create a new array
-      const updatedTasksAfterStatusChange = totalTasks.map(task => {
-         return task._id === draggedTaskId
-            ? { ...task, statusLevel, lastUpdated }
-            : task;
-      });
+         // create a new array
+         const updatedTasksAfterStatusChange = totalTasks.map(task => {
+            return task._id === draggedTaskId
+               ? { ...task, statusLevel, lastUpdated }
+               : task;
+         });
 
-      // update redux task state with new array
-      dispatch(setTotalTasks(sortByLatest(updatedTasksAfterStatusChange)));
+         // update redux task state with new array
+         dispatch(setTotalTasks(sortByLatest(updatedTasksAfterStatusChange)));
 
-      // send the update information to the database
-      const updatedTask = {
-         statusLevel,
-         lastUpdated,
-      };
+         // send the update information to the database
+         const updatedTask = {
+            statusLevel,
+            lastUpdated,
+         };
 
-      const res = await axiosPublic.patch(
-         `/tasks/update/${draggedTaskId}`,
-         updatedTask
-      );
+         const res = await axiosPublic.patch(
+            `/tasks/update/${draggedTaskId}`,
+            updatedTask
+         );
 
-      // show success toast on success
-      if (res.data.status === 'success') {
-         showToast(`Task moved to ${statusLevelText}`, 'success');
-         return true;
-      }
+         // show success toast on success
+         if (res.data.status === 'success') {
+            showToast(`Task moved to ${statusLevelText}`, 'success');
+            return true;
+         }
 
-      return false;
-   };
+         return false;
+      },
+      [dispatch, sortByLatest]
+   );
 
    const deleteTask = async (_id, tasks) => {
       const remainingTasks = tasks.filter(task => task._id !== _id);
