@@ -22,7 +22,7 @@ const MobileMenuBtn = ({
          <BiDotsHorizontalRounded
             className={`block transition-all duration-default text-[1.4rem] md:text-[2rem] xl:text-[2.8rem] m-1 ${
                theme === 'light'
-                  ? 'text-textPrimary active:text-primary lg:hover:text-primary'
+                  ? 'text-textPrimary active:text-primary lg:group-hover:text-primary'
                   : 'text-white '
             }`}
          ></BiDotsHorizontalRounded>
