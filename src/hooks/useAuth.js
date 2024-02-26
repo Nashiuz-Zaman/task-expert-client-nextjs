@@ -4,7 +4,8 @@
 import { useEffect } from 'react';
 
 // hook
-import useAxios from '@/hooks/useAxios';
+import { axiosSecure } from './useAxios';
+import useFirebaseMethods from './useFirebaseMethods';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,7 +26,7 @@ export const googleAuthProvider = new GoogleAuthProvider();
 const useAuth = () => {
    const dispatch = useDispatch();
    const { userShouldExist, profileData } = useSelector(store => store.auth);
-   const { axiosPublic } = useAxios();
+   const { logout } = useFirebaseMethods();
 
    // if true, then user should exist
    useEffect(() => {
@@ -37,22 +38,26 @@ const useAuth = () => {
    // set up observer for users, if there an user, update the user state and set loading to false, if there is none set user to null and set loading to false
    useEffect(() => {
       const unSubscribe = onAuthStateChanged(auth, async curUser => {
-         if (curUser) {
-            // this code should only run when the website is refreshed
-            if (!profileData && userShouldExist) {
-               // check which firebase user is logged in, send the email to database and bring their profile data
-               const userCheckResponse = await axiosPublic.post('/login', {
-                  email: curUser.email,
-               });
+         try {
+            if (curUser) {
+               // this code should only run when the website is refreshed and at the start
+               if (!profileData && userShouldExist) {
+                  // check which firebase user is logged in, send the email to database and bring their profile data
+                  const validationRes = await axiosSecure.get('/validate');
 
-               const tempProfileData = userCheckResponse.data.user;
-               dispatch(setProfileData(tempProfileData));
-               dispatch(setAppLoading(false));
+                  const tempProfileData = validationRes.data.user;
+                  dispatch(setProfileData(tempProfileData));
+                  dispatch(setAppLoading(false));
+               } else {
+                  dispatch(setAppLoading(false));
+               }
             } else {
                dispatch(setAppLoading(false));
             }
-         } else {
-            dispatch(setAppLoading(false));
+         } catch (error) {
+            if (error.response.status === 401) {
+               logout(false);
+            }
          }
       });
 
@@ -60,7 +65,7 @@ const useAuth = () => {
       return () => {
          unSubscribe();
       };
-   }, [dispatch, userShouldExist, profileData, axiosPublic]);
+   }, [dispatch, userShouldExist, profileData,logout]);
 };
 
 export default useAuth;

@@ -1,10 +1,10 @@
 'use client';
 
+// react
+import { useCallback } from 'react';
+
 // next js
 import { useRouter } from 'next/navigation';
-
-// hooks
-import useToast from '@/hooks/useToast';
 
 // redux
 import { useDispatch } from 'react-redux';
@@ -23,13 +23,15 @@ import {
    signInWithPopup,
 } from 'firebase/auth';
 
+// utils
+import { showToast } from '@/utils/toastify';
+
 // auth and google auth provider
 import { auth, googleAuthProvider } from '@/hooks/useAuth';
 
 const useFirebaseMethods = () => {
    const dispatch = useDispatch();
    const router = useRouter();
-   const { showToast } = useToast();
 
    // login with google
    const loginGoogle = () => {
@@ -58,19 +60,32 @@ const useFirebaseMethods = () => {
    };
 
    // logout function
-   const logout = () => {
-      dispatch(setAppLoading(true));
-      signOut(auth)
-         .then(() => {
-            dispatch(setProfileData(null));
-            dispatch(setUserShouldExist(false));
-            localStorage.removeItem('tokenExists');
-            dispatch(setAppLoading(false));
-            showToast('Logged Out Successfully', 'success');
-         })
-         .catch(error => console.error(error));
-      router.push('/');
-   };
+   const logout = useCallback(
+      (manual = true) => {
+         dispatch(setAppLoading(true));
+         signOut(auth)
+            .then(() => {
+               dispatch(setProfileData(null));
+               dispatch(setUserShouldExist(false));
+               localStorage.removeItem('tokenExists');
+               dispatch(setAppLoading(false));
+
+               if (manual) {
+                  showToast('Signed Out Successfully', 'success');
+               }
+
+               if (!manual) {
+                  showToast(
+                     'You Were Signed Out, Please Sign In Again',
+                     'error'
+                  );
+               }
+            })
+            .catch(() => console.error('Error occurred'));
+         router.push('/');
+      },
+      [dispatch, router]
+   );
 
    return {
       loginEmail,

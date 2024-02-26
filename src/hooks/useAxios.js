@@ -6,18 +6,16 @@ import axios from 'axios';
 // server url
 import { serverUrl } from '@/uiData/serverUrl';
 
-const axiosPublic = axios.create({
+export const axiosPublic = axios.create({
    baseURL: serverUrl,
    withCredentials: true,
 });
 
-const axiosSecure = axios.create({
+export const axiosSecure = axios.create({
    baseURL: serverUrl,
    withCredentials: true,
 });
 
-const useAxios = () => {
-   return { axiosPublic, axiosSecure };
-};
+const useAxios = () => {};
 
 export default useAxios;
