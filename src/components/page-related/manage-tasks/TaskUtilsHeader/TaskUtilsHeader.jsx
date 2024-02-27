@@ -17,20 +17,23 @@ const TaskUtilsHeader = ({ modifyClasses = '' }) => {
 
    return (
       <div
-         className={`flex items-center justify-between bg-white py-2 px-4 md:px-8 ${modifyClasses}`}
+         className={`grid grid-cols-1 xs:grid-cols-[1fr_max-content] gap-4 xs:gap-2 items-center bg-white py-4 xs:py-2 px-4 md:px-8 ${modifyClasses}`}
       >
-         <AddBtn
-            onClickFunction={openTaskCreateForm}
-            text='Create Task'
-            modifyClasses='!bg-primary !border-primary hover:!bg-primaryLight hover:!border-primaryLight !text-white !rounded-xl'
-         />
+         {/* add, filter, search */}
+         <div className='flex items-center'>
+            <AddBtn
+               onClickFunction={openTaskCreateForm}
+               text='Create Task'
+               modifyClasses='!bg-primary !border-primary hover:!bg-primaryLight hover:!border-primaryLight !text-white !rounded-xl'
+            />
 
-         {/* filter sort and search */}
-         <div className='flex items-center gap-3'>
-            <FilterBtn modifyClasses='!rounded-xl' />
+            <FilterBtn modifyClasses='!rounded-xl ml-auto mr-2' />
             <SortBtn modifyClasses='!rounded-xl' />
-            <Searchbar modifyClasses='!rounded-xl' />
          </div>
+
+         {/* search */}
+
+         <Searchbar modifyClasses='!rounded-xl !w-full xs:!w-[15rem] justify-self-center md:justify-self-end' />
       </div>
    );
 };

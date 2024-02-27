@@ -9,7 +9,7 @@ import TaskEditForm from '@/components/forms/TaskEditForm/TaskEditForm';
 
 const ManageTasks = () => {
    return (
-      <div>
+      <div className='h-full flex flex-col'>
          {/* make this section's postion relative for the form below */}
          <section className='mb-customSm relative'>
             <TaskUtilsHeader />
@@ -17,7 +17,7 @@ const ManageTasks = () => {
             <TaskEditForm />
          </section>
 
-         <section>
+         <section className='grow overflow-x-auto xl:!overflow-hidden px-4 md:px-8 xl:px-16'>
             <TaskDragDropProvider>
                <AllTasks />
             </TaskDragDropProvider>
