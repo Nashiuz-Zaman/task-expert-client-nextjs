@@ -63,7 +63,7 @@ module.exports = {
             custom3xs: '0.8rem',
          },
          boxShadow: {
-            large: '0 10px 60px -5px rgba(0,0,0,0.3)',
+            large: '0 10px 60px -10px rgba(0,0,0,0.25)',
             medium: '0 5px 40px -5px rgba(0,0,0,0.25)',
             small: '0 3px 20px -3px rgba(0,0,0,0.2)',
          },
@@ -91,5 +91,8 @@ module.exports = {
          },
       },
    },
-   plugins: [],
+   plugins: [
+      // ...
+      require('tailwind-scrollbar')({ nocompatible: true }),
+   ],
 };

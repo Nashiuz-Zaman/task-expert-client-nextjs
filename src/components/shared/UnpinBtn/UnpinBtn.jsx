@@ -14,7 +14,7 @@ const UnpinBtn = ({ onClickFunction, text, modifyClasses = '' }) => {
          className={`flex items-center gap-2 text-neutral-500 text-2xl ${modifyClasses}`}
          onClick={onClickFunction}
       >
-         <Icon className='text-inherit' icon='f7:pin-slash-fill' />
+         <Icon className='text-inherit' icon='iconoir:pin-slash-solid' />
 
          {text && <span className='text-inherit capitalize'>{text}</span>}
       </button>

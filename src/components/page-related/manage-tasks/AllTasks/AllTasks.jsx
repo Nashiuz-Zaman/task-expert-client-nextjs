@@ -28,19 +28,19 @@ const AllTasks = ({ modifyClasses = '' }) => {
 
    return (
       <div
-         className={`mx-4 md:mx-8 xl:mx-16 min-h-[70vh] flex flex-col shadow-large bg-white rounded-2xl ${modifyClasses}`}
+         className={`h-[70vh] bg-white mx-auto w-[70rem] xl:max-w-[89.5rem] xl:w-full shadow-large rounded-2xl ${modifyClasses}`}
       >
          {isLoading && (
             <LoadingSpinner
                text='Loading Data'
                textSizeClass='!text-3xl !text-primary'
                loaderSizeClass='!text-4xl !text-primary'
-               modifyClasses='grow flex items-center justify-center'
+               modifyClasses='h-full flex items-center justify-center'
             />
          )}
 
          {!isLoading && (
-            <div className={`grid grid-cols-1 lg:grid-cols-3 grow gap-4 p-7`}>
+            <div className={`grid grid-cols-3 h-full gap-4 p-7`}>
                {totalTasksSeparated?.map(singleCollection => {
                   return (
                      <StatusSpecificTasks

@@ -31,7 +31,7 @@ const useMethodsForTaskDatabase = () => {
    const createTask = async newTaskData => {
       const res = await axiosPublic.post(`/tasks`, newTaskData);
       if (res.data.success) {
-         showToast('Todo Added Successfully', 'success');
+         showToast('Task Added', 'success');
          // closeCreateForm();
          dispatch(setTotalTasks(res.data.updatedTasks));
       }
@@ -111,7 +111,7 @@ const useMethodsForTaskDatabase = () => {
          `/tasks/delete/${_id}?email=${profileData.email}`
       );
       if (res.data.success) {
-         showToast('Task Deleted Successfully', 'success');
+         showToast('Task Deleted', 'success');
          dispatch(setTotalTasks(res.data.updatedTasks));
       }
       return;
