@@ -28,19 +28,20 @@ import { useTaskDragDropProvider } from '@/utils/TaskDragDropUtils';
 import { getDayMonthNameYearStr } from '@/utils/dateTimeMethods';
 
 const Task = ({ taskData }) => {
+   // necessary hooks and data extraction
    const { dispatch, useSelector } = useRedux();
-   const { _id, title, deadline, priorityLevel } = taskData;
+   const { totalTasks } = useSelector(store => store.task);
    const [isDragging, setIsDragging] = useState(false);
    const { deleteTask, updateTasks } = useMethodsForTaskDatabase();
-   const { totalTasks } = useSelector(store => store.task);
    const { findDropzoneElementId, dropzoneElementRefs } =
       useTaskDragDropProvider();
    const { openTaskEditForm } = useFormVisiblity();
+   const { _id, title, deadline, priorityLevel } = taskData;
    const deadlineStr = getDayMonthNameYearStr(deadline);
 
    return (
       <div
-         className={`border border-inherit rounded-lg p-3 pb-4 text-lg flex flex-col cursor-grab shadow-sm ${
+         className={`border border-neutral-300 rounded-lg p-3 pb-4 text-lg flex flex-col cursor-grab shadow-sm ${
             isDragging
                ? 'opacity-30 !cursor-grabbing'
                : 'opacity-100 !cursor-pointer'
