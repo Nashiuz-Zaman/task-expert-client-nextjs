@@ -6,18 +6,18 @@ import { forwardRef, useEffect, useRef, useState } from 'react';
 
 // component
 import Task from '../Task/Task';
+import DotMenuBtn from '@/components/shared/DotMenuBtn/DotMenuBtn';
 
-// hook
+// redux
 import { useSelector } from 'react-redux';
-import { Icon } from '@iconify/react';
 
-/* eslint-disable react/display-name */
 const StatusSpecificTasks = forwardRef(({ tasksData }, ref) => {
    const tasksContainerRef = useRef();
    const [hasScrollbar, setHasScrollbar] = useState(false);
    const { name, statusSpecificTasks } = tasksData;
    const { isLoading } = useSelector(store => store.task);
 
+   // check for scrollbar
    useEffect(() => {
       if (
          tasksContainerRef.current.scrollHeight >
@@ -52,19 +52,14 @@ const StatusSpecificTasks = forwardRef(({ tasksData }, ref) => {
                {statusSpecificTasks.length}
             </p>
 
-            <button className='ml-auto'>
-               <Icon
-                  className='text-4xl text-neutral-500'
-                  icon='heroicons-solid:dots-horizontal'
-               />
-            </button>
+            <DotMenuBtn modifyClasses='ml-auto' />
          </div>
 
          {/* tasks container */}
          <div
             ref={tasksContainerRef}
             className={`overflow-y-auto rounded-2xl py-2  h-[calc(57vh-9.5rem)] md:h-[calc(70vh-9.5rem)] scrollbar-thin scrollbar-thumb-primary scrollbar-track-white crollbar-thumb-rounded-full ${
-               hasScrollbar ? 'pr-2' : 'pr-0'
+               hasScrollbar ? 'pr-3' : 'pr-0'
             }`}
          >
             {/* if tasks available */}
@@ -88,6 +83,8 @@ const StatusSpecificTasks = forwardRef(({ tasksData }, ref) => {
       </div>
    );
 });
+
+StatusSpecificTasks.displayName = 'StatusSpecificTasks';
 
 StatusSpecificTasks.propTypes = {
    tasksData: PropTypes.object,
