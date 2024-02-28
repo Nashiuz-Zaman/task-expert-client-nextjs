@@ -4,11 +4,14 @@
 import { useCallback } from 'react';
 
 // axios
-import { axiosPublic } from './useAxios';
+import { axiosPublic, axiosSecure } from './useAxios';
 
 // redux
 import useRedux from './useRedux';
-import { setTotalTasks } from '@/lib/redux/features/task/taskSlice';
+import {
+   setTotalTasks,
+   setPinnedTasks,
+} from '@/lib/redux/features/task/taskSlice';
 
 // utils
 import { showToast } from '@/utils/toastify';
@@ -117,12 +120,76 @@ const useMethodsForTaskDatabase = () => {
       return;
    };
 
+   const pinTask = useCallback(
+      async (task, pinnedTasks) => {
+         try {
+            const newPinnedTask = {
+               title: task.title,
+               taskId: task._id,
+               email: task.email,
+            };
+
+            if (pinnedTasks.length === 6) {
+               showToast('Max 6 Pinned Tasks Allowed', 'error');
+               return;
+            }
+
+            // if already in the list
+            if (
+               pinnedTasks.findIndex(
+                  task => task.taskId === newPinnedTask.taskId
+               ) >= 0
+            ) {
+               showToast('Task Already Pinned', 'warning');
+               return;
+            }
+
+            const newPinnedTasks = [...pinnedTasks, newPinnedTask];
+            dispatch(setPinnedTasks(newPinnedTasks));
+
+            const res = await axiosSecure.post('/pinned-tasks', newPinnedTask);
+
+            if (res.data.status === 'success') {
+               showToast('Task Pinned', 'success');
+            }
+         } catch (error) {
+            showToast('Something went wrong. Try again', 'error');
+         }
+      },
+      [dispatch]
+   );
+
+   const unpinTask = useCallback(
+      async (pinnedTaskId, pinnedTasks) => {
+         try {
+            const newPinnedTasks = pinnedTasks.filter(
+               task => task._id !== pinnedTaskId
+            );
+
+            dispatch(setPinnedTasks(newPinnedTasks));
+
+            const res = await axiosSecure.delete(
+               `/pinned-tasks/${pinnedTaskId}`
+            );
+
+            if (res.data.status === 'success') {
+               showToast('Task Unpinned', 'success');
+            }
+         } catch (error) {
+            showToast('Something went wrong. Try again', 'error');
+         }
+      },
+      [dispatch]
+   );
+
    return {
       sortByLatest,
       updateTasks,
       deleteTask,
       createTask,
       editTask,
+      pinTask,
+      unpinTask,
    };
 };
 
