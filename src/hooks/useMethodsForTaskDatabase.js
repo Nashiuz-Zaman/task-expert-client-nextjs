@@ -32,13 +32,15 @@ const useMethodsForTaskDatabase = () => {
    }, []);
 
    const createTask = async newTaskData => {
-      const res = await axiosPublic.post(`/tasks`, newTaskData);
-      if (res.data.success) {
-         showToast('Task Added', 'success');
-         // closeCreateForm();
-         dispatch(setTotalTasks(res.data.updatedTasks));
+      try {
+         const res = await axiosSecure.post(`/tasks`, newTaskData);
+         if (res.data.status === 'success') {
+            showToast('Task Added', 'success');
+            dispatch(setTotalTasks(res.data.tasks));
+         }
+      } catch (error) {
+         showToast('Something went wrong. Try again', 'error');
       }
-      return;
    };
 
    const editTask = useCallback(
@@ -127,8 +129,10 @@ const useMethodsForTaskDatabase = () => {
                title: task.title,
                taskId: task._id,
                email: task.email,
+               lastUpdated: new Date().toISOString(),
             };
 
+            // no more than 6 tasks
             if (pinnedTasks.length === 6) {
                showToast('Max 6 Pinned Tasks Allowed', 'error');
                return;
@@ -144,12 +148,10 @@ const useMethodsForTaskDatabase = () => {
                return;
             }
 
-            const newPinnedTasks = [...pinnedTasks, newPinnedTask];
-            dispatch(setPinnedTasks(newPinnedTasks));
-
             const res = await axiosSecure.post('/pinned-tasks', newPinnedTask);
 
             if (res.data.status === 'success') {
+               dispatch(setPinnedTasks(res.data.pinnedTasks));
                showToast('Task Pinned', 'success');
             }
          } catch (error) {
