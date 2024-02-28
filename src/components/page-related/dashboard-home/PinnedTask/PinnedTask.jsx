@@ -4,12 +4,15 @@ import PropTypes from 'prop-types';
 // component
 import UnpinBtn from '@/components/shared/UnpinBtn/UnpinBtn';
 
+// hook
+import useMethodsForTaskDatabase from '@/hooks/useMethodsForTaskDatabase';
+
 // redux
-import { useDispatch } from 'react-redux';
-import { unpinTask } from '@/lib/redux/features/task/taskSlice';
+import { useSelector } from 'react-redux';
 
 const PinnedTask = ({ defaultValue = true, task, modifyClasses = '' }) => {
-   const dispatch = useDispatch();
+   const { unpinTask } = useMethodsForTaskDatabase();
+   const { pinnedTasks } = useSelector(store => store.task);
 
    return (
       <div
@@ -21,10 +24,10 @@ const PinnedTask = ({ defaultValue = true, task, modifyClasses = '' }) => {
          </span>
          {!defaultValue && (
             <UnpinBtn
-               modifyClasses='!ml-auto'
                onClickFunction={() => {
-                  dispatch(unpinTask(task?._id));
+                  unpinTask(task._id, pinnedTasks);
                }}
+               modifyClasses='!ml-auto'
             />
          )}
       </div>

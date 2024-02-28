@@ -4,13 +4,14 @@
 import { useEffect } from 'react';
 
 // hooks
-import { axiosPublic } from './useAxios';
+import { axiosSecure } from './useAxios';
 
 // redux
 import useRedux from './useRedux';
 import {
    setTotalTasks,
    setIsLoading,
+   setPinnedTasks,
 } from '@/lib/redux/features/task/taskSlice';
 
 const useGetInitialTasksData = () => {
@@ -20,12 +21,25 @@ const useGetInitialTasksData = () => {
    useEffect(() => {
       const getInitialTasks = async email => {
          dispatch(setIsLoading(true));
-         const res = await axiosPublic.get(`/tasks?email=${email}`);
-         dispatch(setIsLoading(false));
 
-         if (res.data.status === 'success') {
-            dispatch(setTotalTasks(res.data.data));
+         const totalTasksPromise = axiosSecure.get(`/tasks?email=${email}`);
+         const pinnedTasksPromise = axiosSecure.get(
+            `/pinned-tasks?email=${email}`
+         );
+
+         const [totalTasksRes, pinnedTasksRes] = await Promise.all([
+            totalTasksPromise,
+            pinnedTasksPromise,
+         ]);
+
+         if (totalTasksRes.data.status === 'success') {
+            dispatch(setTotalTasks(totalTasksRes.data.tasks));
          }
+
+         if (pinnedTasksRes.data.status === 'success') {
+            dispatch(setPinnedTasks(pinnedTasksRes.data.pinnedTasks));
+         }
+         dispatch(setIsLoading(false));
       };
 
       if (profileData?.email) {

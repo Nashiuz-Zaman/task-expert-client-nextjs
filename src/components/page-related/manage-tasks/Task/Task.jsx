@@ -21,7 +21,7 @@ import useFormVisiblity from '@/hooks/useFormVisiblity';
 // redux
 import useRedux from '@/hooks/useRedux';
 
-import { pinTask, setTaskToEdit } from '@/lib/redux/features/task/taskSlice';
+import { setTaskToEdit } from '@/lib/redux/features/task/taskSlice';
 
 // utils
 import { useTaskDragDropProvider } from '@/utils/TaskDragDropUtils';
@@ -30,9 +30,9 @@ import { getDayMonthNameYearStr } from '@/utils/dateTimeMethods';
 const Task = ({ taskData }) => {
    // necessary hooks and data extraction
    const { dispatch, useSelector } = useRedux();
-   const { totalTasks } = useSelector(store => store.task);
+   const { totalTasks, pinnedTasks } = useSelector(store => store.task);
    const [isDragging, setIsDragging] = useState(false);
-   const { deleteTask, updateTasks } = useMethodsForTaskDatabase();
+   const { deleteTask, updateTasks, pinTask } = useMethodsForTaskDatabase();
    const { findDropzoneElementId, dropzoneElementRefs } =
       useTaskDragDropProvider();
    const { openTaskEditForm } = useFormVisiblity();
@@ -41,7 +41,7 @@ const Task = ({ taskData }) => {
 
    return (
       <div
-         className={`border border-neutral-300 rounded-lg p-3 pb-4 text-lg flex flex-col cursor-grab shadow-sm ${
+         className={`border border-neutral-300 hover:bg-neutral-100 transition-all duration-default rounded-lg p-3 pb-4 text-lg flex flex-col cursor-grab shadow-sm ${
             isDragging
                ? 'opacity-30 !cursor-grabbing'
                : 'opacity-100 !cursor-pointer'
@@ -102,7 +102,7 @@ const Task = ({ taskData }) => {
                />
                <PinBtn
                   onClickFunction={() => {
-                     dispatch(pinTask({ _id, title }));
+                     pinTask(taskData, pinnedTasks);
                   }}
                />
                <DeleteBtn

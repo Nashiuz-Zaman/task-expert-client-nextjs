@@ -24,20 +24,6 @@ const taskSlice = createSlice({
       setPinnedTasks: (state, { payload }) => {
          state.pinnedTasks = payload;
       },
-      pinTask: (state, { payload }) => {
-         const { _id } = payload;
-
-         if (state.pinnedTasks.findIndex(task => task._id === _id) !== -1) {
-            return;
-         }
-
-         state.pinnedTasks.push(payload);
-      },
-      unpinTask: (state, { payload }) => {
-         state.pinnedTasks = state.pinnedTasks.filter(
-            task => task._id !== payload
-         );
-      },
       setStatusSpecificTasks: (state, { payload }) => {
          state.statusSpecificTasks = payload;
       },
@@ -53,8 +39,6 @@ export default reducer;
 export const {
    setTotalTasks,
    setPinnedTasks,
-   pinTask,
-   unpinTask,
    setStatusSpecificTasks,
    setIsLoading,
    setTaskToEdit,

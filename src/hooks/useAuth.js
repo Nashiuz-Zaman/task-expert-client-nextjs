@@ -55,7 +55,7 @@ const useAuth = () => {
                dispatch(setAppLoading(false));
             }
          } catch (error) {
-            if (error.response.status === 401) {
+            if (error?.response?.status === 401) {
                logout(false);
             }
          }
@@ -65,7 +65,7 @@ const useAuth = () => {
       return () => {
          unSubscribe();
       };
-   }, [dispatch, userShouldExist, profileData,logout]);
+   }, [dispatch, userShouldExist, profileData, logout]);
 };
 
 export default useAuth;
