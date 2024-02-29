@@ -20,14 +20,13 @@ import { setTaskToEdit } from '@/lib/redux/features/task/taskSlice';
 import { priorityOptions } from '@/uiData/formsUiData';
 
 // utils
-import { getDayMonthNameYearStr } from '@/utils/dateTimeMethods';
+import { getDateInYYYYMMDD } from '@/utils/dateTimeMethods';
 
 const TaskEditForm = () => {
    const { dispatch, useSelector } = useRedux();
    const { taskEditFormOpen } = useSelector(store => store.form);
    const { taskToEdit, totalTasks } = useSelector(store => store.task);
    const { closeTaskEditForm } = useFormVisiblity();
-
    const { editTask } = useTaskDatabaseMethods();
 
    // close form and reset the taskToEdit state
@@ -92,16 +91,11 @@ const TaskEditForm = () => {
             {/* deadline */}
             <InputField2
                defaultValueData={
-                  taskToEdit &&
-                  getDayMonthNameYearStr(taskToEdit.deadline).replaceAll(
-                     ' ',
-                     '-'
-                  )
+                  taskToEdit && getDateInYYYYMMDD(taskToEdit.deadline)
                }
+               type='date'
                label='Deadline'
                name='deadline'
-               placeholder='DD-MMM-YYYY'
-               maxLength={11}
             />
 
             {/* priority */}

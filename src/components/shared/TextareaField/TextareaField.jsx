@@ -24,7 +24,7 @@ const TextareaField = ({
          <textarea
             required
             defaultValue={defaultValueData}
-            className={`block rounded-default !w-full text-sm lg:text-base p-1 md:p-2 font-inherit bg-lightGray h-12 ${
+            className={`block rounded-default !w-full text-sm lg:text-base p-1 md:p-2 font-inherit bg-lightGray h-16 ${
                theme === 'light' ? 'text-textPrimary' : 'text-white'
             }`}
             name={name}
