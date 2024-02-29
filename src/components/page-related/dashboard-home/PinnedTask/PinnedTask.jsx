@@ -5,13 +5,13 @@ import PropTypes from 'prop-types';
 import UnpinBtn from '@/components/shared/UnpinBtn/UnpinBtn';
 
 // hook
-import useMethodsForTaskDatabase from '@/hooks/useMethodsForTaskDatabase';
+import useTaskDatabaseMethods from '@/hooks/useTaskDatabaseMethods';
 
 // redux
 import { useSelector } from 'react-redux';
 
 const PinnedTask = ({ defaultValue = true, task, modifyClasses = '' }) => {
-   const { unpinTask } = useMethodsForTaskDatabase();
+   const { unpinTask } = useTaskDatabaseMethods();
    const { pinnedTasks } = useSelector(store => store.task);
 
    return (
