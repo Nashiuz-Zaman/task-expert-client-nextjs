@@ -38,6 +38,7 @@ const Priority = ({ priorityLevel = 0, modifyClasses = '' }) => {
 
 Priority.propTypes = {
    priorityLevel: PropTypes.number,
+   modifyClasses: PropTypes.string,
 };
 
 export default Priority;
