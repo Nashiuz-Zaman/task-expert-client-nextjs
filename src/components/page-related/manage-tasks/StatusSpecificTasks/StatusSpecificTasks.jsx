@@ -6,10 +6,11 @@ import { forwardRef, useEffect, useRef, useState } from 'react';
 
 // component
 import Task from '../Task/Task';
-import DotMenuBtn from '@/components/shared/DotMenuBtn/DotMenuBtn';
+import DotsMenuBtn from '@/components/shared/DotsMenuBtn/DotsMenuBtn';
 
 // redux
 import { useSelector } from 'react-redux';
+import MenuPanel from '../../../shared/MenuPanel/MenuPanel';
 
 const StatusSpecificTasks = forwardRef(({ tasksData }, ref) => {
    const tasksContainerRef = useRef();
@@ -52,7 +53,16 @@ const StatusSpecificTasks = forwardRef(({ tasksData }, ref) => {
                {statusSpecificTasks.length}
             </p>
 
-            <DotMenuBtn modifyClasses='ml-auto' />
+            <DotsMenuBtn
+               modifyClasses='ml-auto'
+               renderChildren={(show, setShow) => {
+                  return (
+                     <MenuPanel show={show} setShow={setShow}>
+                        sss
+                     </MenuPanel>
+                  );
+               }}
+            />
          </div>
 
          {/* tasks container */}
