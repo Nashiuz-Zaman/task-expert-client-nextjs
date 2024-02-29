@@ -13,15 +13,19 @@ import EditBtn from '@/components/shared/EditBtn/EditBtn';
 import DeleteBtn from '@/components/shared/DeleteBtn/DeleteBtn';
 import PinBtn from '@/components/shared/PinBtn/PinBtn';
 import ViewDetailsBtn from '@/components/shared/ViewDetailsBtn/ViewDetailsBtn';
+import DotsMenuBtn from '@/components/shared/DotsMenuBtn/DotsMenuBtn';
+import MenuPanel from '@/components/shared/MenuPanel/MenuPanel';
 
 // hook
-import useMethodsForTaskDatabase from '@/hooks/useMethodsForTaskDatabase';
+import useTaskDatabaseMethods from '@/hooks/useTaskDatabaseMethods';
 import useFormVisiblity from '@/hooks/useFormVisiblity';
 
 // redux
 import useRedux from '@/hooks/useRedux';
-
-import { setTaskToEdit } from '@/lib/redux/features/task/taskSlice';
+import {
+   setTaskToEdit,
+   setTaskDetails,
+} from '@/lib/redux/features/task/taskSlice';
 
 // utils
 import { useTaskDragDropProvider } from '@/utils/TaskDragDropUtils';
@@ -32,7 +36,7 @@ const Task = ({ taskData }) => {
    const { dispatch, useSelector } = useRedux();
    const { totalTasks, pinnedTasks } = useSelector(store => store.task);
    const [isDragging, setIsDragging] = useState(false);
-   const { deleteTask, updateTasks, pinTask } = useMethodsForTaskDatabase();
+   const { deleteTask, updateTasks, pinTask } = useTaskDatabaseMethods();
    const { findDropzoneElementId, dropzoneElementRefs } =
       useTaskDragDropProvider();
    const { openTaskEditForm } = useFormVisiblity();
@@ -92,25 +96,45 @@ const Task = ({ taskData }) => {
          <div className='flex items-center justify-between mb-[1.125rem]'>
             <Priority priorityLevel={priorityLevel} />
 
-            <div className='flex items-center gap-2 text-2xl'>
-               <ViewDetailsBtn modifyClasses='text-xl' />
-               <EditBtn
-                  onClickFunction={() => {
-                     dispatch(setTaskToEdit(taskData));
-                     openTaskEditForm();
-                  }}
-               />
-               <PinBtn
-                  onClickFunction={() => {
-                     pinTask(taskData, pinnedTasks);
-                  }}
-               />
-               <DeleteBtn
-                  onClickFunction={() => {
-                     deleteTask(_id, totalTasks);
-                  }}
-               />
-            </div>
+            {/* three dotted menu button */}
+            <DotsMenuBtn
+               modifyClasses='ml-auto mr-2'
+               renderChildren={(show, setShow) => {
+                  return (
+                     <MenuPanel show={show} setShow={setShow}>
+                        <ViewDetailsBtn
+                           onClickFunction={() => {
+                              dispatch(setTaskDetails(taskData));
+                              setShow(false);
+                           }}
+                           text='View Details'
+                        />
+                        <EditBtn
+                           onClickFunction={() => {
+                              setShow(false);
+                              dispatch(setTaskToEdit(taskData));
+                              openTaskEditForm();
+                           }}
+                           text='Edit Task'
+                        />
+                        <PinBtn
+                           onClickFunction={() => {
+                              setShow(false);
+                              pinTask(taskData, pinnedTasks);
+                           }}
+                           text='Pin Task'
+                        />
+                     </MenuPanel>
+                  );
+               }}
+            />
+
+            {/* delete button */}
+            <DeleteBtn
+               onClickFunction={() => {
+                  deleteTask(_id, totalTasks);
+               }}
+            />
          </div>
 
          {/* title */}

@@ -8,7 +8,7 @@ import InputField2 from '@/components/shared/InputField2/InputField2';
 import TextareaField from './../../shared/TextareaField/TextareaField';
 
 // custom hooks
-import useMethodsForTaskDatabase from '@/hooks/useMethodsForTaskDatabase';
+import useTaskDatabaseMethods from '@/hooks/useTaskDatabaseMethods';
 import useEscapeClose from '../../../hooks/useEscapeClose';
 import useFormVisiblity from '@/hooks/useFormVisiblity';
 import useClickOutside from '@/hooks/useClickOutside';
@@ -22,7 +22,7 @@ import { priorityOptions } from '@/uiData/formsUiData';
 const TaskCreateForm = () => {
    const { profileData } = useSelector(store => store.auth);
    const { taskCreateFormOpen } = useSelector(store => store.form);
-   const { createTask } = useMethodsForTaskDatabase();
+   const { createTask } = useTaskDatabaseMethods();
    const { closeTaskCreateForm } = useFormVisiblity();
 
    const handleClickOutside = e => {

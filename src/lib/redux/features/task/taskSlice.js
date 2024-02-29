@@ -7,8 +7,10 @@ const initialState = {
    totalTasks: null,
    statusSpecificTasks: null,
    taskToEdit: null,
+   taskDetails: null,
    pinnedTasks: [],
    isLoading: true,
+   showTaskDetailsPanel: false,
 };
 
 const taskSlice = createSlice({
@@ -21,11 +23,17 @@ const taskSlice = createSlice({
       setTaskToEdit: (state, { payload }) => {
          state.taskToEdit = payload;
       },
+      setTaskDetails: (state, { payload }) => {
+         state.taskDetails = payload;
+      },
       setPinnedTasks: (state, { payload }) => {
          state.pinnedTasks = payload;
       },
       setStatusSpecificTasks: (state, { payload }) => {
          state.statusSpecificTasks = payload;
+      },
+      setShowTaskDetailsPanel: (state, { payload }) => {
+         state.showTaskDetailsPanel = payload;
       },
       setIsLoading: (state, { payload }) => {
          state.isLoading = payload;
@@ -42,4 +50,6 @@ export const {
    setStatusSpecificTasks,
    setIsLoading,
    setTaskToEdit,
+   setTaskDetails,
+   setShowTaskDetailsPanel,
 } = actions;

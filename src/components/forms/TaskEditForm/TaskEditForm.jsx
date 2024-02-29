@@ -8,7 +8,7 @@ import TextareaField from '@/components/shared/TextareaField/TextareaField';
 import SelectField from '@/components/shared/SelectField/SelectField';
 
 // custom hooks
-import useMethodsForTaskDatabase from '@/hooks/useMethodsForTaskDatabase';
+import useTaskDatabaseMethods from '@/hooks/useTaskDatabaseMethods';
 import useEscapeClose from '../../../hooks/useEscapeClose';
 import useFormVisiblity from '@/hooks/useFormVisiblity';
 
@@ -28,7 +28,7 @@ const TaskEditForm = () => {
    const { taskToEdit, totalTasks } = useSelector(store => store.task);
    const { closeTaskEditForm } = useFormVisiblity();
 
-   const { editTask } = useMethodsForTaskDatabase();
+   const { editTask } = useTaskDatabaseMethods();
 
    // close form and reset the taskToEdit state
    const handleCloseForm = () => {
