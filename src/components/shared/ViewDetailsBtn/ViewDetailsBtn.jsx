@@ -11,13 +11,10 @@ const ViewDetailsBtn = ({ onClickFunction, text, modifyClasses = '' }) => {
       <button
          title='View Details'
          aria-label='View Details Button'
-         className={`flex items-center gap-2 text-neutral-500 text-2xl ${modifyClasses}`}
+         className={`flex items-center gap-2 text-neutral-500 text-xl hover:text-primary ${modifyClasses}`}
          onClick={onClickFunction}
       >
-         <Icon
-            className='text-inherit'
-            icon='fa6-solid:magnifying-glass-plus'
-         />
+         <Icon className='text-inherit' icon='ph:magnifying-glass-plus-fill' />
 
          {text && <span className='text-inherit capitalize'>{text}</span>}
       </button>

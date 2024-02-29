@@ -11,7 +11,7 @@ const PinBtn = ({ onClickFunction, text, modifyClasses = '' }) => {
       <button
          title='Pin Task'
          aria-label='Pin button'
-         className={`flex items-center gap-2 text-neutral-500 text-2xl ${modifyClasses}`}
+         className={`flex items-center gap-2 text-neutral-500 text-xl hover:text-primary ${modifyClasses}`}
          onClick={onClickFunction}
       >
          <Icon className='text-inherit' icon='iconoir:pin-solid' />
