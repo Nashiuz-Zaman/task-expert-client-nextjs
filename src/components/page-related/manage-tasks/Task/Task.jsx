@@ -25,6 +25,7 @@ import useRedux from '@/hooks/useRedux';
 import {
    setTaskToEdit,
    setTaskDetails,
+   setShowTaskDetailsPanel,
 } from '@/lib/redux/features/task/taskSlice';
 
 // utils
@@ -105,6 +106,7 @@ const Task = ({ taskData }) => {
                         <ViewDetailsBtn
                            onClickFunction={() => {
                               dispatch(setTaskDetails(taskData));
+                              dispatch(setShowTaskDetailsPanel(true));
                               setShow(false);
                            }}
                            text='View Details'
