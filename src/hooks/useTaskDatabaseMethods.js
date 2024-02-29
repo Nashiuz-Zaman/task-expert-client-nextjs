@@ -19,7 +19,7 @@ import { showToast } from '@/utils/toastify';
 // data
 import { statusOptions } from '@/uiData/formsUiData';
 
-const useMethodsForTaskDatabase = () => {
+const useTaskDatabaseMethods = () => {
    const { dispatch, useSelector } = useRedux();
    const { profileData } = useSelector(store => store.auth);
 
@@ -195,4 +195,4 @@ const useMethodsForTaskDatabase = () => {
    };
 };
 
-export default useMethodsForTaskDatabase;
+export default useTaskDatabaseMethods;
