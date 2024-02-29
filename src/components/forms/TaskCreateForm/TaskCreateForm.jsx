@@ -42,11 +42,12 @@ const TaskCreateForm = () => {
       const form = e.target;
       const title = form.title.value;
       const description = form.description.value;
-      const deadline = form.deadline.value;
+      const deadline = new Date(form.deadline.value).toISOString();
       const priorityLevel = parseInt(form.priority.value);
       const date = new Date().toISOString();
+      console.log(deadline);
 
-      // Task data summarized
+      // Task data
       const taskData = {
          title,
          description,
@@ -86,12 +87,7 @@ const TaskCreateForm = () => {
             />
 
             {/* deadline */}
-            <InputField2
-               label='Deadline'
-               name='deadline'
-               placeholder='DD-MMM-YYYY'
-               maxLength={11}
-            />
+            <InputField2 label='Deadline' type='date' name='deadline' />
 
             {/* priority */}
             <SelectField
