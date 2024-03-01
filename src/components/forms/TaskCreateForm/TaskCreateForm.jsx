@@ -77,7 +77,12 @@ const TaskCreateForm = () => {
          {/* form starts here */}
          <form onSubmit={handleCreateTask} className='block space-y-3'>
             {/* title */}
-            <InputField2 label='Title' name='title' placeholder='Task Title' />
+            <InputField2
+               label='Title'
+               maxLength={50}
+               name='title'
+               placeholder='Task Title'
+            />
 
             {/* description */}
             <TextareaField

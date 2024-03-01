@@ -14,7 +14,7 @@ const MenuPanel = ({ show = false, setShow, children }) => {
 
    return (
       <div
-         className={`absolute w-max top-3/4 right-0 z-30 bg-white border border-neutral-300 shadow-xl rounded-xl p-4 px-5 space-y-5 menu-panel-focus ${
+         className={`absolute w-max top-3/4 right-0 z-30 bg-white border border-neutral-300 shadow-xl rounded-xl p-4 px-5 space-y-4 menu-panel-focus ${
             show ? 'block' : 'hidden'
          }`}
       >

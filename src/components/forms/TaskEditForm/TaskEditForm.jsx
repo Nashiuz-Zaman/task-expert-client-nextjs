@@ -77,6 +77,7 @@ const TaskEditForm = () => {
                defaultValueData={taskToEdit?.title}
                label='Title'
                name='title'
+               maxLength={50}
                placeholder='Task Title'
             />
 
