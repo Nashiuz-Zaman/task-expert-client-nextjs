@@ -6,11 +6,9 @@ import { forwardRef, useEffect, useRef, useState } from 'react';
 
 // component
 import Task from '../Task/Task';
-import DotsMenuBtn from '@/components/buttons/DotsMenuBtn/DotsMenuBtn';
 
 // redux
 import { useSelector } from 'react-redux';
-import MenuPanel from '../../../shared/MenuPanel/MenuPanel';
 
 const StatusSpecificTasks = forwardRef(({ tasksData }, ref) => {
    const tasksContainerRef = useRef();
@@ -49,20 +47,9 @@ const StatusSpecificTasks = forwardRef(({ tasksData }, ref) => {
          {/* task status label and count */}
          <div className='flex items-center gap-3 mb-7'>
             <h3 className='font-semibold text-2xl'>{name}</h3>
-            <p className='min-w-7 py-1 flex items-center justify-center border border-neutral-200 bg-neutral-100 text-neutral-500 rounded-md !leading-none'>
+            <p className='min-w-8 py-2 flex items-center justify-center bg-primary text-white rounded-full font-semibold !leading-none text-sm'>
                {statusSpecificTasks.length}
             </p>
-
-            <DotsMenuBtn
-               modifyClasses='ml-auto'
-               renderChildren={(show, setShow) => {
-                  return (
-                     <MenuPanel show={show} setShow={setShow}>
-                        sss
-                     </MenuPanel>
-                  );
-               }}
-            />
          </div>
 
          {/* tasks container */}

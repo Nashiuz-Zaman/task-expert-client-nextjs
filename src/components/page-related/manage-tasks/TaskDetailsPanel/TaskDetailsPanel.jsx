@@ -2,7 +2,7 @@
 
 // components
 import CloseBtn from '../../../buttons/CloseBtn/CloseBtn';
-import Priority from '@/components/shared/Priority/Priority';
+import PriorityCard from '@/components/shared/PriorityCard/PriorityCard';
 
 // hooks
 import useClickOutside from '@/hooks/useClickOutside';
@@ -54,7 +54,7 @@ const TaskDetailsPanel = () => {
                   dispatch(setShowTaskDetailsPanel(false));
                }}
             />
-            <Priority
+            <PriorityCard
                priorityLevel={taskDetails.priorityLevel}
                modifyClasses='mb-2'
             />
