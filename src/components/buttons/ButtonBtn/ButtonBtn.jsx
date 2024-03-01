@@ -57,7 +57,7 @@ const ButtonBtn = ({
          {loading && (
             <LoadingSpinner
                onlyLoader={true}
-               loaderSizeClass={'3xl:text-2xl'}
+               loaderSizeClass='text-xl xl:text-2xl'
             />
          )}
          {!loading && text}

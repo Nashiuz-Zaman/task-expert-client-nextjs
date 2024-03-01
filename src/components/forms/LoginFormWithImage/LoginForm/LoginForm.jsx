@@ -20,7 +20,7 @@ import { useSelector } from 'react-redux';
 import { setLoginErrors } from '@/lib/redux/features/auth/authSlice';
 
 const LoginForm = ({ modifyClasses = '' }) => {
-   const { loginErrors } = useSelector(store => store.auth);
+   const { loginErrors, loginLoading } = useSelector(store => store.auth);
    const { loginFormOpen } = useSelector(store => store.form);
    const { handleLoginEmail, handleLoginGoogle } = useLoginForm();
    const { resetFormFieldsAndErrors } = useResetForm();
@@ -76,6 +76,7 @@ const LoginForm = ({ modifyClasses = '' }) => {
             )}
 
             <ButtonBtn
+               loading={loginLoading}
                text='Sign In'
                modifyClasses='mx-auto block my-custom2xs'
             />

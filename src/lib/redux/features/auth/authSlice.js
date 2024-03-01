@@ -7,9 +7,11 @@ const initialState = {
    userShouldExist: false,
    userAlreadyRegistered: false,
    profileData: null,
-   appLoading: true,
+   userLoading: true,
    loginErrors: [],
    registrationErrors: [],
+   loginLoading: false,
+   registrationLoading: false,
 };
 
 const authSlice = createSlice({
@@ -25,14 +27,20 @@ const authSlice = createSlice({
       setProfileData: (state, { payload }) => {
          state.profileData = payload;
       },
-      setAppLoading: (state, { payload }) => {
-         state.appLoading = payload;
+      setUserLoading: (state, { payload }) => {
+         state.userLoading = payload;
       },
       setLoginErrors: (state, { payload }) => {
          state.loginErrors = payload;
       },
       setRegistrationErrors: (state, { payload }) => {
          state.registrationErrors = payload;
+      },
+      setLoginLoading: (state, { payload }) => {
+         state.loginLoading = payload;
+      },
+      setRegistrationLoading: (state, { payload }) => {
+         state.registrationLoading = payload;
       },
    },
 });
@@ -43,7 +51,9 @@ export const {
    setUserShouldExist,
    setUserAlreadyRegistered,
    setProfileData,
-   setAppLoading,
+   setUserLoading,
    setLoginErrors,
    setRegistrationErrors,
+   setLoginLoading,
+   setRegistrationLoading,
 } = actions;

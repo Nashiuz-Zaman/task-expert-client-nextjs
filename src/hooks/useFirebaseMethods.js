@@ -11,7 +11,6 @@ import { useDispatch } from 'react-redux';
 import {
    setUserShouldExist,
    setProfileData,
-   setAppLoading,
 } from '@/lib/redux/features/auth/authSlice';
 
 // firebase
@@ -35,19 +34,16 @@ const useFirebaseMethods = () => {
 
    // login with google
    const loginGoogle = () => {
-      dispatch(setAppLoading(true));
       return signInWithPopup(auth, googleAuthProvider);
    };
 
    // signup with email and password
    const signup = (email, password) => {
-      dispatch(setAppLoading(true));
       return createUserWithEmailAndPassword(auth, email, password);
    };
 
    // login with email and password
    const loginEmail = (email, password) => {
-      dispatch(setAppLoading(true));
       return signInWithEmailAndPassword(auth, email, password);
    };
 
@@ -62,13 +58,11 @@ const useFirebaseMethods = () => {
    // logout function
    const logout = useCallback(
       (manual = true) => {
-         dispatch(setAppLoading(true));
          signOut(auth)
             .then(() => {
                dispatch(setProfileData(null));
                dispatch(setUserShouldExist(false));
                localStorage.removeItem('tokenExists');
-               dispatch(setAppLoading(false));
 
                if (manual) {
                   showToast('Signed Out Successfully', 'success');

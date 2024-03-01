@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
    setUserShouldExist,
    setProfileData,
-   setAppLoading,
+   setUserLoading,
 } from '@/lib/redux/features/auth/authSlice';
 
 // firebase imports
@@ -44,15 +44,13 @@ const useAuth = () => {
                if (!profileData && userShouldExist) {
                   // check which firebase user is logged in, send the email to database and bring their profile data
                   const validationRes = await axiosSecure.get('/validate');
-
-                  const tempProfileData = validationRes.data.user;
-                  dispatch(setProfileData(tempProfileData));
-                  dispatch(setAppLoading(false));
+                  dispatch(setProfileData(validationRes.data.user));
+                  dispatch(setUserLoading(false));
                } else {
-                  dispatch(setAppLoading(false));
+                  dispatch(setUserLoading(false));
                }
             } else {
-               dispatch(setAppLoading(false));
+               dispatch(setUserLoading(false));
             }
          } catch (error) {
             if (error?.response?.status === 401) {
