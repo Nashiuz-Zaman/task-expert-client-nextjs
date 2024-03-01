@@ -70,15 +70,15 @@ const useTaskDatabaseMethods = () => {
       [dispatch]
    );
 
-   const updateTasks = useCallback(
-      async (draggedTaskId, statusLevel, totalTasks) => {
+   const updateTaskStatus = useCallback(
+      async (taskId, statusLevel, totalTasks) => {
          // find latest time
          const lastUpdated = new Date().toISOString();
          const statusLevelText = statusOptions[statusLevel].text;
 
          // create a new array
          const updatedTasksAfterStatusChange = totalTasks.map(task => {
-            return task._id === draggedTaskId
+            return task._id === taskId
                ? { ...task, statusLevel, lastUpdated }
                : task;
          });
@@ -93,7 +93,7 @@ const useTaskDatabaseMethods = () => {
          };
 
          const res = await axiosPublic.patch(
-            `/tasks/update/${draggedTaskId}`,
+            `/tasks/update/${taskId}`,
             updatedTask
          );
 
@@ -186,7 +186,7 @@ const useTaskDatabaseMethods = () => {
 
    return {
       sortByLatest,
-      updateTasks,
+      updateTaskStatus,
       deleteTask,
       createTask,
       editTask,

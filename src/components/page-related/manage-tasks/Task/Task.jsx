@@ -21,6 +21,7 @@ import MoveToCompletedBtn from '@/components/buttons/MoveToCompletedBtn/MoveToCo
 // hook
 import useTaskDatabaseMethods from '@/hooks/useTaskDatabaseMethods';
 import useFormVisiblity from '@/hooks/useFormVisiblity';
+import useMediaQueryMatcher from '@/hooks/useMediaQueryMatcher';
 
 // redux
 import useRedux from '@/hooks/useRedux';
@@ -33,19 +34,20 @@ import {
 // utils
 import { useTaskDragDropProvider } from '@/utils/TaskDragDropUtils';
 import { getDayMonthNameYearStr } from '@/utils/dateTimeMethods';
-
+import MoveToTodoBtn from '@/components/buttons/MoveToTodoBtn/MoveToTodoBtn';
 
 const Task = ({ taskData }) => {
    // necessary hooks and data extraction
    const { dispatch, useSelector } = useRedux();
    const { totalTasks, pinnedTasks } = useSelector(store => store.task);
    const [isDragging, setIsDragging] = useState(false);
-   const { deleteTask, updateTasks, pinTask } = useTaskDatabaseMethods();
+   const { deleteTask, updateTaskStatus, pinTask } = useTaskDatabaseMethods();
    const { findDropzoneElementId, dropzoneElementRefs } =
       useTaskDragDropProvider();
    const { openTaskEditForm } = useFormVisiblity();
-   const { _id, title, deadline, priorityLevel } = taskData;
+   const { _id, title, statusLevel, deadline, priorityLevel } = taskData;
    const deadlineStr = getDayMonthNameYearStr(deadline);
+   const { isComputer } = useMediaQueryMatcher();
 
    return (
       <div
@@ -54,29 +56,27 @@ const Task = ({ taskData }) => {
                ? 'opacity-30 !cursor-grabbing'
                : 'opacity-100 !cursor-pointer'
          }`}
-         draggable={true}
-         onTouchStart={() => {
-            setIsDragging(true);
-            // make the website body temporarily unscrollable
-            document.body.style.overflowY = 'hidden';
-         }}
-         onTouchEnd={e => {
-            const status = findDropzoneElementId(
-               e,
-               dropzoneElementRefs,
-               'touch'
-            );
-            // make the website body scrollable again
-            document.body.style.overflowY = 'auto';
+         draggable={isComputer ? true : false}
+         onTouchStart={isComputer ? () => setIsDragging(true) : null}
+         onTouchEnd={
+            isComputer
+               ? e => {
+                    const status = findDropzoneElementId(
+                       e,
+                       dropzoneElementRefs,
+                       'touch'
+                    );
 
-            const statusLevel =
-               status === 'todo' ? 0 : status === 'ongoing' ? 1 : 2;
+                    const statusLevel =
+                       status === 'todo' ? 0 : status === 'ongoing' ? 1 : 2;
 
-            if (status) {
-               updateTasks(_id, statusLevel, totalTasks);
-            }
-            setIsDragging(false);
-         }}
+                    if (status) {
+                       updateTaskStatus(_id, statusLevel, totalTasks);
+                    }
+                    setIsDragging(false);
+                 }
+               : null
+         }
          onDragStart={() => {
             setIsDragging(true);
          }}
@@ -91,7 +91,7 @@ const Task = ({ taskData }) => {
                status === 'todo' ? 0 : status === 'ongoing' ? 1 : 2;
 
             if (status) {
-               updateTasks(_id, statusLevel, totalTasks);
+               updateTaskStatus(_id, statusLevel, totalTasks);
             }
             setIsDragging(false);
          }}
@@ -130,8 +130,32 @@ const Task = ({ taskData }) => {
                            text='Pin Task'
                         />
 
-                        <MoveToOngoingBtn text='Mark as Ongoing' />
-                        <MoveToCompletedBtn text='Mark as Completed' />
+                        {statusLevel !== 0 && (
+                           <MoveToTodoBtn
+                              onClickFunction={() => {
+                                 updateTaskStatus(_id, 0, totalTasks);
+                              }}
+                              text='Mark as Todo'
+                           />
+                        )}
+
+                        {statusLevel !== 1 && (
+                           <MoveToOngoingBtn
+                              onClickFunction={() => {
+                                 updateTaskStatus(_id, 1, totalTasks);
+                              }}
+                              text='Mark as Ongoing'
+                           />
+                        )}
+
+                        {statusLevel !== 2 && (
+                           <MoveToCompletedBtn
+                              onClickFunction={() => {
+                                 updateTaskStatus(_id, 2, totalTasks);
+                              }}
+                              text='Mark as Completed'
+                           />
+                        )}
 
                         {/* delete button */}
                         <DeleteBtn
