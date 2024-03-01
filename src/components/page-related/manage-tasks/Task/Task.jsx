@@ -8,13 +8,15 @@ import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
 
 // component
-import Priority from '@/components/shared/Priority/Priority';
+import PriorityCard from '@/components/shared/PriorityCard/PriorityCard';
 import EditBtn from '@/components/buttons/EditBtn/EditBtn';
 import DeleteBtn from '@/components/buttons/DeleteBtn/DeleteBtn';
 import PinBtn from '@/components/buttons/PinBtn/PinBtn';
 import ViewDetailsBtn from '@/components/buttons/ViewDetailsBtn/ViewDetailsBtn';
 import DotsMenuBtn from '@/components/buttons/DotsMenuBtn/DotsMenuBtn';
 import MenuPanel from '@/components/shared/MenuPanel/MenuPanel';
+import MoveToOngoingBtn from '@/components/buttons/MoveToOngoingBtn/MoveToOngoingBtn';
+import MoveToCompletedBtn from '@/components/buttons/MoveToCompletedBtn/MoveToCompletedBtn';
 
 // hook
 import useTaskDatabaseMethods from '@/hooks/useTaskDatabaseMethods';
@@ -31,6 +33,7 @@ import {
 // utils
 import { useTaskDragDropProvider } from '@/utils/TaskDragDropUtils';
 import { getDayMonthNameYearStr } from '@/utils/dateTimeMethods';
+
 
 const Task = ({ taskData }) => {
    // necessary hooks and data extraction
@@ -95,7 +98,7 @@ const Task = ({ taskData }) => {
       >
          {/* priority and top buttons */}
          <div className='flex items-center justify-between mb-[1.125rem]'>
-            <Priority priorityLevel={priorityLevel} />
+            <PriorityCard priorityLevel={priorityLevel} />
 
             {/* three dotted menu button */}
             <DotsMenuBtn
@@ -126,6 +129,9 @@ const Task = ({ taskData }) => {
                            }}
                            text='Pin Task'
                         />
+
+                        <MoveToOngoingBtn text='Mark as Ongoing' />
+                        <MoveToCompletedBtn text='Mark as Completed' />
 
                         {/* delete button */}
                         <DeleteBtn

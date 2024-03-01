@@ -1,7 +1,7 @@
 // react
 import PropTypes from 'prop-types';
 
-const Priority = ({ priorityLevel = 0, modifyClasses = '' }) => {
+const PriorityCard = ({ priorityLevel = 0, modifyClasses = '' }) => {
    // priority data info
    const priorities = [
       {
@@ -28,7 +28,7 @@ const Priority = ({ priorityLevel = 0, modifyClasses = '' }) => {
 
    return (
       <p
-         className={`w-max px-3 py-[6px] font-medium rounded-md text-sm ${priorityBgColor} ${priorityTextColor} ${modifyClasses}`}
+         className={`w-max px-3 py-[6px] font-semibold rounded-md text-sm ${priorityBgColor} ${priorityTextColor} ${modifyClasses}`}
          title={`${priorityText} priority task`}
       >
          {priorityText}
@@ -36,9 +36,9 @@ const Priority = ({ priorityLevel = 0, modifyClasses = '' }) => {
    );
 };
 
-Priority.propTypes = {
+PriorityCard.propTypes = {
    priorityLevel: PropTypes.number,
    modifyClasses: PropTypes.string,
 };
 
-export default Priority;
+export default PriorityCard;
