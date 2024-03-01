@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types';
 
 // component
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from '../../shared/LoadingSpinner/LoadingSpinner';
 
 const ButtonBtn = ({
    text,

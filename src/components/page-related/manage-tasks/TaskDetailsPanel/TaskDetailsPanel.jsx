@@ -1,7 +1,7 @@
 'use client';
 
 // components
-import CloseBtn from './../../../shared/CloseBtn/CloseBtn';
+import CloseBtn from '../../../buttons/CloseBtn/CloseBtn';
 import Priority from '@/components/shared/Priority/Priority';
 
 // hooks

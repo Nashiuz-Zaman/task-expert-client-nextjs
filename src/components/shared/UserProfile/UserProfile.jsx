@@ -9,7 +9,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 // component
-import ButtonBtn from '../ButtonBtn/ButtonBtn';
+import ButtonBtn from '../../buttons/ButtonBtn/ButtonBtn';
 
 // hooks
 import useClickOutside from '@/hooks/useClickOutside';

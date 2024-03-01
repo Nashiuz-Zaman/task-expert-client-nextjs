@@ -6,7 +6,7 @@ import { forwardRef, useEffect, useRef, useState } from 'react';
 
 // component
 import Task from '../Task/Task';
-import DotsMenuBtn from '@/components/shared/DotsMenuBtn/DotsMenuBtn';
+import DotsMenuBtn from '@/components/buttons/DotsMenuBtn/DotsMenuBtn';
 
 // redux
 import { useSelector } from 'react-redux';

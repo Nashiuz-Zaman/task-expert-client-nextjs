@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import { useEffect, useRef } from 'react';
 
 // component
-import ButtonBtn from '@/components/shared/ButtonBtn/ButtonBtn';
-import GoogleLoginBtn from '@/components/shared/GoogleLoginBtn/GoogleLoginBtn';
+import ButtonBtn from '@/components/buttons/ButtonBtn/ButtonBtn';
+import GoogleLoginBtn from '@/components/buttons/GoogleLoginBtn/GoogleLoginBtn';
 import PasswordField from '@/components/shared/PasswordField/PasswordField';
 import InputField1 from '@/components/shared/InputField1/InputField1';
 

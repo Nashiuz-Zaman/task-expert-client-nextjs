@@ -9,11 +9,11 @@ import { Icon } from '@iconify/react';
 
 // component
 import Priority from '@/components/shared/Priority/Priority';
-import EditBtn from '@/components/shared/EditBtn/EditBtn';
-import DeleteBtn from '@/components/shared/DeleteBtn/DeleteBtn';
-import PinBtn from '@/components/shared/PinBtn/PinBtn';
-import ViewDetailsBtn from '@/components/shared/ViewDetailsBtn/ViewDetailsBtn';
-import DotsMenuBtn from '@/components/shared/DotsMenuBtn/DotsMenuBtn';
+import EditBtn from '@/components/buttons/EditBtn/EditBtn';
+import DeleteBtn from '@/components/buttons/DeleteBtn/DeleteBtn';
+import PinBtn from '@/components/buttons/PinBtn/PinBtn';
+import ViewDetailsBtn from '@/components/buttons/ViewDetailsBtn/ViewDetailsBtn';
+import DotsMenuBtn from '@/components/buttons/DotsMenuBtn/DotsMenuBtn';
 import MenuPanel from '@/components/shared/MenuPanel/MenuPanel';
 
 // hook
@@ -126,15 +126,16 @@ const Task = ({ taskData }) => {
                            }}
                            text='Pin Task'
                         />
+
+                        {/* delete button */}
+                        <DeleteBtn
+                           onClickFunction={() => {
+                              deleteTask(_id, totalTasks);
+                           }}
+                           text='Delete'
+                        />
                      </MenuPanel>
                   );
-               }}
-            />
-
-            {/* delete button */}
-            <DeleteBtn
-               onClickFunction={() => {
-                  deleteTask(_id, totalTasks);
                }}
             />
          </div>

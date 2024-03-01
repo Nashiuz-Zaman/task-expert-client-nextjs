@@ -9,10 +9,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 // components
-import CloseBtn from '@/components/shared/CloseBtn/CloseBtn';
+import CloseBtn from '@/components/buttons/CloseBtn/CloseBtn';
 import BrandLogo from '@/components/shared/BrandLogo/BrandLogo';
-import MobileMenuBtn from '@/components/shared/MobileMenuBtn/MobileMenuBtn';
-import ButtonBtn from '@/components/shared/ButtonBtn/ButtonBtn';
+import MobileMenuBtn from '@/components/buttons/MobileMenuBtn/MobileMenuBtn';
+import ButtonBtn from '@/components/buttons/ButtonBtn/ButtonBtn';
 
 // hook
 import useMobileNavigation from '@/hooks/useMobileNavigation';

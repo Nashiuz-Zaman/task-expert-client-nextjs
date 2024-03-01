@@ -11,10 +11,11 @@ const DeleteBtn = ({ onClickFunction, text, modifyClasses = '' }) => {
       <button
          title='Delete'
          aria-label='Delete button'
-         className={`flex items-center gap-2 text-red-500 text-2xl ${modifyClasses}`}
+         className={`flex items-center gap-2 text-red-500 text-xl ${modifyClasses}`}
          onClick={onClickFunction}
       >
-         <Icon className='text-inherit' icon='typcn:delete' />
+         <Icon className='text-inherit' icon='material-symbols:delete' />
+
          {text && <span className='text-inherit capitalize'>{text}</span>}
       </button>
    );

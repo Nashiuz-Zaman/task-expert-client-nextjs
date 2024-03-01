@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 
 // components
-import CloseBtn from '@/components/shared/CloseBtn/CloseBtn';
-import MobileMenuBtn from '@/components/shared/MobileMenuBtn/MobileMenuBtn';
-import ButtonBtn from '@/components/shared/ButtonBtn/ButtonBtn';
+import CloseBtn from '@/components/buttons/CloseBtn/CloseBtn';
+import MobileMenuBtn from '@/components/buttons/MobileMenuBtn/MobileMenuBtn';
+import ButtonBtn from '@/components/buttons/ButtonBtn/ButtonBtn';
 import BrandLogo from '@/components/shared/BrandLogo/BrandLogo';
 import DashboardNavContent from '../DashboardNavContent/DashboardNavContent';
 

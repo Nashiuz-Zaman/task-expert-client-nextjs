@@ -4,8 +4,8 @@
 import PropTypes from 'prop-types';
 
 // components
-import ButtonBtn from '@/components/shared/ButtonBtn/ButtonBtn';
-import LinkBtn from '@/components/shared/LinkBtn/LinkBtn';
+import ButtonBtn from '@/components/buttons/ButtonBtn/ButtonBtn';
+import LinkBtn from '@/components/buttons/LinkBtn/LinkBtn';
 
 // hooks
 import useFormVisiblity from '@/hooks/useFormVisiblity';

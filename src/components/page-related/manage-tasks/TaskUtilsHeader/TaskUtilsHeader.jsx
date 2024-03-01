@@ -4,10 +4,10 @@
 import PropTypes from 'prop-types';
 
 // components
-import FilterBtn from '@/components/shared/FilterBtn/FilterBtn';
-import SortBtn from '@/components/shared/SortBtn/SortBtn';
+import FilterBtn from '@/components/buttons/FilterBtn/FilterBtn';
+import SortBtn from '@/components/buttons/SortBtn/SortBtn';
 import Searchbar from '@/components/shared/Searchbar/Searchbar';
-import AddBtn from '@/components/shared/AddBtn/AddBtn';
+import AddBtn from '@/components/buttons/AddBtn/AddBtn';
 
 // hook
 import useFormVisiblity from '@/hooks/useFormVisiblity';

@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types';
 
 // component
-import UnpinBtn from '@/components/shared/UnpinBtn/UnpinBtn';
+import UnpinBtn from '@/components/buttons/UnpinBtn/UnpinBtn';
 
 // hook
 import useTaskDatabaseMethods from '@/hooks/useTaskDatabaseMethods';

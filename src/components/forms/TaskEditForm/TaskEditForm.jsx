@@ -1,8 +1,8 @@
 'use client';
 
 // shared components
-import ButtonBtn from '../../shared/ButtonBtn/ButtonBtn';
-import CloseBtn from '@/components/shared/CloseBtn/CloseBtn';
+import ButtonBtn from '../../buttons/ButtonBtn/ButtonBtn';
+import CloseBtn from '@/components/buttons/CloseBtn/CloseBtn';
 import InputField2 from '@/components/shared/InputField2/InputField2';
 import TextareaField from '@/components/shared/TextareaField/TextareaField';
 import SelectField from '@/components/shared/SelectField/SelectField';
