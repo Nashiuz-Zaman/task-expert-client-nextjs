@@ -29,7 +29,7 @@ const TimeRemainingCard = ({
       <div className={`flex items-center gap-1 ${modifyClasses}`}>
          <Icon icon='ph:clock-fill' className='block' />
          {/* time remaining part */}
-         <p className='font-medium'>
+         <p style={{ fontWeight: 'inherit' }}>
             <span>{text}</span>
 
             <span>
