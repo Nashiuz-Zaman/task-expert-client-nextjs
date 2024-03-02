@@ -18,12 +18,12 @@ const imageUploadAPI = `https://api.imgbb.com/1/upload?key=${imageUploadAPIKey}`
 
 // redux
 import { useDispatch } from 'react-redux';
-import {
-   setAppLoading,
+import {  
    setUserAlreadyRegistered,
    setUserShouldExist,
    setProfileData,
    setRegistrationErrors,
+   setRegistrationLoading,
 } from '@/lib/redux/features/auth/authSlice';
 
 // custom hook body starts here
@@ -114,7 +114,7 @@ const useRegistrationForm = () => {
 
       // if there are no basic errors code will reach this line
       try {
-         dispatch(setAppLoading(true));
+         dispatch(setRegistrationLoading(true));
          const userExistsResponse = await axiosPublic.post(
             '/users/checkExistence',
             {
@@ -125,7 +125,7 @@ const useRegistrationForm = () => {
          // if user exists
          if (userExistsResponse.data.userExists) {
             dispatch(setUserAlreadyRegistered(true));
-            dispatch(setAppLoading(false));
+            dispatch(setRegistrationLoading(false));
          } else {
             // if user doesn't exist
             // upload image to imgbb first
@@ -181,14 +181,14 @@ const useRegistrationForm = () => {
 
                      closeSignupFormWithBackdrop();
                      router.push('/');
-                     dispatch(setAppLoading(false));
+                     dispatch(setRegistrationLoading(false));
                   }
                }
             }
          }
       } catch (error) {
          if (error) {
-            dispatch(setAppLoading(false));
+            dispatch(setRegistrationLoading(false));
             dispatch(setRegistrationErrors([error.message]));
          }
       }

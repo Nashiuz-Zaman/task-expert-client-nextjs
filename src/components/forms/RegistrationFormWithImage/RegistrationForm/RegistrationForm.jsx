@@ -24,7 +24,9 @@ import { setRegistrationErrors } from '@/lib/redux/features/auth/authSlice';
 
 const RegistrationForm = ({ modifyClasses }) => {
    const { handleSignup } = useRegistrationForm();
-   const { registrationErrors } = useSelector(store => store.auth);
+   const { registrationErrors, registrationLoading } = useSelector(
+      store => store.auth
+   );
    const { registrationFormOpen } = useSelector(store => store.form);
    const { handleLoginGoogle } = useLoginForm();
    const { resetFormFieldsAndErrors } = useResetForm();
@@ -92,6 +94,7 @@ const RegistrationForm = ({ modifyClasses }) => {
             )}
 
             <ButtonBtn
+               loading={registrationLoading}
                text='Sign Up'
                modifyClasses='mx-auto block my-custom2xs'
             />

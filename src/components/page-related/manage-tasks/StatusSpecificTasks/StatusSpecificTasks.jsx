@@ -47,7 +47,7 @@ const StatusSpecificTasks = forwardRef(({ tasksData }, ref) => {
          {/* task status label and count */}
          <div className='flex items-center gap-3 mb-7'>
             <h3 className='font-semibold text-2xl'>{name}</h3>
-            <p className='min-w-8 py-2 flex items-center justify-center bg-primary text-white rounded-full font-semibold !leading-none text-sm'>
+            <p className='min-w-8 py-2 flex items-center justify-center bg-neutral-100 rounded-lg font-semibold !leading-none text-sm'>
                {statusSpecificTasks.length}
             </p>
          </div>

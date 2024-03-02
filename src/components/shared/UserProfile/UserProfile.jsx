@@ -14,13 +14,12 @@ import ButtonBtn from '../../buttons/ButtonBtn/ButtonBtn';
 // hooks
 import useClickOutside from '@/hooks/useClickOutside';
 
-//  react icon import
-import { FaUserCircle } from 'react-icons/fa';
+//  icon
+import { Icon } from '@iconify/react';
 
-const UserProfile = ({ profile, logoutFunction, modifyClasses = '' }) => {
+const UserProfile = ({ profileData, logoutFunction, modifyClasses = '' }) => {
    const [showInfoPanel, setShowInfoPanel] = useState(false);
 
-   // function to control info panel
    const handleShowInfoPanel = () => {
       setShowInfoPanel(prev => {
          return !prev;
@@ -32,16 +31,15 @@ const UserProfile = ({ profile, logoutFunction, modifyClasses = '' }) => {
          setShowInfoPanel(false);
       }
    };
-
    useClickOutside(showInfoPanel, handleClickOutside);
 
    // declare name and photo variables
    let name, image;
 
-   if (profile) {
+   if (profileData) {
       // assign name and photo variables
-      name = profile.name;
-      image = profile.imageSource;
+      name = profileData.name;
+      image = profileData.imageSource;
 
       return (
          <div
@@ -50,11 +48,14 @@ const UserProfile = ({ profile, logoutFunction, modifyClasses = '' }) => {
             {/* profile image container div */}
             <div
                onClick={handleShowInfoPanel}
-               className='w-full h-full aspect-square border border-[#ddd]  rounded-full overflow-hidden'
+               className='w-full h-full aspect-square border border-neutral-300  rounded-full overflow-hidden'
             >
                {/* if no photo provided show default silhoutte photo */}
                {!image && (
-                  <FaUserCircle className='w-full h-full object-contain text-white'></FaUserCircle>
+                  <Icon
+                     className='w-full h-full object-contain text-white'
+                     icon='solar:user-circle-bold'
+                  />
                )}
 
                {/* if there is photo show this part */}
@@ -71,17 +72,19 @@ const UserProfile = ({ profile, logoutFunction, modifyClasses = '' }) => {
 
             {/* positioned div for userpanel menu */}
             <div
-               className={`rounded-2xl w-[12rem] md:w-[15rem] bg-white border border-[#e5e5e5] shadow-xl p-4 absolute z-20 bottom-0 right-0  translate-y-[105%] space-y-5 text-left cursor-default userpanel-focus ${
+               className={`rounded-2xl w-[12rem] md:w-[15rem] bg-white border border-neutral-300 shadow-sm p-4 absolute z-30 bottom-0 right-0  translate-y-[105%] space-y-5 text-left cursor-default userpanel-focus ${
                   showInfoPanel ? 'block' : 'hidden'
                }`}
             >
                <p className='font-semibold md:text-lg'>{name}</p>
+
                <Link
                   href='/'
                   className='block hover:text-primary transition-all duration-200'
                >
                   Go to website
                </Link>
+
                <ButtonBtn
                   onClickFunction={logoutFunction}
                   text='Sign Out'
@@ -94,7 +97,7 @@ const UserProfile = ({ profile, logoutFunction, modifyClasses = '' }) => {
 };
 
 UserProfile.propTypes = {
-   profile: PropTypes.object,
+   profileData: PropTypes.object,
    logoutFunction: PropTypes.func,
    modifyClasses: PropTypes.string,
 };

@@ -13,10 +13,10 @@ import { axiosPublic } from './useAxios';
 // redux
 import { useDispatch } from 'react-redux';
 import {
-   setAppLoading,
    setUserShouldExist,
    setProfileData,
    setLoginErrors,
+   setLoginLoading,
 } from '@/lib/redux/features/auth/authSlice';
 
 // utils
@@ -50,6 +50,7 @@ const useLoginForm = () => {
 
    // handle google sign in
    const handleLoginGoogle = async () => {
+      dispatch(setLoginLoading(true));
       const result = await loginGoogle();
 
       // if google login is succesful send the google user object to the database to check role and existence and also to make a jwt token
@@ -82,7 +83,7 @@ const useLoginForm = () => {
             router.push('/');
 
             showToast('Logged In Successfully', 'success');
-            dispatch(setAppLoading(false));
+            dispatch(setLoginLoading(false));
          }
       }
    };
@@ -90,6 +91,7 @@ const useLoginForm = () => {
    // handle normal login
    const handleLoginEmail = async e => {
       e.preventDefault();
+
       // reset errors
       dispatch(setLoginErrors([]));
 
@@ -111,6 +113,7 @@ const useLoginForm = () => {
       }
 
       try {
+         dispatch(setLoginLoading(true));
          // firebase login api call
          const result = await loginEmail(dataObject.email, dataObject.password);
 
@@ -135,12 +138,12 @@ const useLoginForm = () => {
                router.push('/');
 
                showToast('Logged In Successfully', 'success');
-               dispatch(setAppLoading(false));
+               dispatch(setLoginLoading(false));
             }
          }
       } catch (error) {
          dispatch(setLoginErrors(["Email/Password doesn't match. Try again."]));
-         dispatch(setAppLoading(false));
+         dispatch(setLoginLoading(false));
       }
    };
 

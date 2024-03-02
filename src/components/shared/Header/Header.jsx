@@ -10,6 +10,7 @@ import Link from 'next/link';
 import BrandLogo from '@/components/shared/BrandLogo/BrandLogo';
 import InnerContainer from '@/components/containers/InnerContainer/InnerContainer';
 import MobileNav from '@/components/shared/MobileNav/MobileNav';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 // hooks
 import useFormVisiblity from '@/hooks/useFormVisiblity';
@@ -19,7 +20,7 @@ import useFirebaseMethods from '@/hooks/useFirebaseMethods';
 import { useSelector } from 'react-redux';
 
 const Header = ({ modifyClasses = '' }) => {
-   const { profileData } = useSelector(store => store.auth);
+   const { profileData, userLoading } = useSelector(store => store.auth);
    const { openLoginFormWithBackdrop, openSignupFormWithBackdrop } =
       useFormVisiblity();
    const { logout } = useFirebaseMethods();
@@ -38,8 +39,16 @@ const Header = ({ modifyClasses = '' }) => {
                      : 'flex-row gap-4'
                } justify-center items-center 2md:justify-end lg:text-lg mb-customXs 2md:mb-custom2xs font-medium`}
             >
+               {userLoading && (
+                  <LoadingSpinner
+                     text='Loading User'
+                     textSizeClass='lg:!text-lg !text-primary'
+                     loaderSizeClass='!hidden'
+                  />
+               )}
+
                {/* if no user then login and registration btns are shown */}
-               {!profileData && (
+               {!userLoading && !profileData && (
                   <>
                      <button
                         onClick={openLoginFormWithBackdrop}
@@ -58,7 +67,7 @@ const Header = ({ modifyClasses = '' }) => {
                )}
 
                {/* if user available then show name and go to dashboard and logout btns */}
-               {profileData && (
+               {!userLoading && profileData && (
                   <>
                      <p>
                         Logged in as:{' '}

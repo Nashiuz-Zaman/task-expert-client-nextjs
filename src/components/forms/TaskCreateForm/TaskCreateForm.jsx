@@ -67,7 +67,7 @@ const TaskCreateForm = () => {
       <div
          className={`${
             taskCreateFormOpen ? 'block' : 'hidden'
-         } translate-x-4 md:translate-x-8 shadow-xl w-[19rem] absolute top-0 translate-y-[3.2rem] left-0 p-4 bg-white border border-neutral-300 z-40 rounded-xl task-create-form-focus`}
+         } translate-x-4 md:translate-x-8 shadow-md w-[19rem] absolute top-0 translate-y-[3.2rem] left-0 p-4 bg-white border border-neutral-300 z-40 rounded-xl task-create-form-focus`}
       >
          <CloseBtn
             onClickFunction={closeTaskCreateForm}
@@ -77,7 +77,12 @@ const TaskCreateForm = () => {
          {/* form starts here */}
          <form onSubmit={handleCreateTask} className='block space-y-3'>
             {/* title */}
-            <InputField2 label='Title' name='title' placeholder='Task Title' />
+            <InputField2
+               label='Title'
+               maxLength={50}
+               name='title'
+               placeholder='Task Title'
+            />
 
             {/* description */}
             <TextareaField

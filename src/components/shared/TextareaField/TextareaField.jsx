@@ -6,8 +6,9 @@ const TextareaField = ({
    label = 'Default Label',
    name,
    defaultValueData,
-   modifyClasses = '',
+   maxLength = null,
    placeholder = 'Default placeholder',
+   modifyClasses = '',
 }) => {
    return (
       <div className={`${modifyClasses}`}>
@@ -22,6 +23,7 @@ const TextareaField = ({
 
          {/* input area */}
          <textarea
+            maxLength={maxLength}
             required
             defaultValue={defaultValueData}
             className={`block rounded-default !w-full text-sm lg:text-base p-1 md:p-2 font-inherit bg-lightGray h-16 ${
@@ -40,6 +42,7 @@ TextareaField.propTypes = {
    name: PropTypes.string,
    placeholder: PropTypes.string,
    defaultValueData: PropTypes.string,
+   maxLength: PropTypes.number,
    modifyClasses: PropTypes.string,
 };
 
