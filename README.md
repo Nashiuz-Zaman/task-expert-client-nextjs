@@ -1,4 +1,4 @@
-# Project Task Expert
+# Project Task Expert (Next.js version)
 
 Live link: https://taskexpert.vercel.app/
 
@@ -21,6 +21,19 @@ This is a simplistic drag and drop task management web app that anybody can use 
 
 # Features
 
--  Users can register accounts and, create/delete/pin/edit tasks to manage their daily workflow
--  On the tasks dashboard users can easily drag and drop their tasks to change the task’s status into three statuses - todo, ongoing and completed
--  Firebase authentication has been used for login/registration and JSON web token has been used for authorization security.
+## Client-side:
+
+1. Users can register their accounts and login to the dashboard.
+2. Users can create, edit, delete, pin/unpin tasks from the dashboard.
+3. If user views the details of a task they can see the live countdown of the time remaining before they should complete the task.
+4. Users can drag and drop tasks into three statuses - Todo, Ongoing, Completed.
+5. Users can filter and sort their tasks based on priorities and can also search for specific tasks using the searchbar.
+6. Firebase authentication has been used for login and registration.
+7. Redux toolkit has been used for local UI state management.
+8. Website is fully responsive.
+
+## Server-side
+
+1. The server side has been created using Express JS, MongoDB, Mongoose.
+2. JSON Web Token has been used for authorization, users cannot see other users' data.
+3. If Token has expired, users will be automatically logged out.
