@@ -11,6 +11,8 @@ import authReducer from '@/lib/redux/features/auth/authSlice';
 import formReducer from '@/lib/redux/features/form/formSlice';
 import dashboardReducer from '@/lib/redux/features/dashboard/dashboardSlice';
 import taskReducer from '@/lib/redux/features/task/taskSlice';
+import searchReducer from '@/lib/redux/features/search/searchSlice';
+import filterReducer from '@/lib/redux/features/filter/filterSlice';
 
 // store
 export const store = configureStore({
@@ -22,5 +24,7 @@ export const store = configureStore({
       form: formReducer,
       dashboard: dashboardReducer,
       task: taskReducer,
+      search: searchReducer,
+      filter: filterReducer,
    },
 });

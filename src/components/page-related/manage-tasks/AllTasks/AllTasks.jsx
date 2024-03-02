@@ -22,9 +22,17 @@ const AllTasks = ({ modifyClasses = '' }) => {
    useGetInitialTasksData();
    const { dropzoneElementRefs } = useTaskDragDropProvider();
    const { totalTasks, isLoading } = useSelector(store => store.task);
+   const { searchTerm } = useSelector(store => store.search);
+   const { taskFilterParams } = useSelector(store => store.filter);
    const { getStatusSpecificTasks } = useTaskSeparator();
 
-   const totalTasksSeparated = totalTasks && getStatusSpecificTasks(totalTasks);
+   const totalTasksSeparated =
+      totalTasks &&
+      getStatusSpecificTasks(
+         totalTasks
+            .filter(task => taskFilterParams.includes(task.priorityLevel))
+            .filter(task => task.title.toLowerCase().includes(searchTerm))
+      );
 
    return (
       <div

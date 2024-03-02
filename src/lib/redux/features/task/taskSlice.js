@@ -4,7 +4,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-   totalTasks: null,
+   totalTasks: [],
    statusSpecificTasks: null,
    taskToEdit: null,
    taskDetails: null,
