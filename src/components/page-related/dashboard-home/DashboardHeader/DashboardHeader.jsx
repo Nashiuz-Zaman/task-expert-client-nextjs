@@ -27,7 +27,7 @@ const DashboardHeader = ({ modifyClasses = '' }) => {
             {/* if user is truthy, show the userprofile */}
             {profileData && (
                <UserProfile
-                  profile={profileData}
+                  profileData={profileData}
                   modifyClasses='ml-auto'
                   logoutFunction={logout}
                />
