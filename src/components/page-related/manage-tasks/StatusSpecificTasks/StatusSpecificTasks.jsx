@@ -32,7 +32,7 @@ const StatusSpecificTasks = forwardRef(({ tasksData }, ref) => {
    return (
       <div
          id={name}
-         className='bg-white  h-full overflow-hidden rounded-2xl px-3 py-4 drop-target animate-fadeIn border border-neutral-300'
+         className='bg-white !overflow-x-visible h-full rounded-2xl px-3 py-4 drop-target animate-fadeIn border border-neutral-300'
          // ref collection
          ref={el => {
             if (!ref.current.includes(el) && el !== null) {
@@ -55,7 +55,7 @@ const StatusSpecificTasks = forwardRef(({ tasksData }, ref) => {
          {/* tasks container */}
          <div
             ref={tasksContainerRef}
-            className={`overflow-y-auto rounded-2xl py-2  h-[calc(57vh-9.5rem)] md:h-[calc(70vh-9.5rem)] scrollbar-thin scrollbar-thumb-primary scrollbar-track-white crollbar-thumb-rounded-full ${
+            className={`overflow-y-auto !overflow-x-visible rounded-2xl py-2 h-[calc(57vh-9.5rem)] md:h-[calc(70vh-9.5rem)] scrollbar-thin scrollbar-thumb-primary scrollbar-track-white crollbar-thumb-rounded-full ${
                hasScrollbar ? 'pr-3' : 'pr-0'
             }`}
          >

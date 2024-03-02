@@ -15,7 +15,7 @@ const FilterBtn = ({ text = 'Filter', renderChildren, modifyClasses = '' }) => {
    };
 
    return (
-      <div className={`relative shadow-sm  ${modifyClasses}`}>
+      <div className={`relative shadow-sm ${modifyClasses}`}>
          <button
             onClick={handleClick}
             className='flex gap-2 bg-white hover:text-primary hover:border-primary border border-neutral-300 items-center rounded-[inherit] px-2 py-1 transition-all duration-default'
