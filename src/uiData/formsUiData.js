@@ -34,3 +34,21 @@ export const statusOptions = [
       value: 2,
    },
 ];
+
+export const sortByPriorityOptions = [
+   {
+      id: 0,
+      text: 'Not Specified',
+      value: 0,
+   },
+   {
+      id: 1,
+      text: 'Low to High',
+      value: 1,
+   },
+   {
+      id: 2,
+      text: 'High to Low',
+      value: 2,
+   },
+];

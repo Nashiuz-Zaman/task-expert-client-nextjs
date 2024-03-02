@@ -13,6 +13,7 @@ import dashboardReducer from '@/lib/redux/features/dashboard/dashboardSlice';
 import taskReducer from '@/lib/redux/features/task/taskSlice';
 import searchReducer from '@/lib/redux/features/search/searchSlice';
 import filterReducer from '@/lib/redux/features/filter/filterSlice';
+import sortReducer from '@/lib/redux/features/sort/sortSlice';
 
 // store
 export const store = configureStore({
@@ -26,5 +27,6 @@ export const store = configureStore({
       task: taskReducer,
       search: searchReducer,
       filter: filterReducer,
+      sort: sortReducer,
    },
 });

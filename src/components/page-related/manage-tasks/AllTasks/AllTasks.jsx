@@ -24,15 +24,28 @@ const AllTasks = ({ modifyClasses = '' }) => {
    const { totalTasks, isLoading } = useSelector(store => store.task);
    const { searchTerm } = useSelector(store => store.search);
    const { taskFilterParams } = useSelector(store => store.filter);
+   const { prioritySortParam } = useSelector(store => store.sort);
    const { getStatusSpecificTasks } = useTaskSeparator();
 
-   const totalTasksSeparated =
-      totalTasks &&
-      getStatusSpecificTasks(
-         totalTasks
-            .filter(task => taskFilterParams.includes(task.priorityLevel))
-            .filter(task => task.title.toLowerCase().includes(searchTerm))
-      );
+   let tasksToShow = totalTasks
+      ?.filter(task => taskFilterParams.includes(task.priorityLevel))
+      ?.filter(task => task.title.toLowerCase().includes(searchTerm));
+
+   tasksToShow.sort((a, b) => {
+      if (prioritySortParam === 0) {
+         return 0;
+      }
+
+      if (prioritySortParam === 1) {
+         return a.priorityLevel - b.priorityLevel;
+      }
+
+      if (prioritySortParam === 2) {
+         return b.priorityLevel - a.priorityLevel;
+      }
+   });
+
+   tasksToShow = getStatusSpecificTasks(tasksToShow);
 
    return (
       <div
@@ -49,7 +62,7 @@ const AllTasks = ({ modifyClasses = '' }) => {
 
          {!isLoading && (
             <div className={`grid grid-cols-3 h-full gap-4 p-7`}>
-               {totalTasksSeparated?.map(singleCollection => {
+               {tasksToShow?.map(singleCollection => {
                   return (
                      <StatusSpecificTasks
                         ref={dropzoneElementRefs}
