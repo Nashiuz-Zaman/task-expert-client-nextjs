@@ -160,7 +160,7 @@ const Task = ({ taskData }) => {
                         {/* delete button */}
                         <DeleteBtn
                            onClickFunction={() => {
-                              deleteTask(_id, totalTasks);
+                              deleteTask(_id, totalTasks, pinnedTasks);
                            }}
                            text='Delete'
                         />

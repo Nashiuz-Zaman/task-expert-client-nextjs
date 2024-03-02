@@ -108,20 +108,6 @@ const useTaskDatabaseMethods = () => {
       [dispatch, sortByLatest]
    );
 
-   const deleteTask = async (_id, tasks) => {
-      const remainingTasks = tasks.filter(task => task._id !== _id);
-      dispatch(setTotalTasks(remainingTasks));
-
-      const res = await axiosPublic.delete(
-         `/tasks/delete/${_id}?email=${profileData.email}`
-      );
-      if (res.data.success) {
-         showToast('Task Deleted', 'success');
-         dispatch(setTotalTasks(res.data.updatedTasks));
-      }
-      return;
-   };
-
    const pinTask = useCallback(
       async (task, pinnedTasks) => {
          try {
@@ -183,6 +169,25 @@ const useTaskDatabaseMethods = () => {
       },
       [dispatch]
    );
+
+   const deleteTask = async (_id, tasks, pinnedTasks) => {
+      const pinnedTask = pinnedTasks.find(task => task.taskId === _id);
+
+      if (pinnedTask?._id) {
+         unpinTask(pinnedTask._id, pinnedTasks);
+      }
+
+      const remainingTasks = tasks.filter(task => task._id !== _id);
+      dispatch(setTotalTasks(remainingTasks));
+
+      const res = await axiosPublic.delete(
+         `/tasks/delete/${_id}?email=${profileData.email}`
+      );
+
+      if (res.data.success) {
+         showToast('Task Deleted', 'success');
+      }
+   };
 
    return {
       sortByLatest,
