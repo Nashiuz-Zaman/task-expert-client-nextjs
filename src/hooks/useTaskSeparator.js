@@ -5,7 +5,7 @@ import { useCallback } from 'react';
 
 const useTaskSeparator = () => {
    const findTasksByStatus = useCallback((allTasks, statusLevel) => {
-      return allTasks?.filter(task => task.statusLevel === statusLevel);
+      return allTasks.filter(task => task.statusLevel === statusLevel);
    }, []);
 
    const getStatusSpecificTasks = useCallback(

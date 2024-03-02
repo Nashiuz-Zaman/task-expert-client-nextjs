@@ -12,8 +12,17 @@ import AddBtn from '@/components/buttons/AddBtn/AddBtn';
 // hook
 import useFormVisiblity from '@/hooks/useFormVisiblity';
 
+// redux
+import { useDispatch } from 'react-redux';
+import { setSearchTerm } from '@/lib/redux/features/search/searchSlice';
+
 const TaskUtilsHeader = ({ modifyClasses = '' }) => {
+   const dispatch = useDispatch();
    const { openTaskCreateForm } = useFormVisiblity();
+
+   const handleSearchChange = e => {
+      dispatch(setSearchTerm(e.target.value.toLowerCase()));
+   };
 
    return (
       <div
@@ -33,7 +42,10 @@ const TaskUtilsHeader = ({ modifyClasses = '' }) => {
 
          {/* search */}
 
-         <Searchbar modifyClasses='!rounded-xl !w-full xs:!w-[15rem] justify-self-center md:justify-self-end' />
+         <Searchbar
+            onChangeFunction={handleSearchChange}
+            modifyClasses='!rounded-xl !w-full xs:!w-[15rem] justify-self-center md:justify-self-end'
+         />
       </div>
    );
 };

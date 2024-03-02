@@ -3,7 +3,7 @@
 // react
 import PropTypes from 'prop-types';
 
-// react icon
+// icon
 import { Icon } from '@iconify/react';
 
 const Searchbar = ({
@@ -21,7 +21,7 @@ const Searchbar = ({
          />
 
          <input
-            onChange={onChangeFunction && onChangeFunction}
+            onChange={onChangeFunction}
             className='w-[15rem] text-lg bg-inherit placeholder:text-neutral-500 placeholder:capitalize focus:outline-none'
             type='text'
             placeholder={placeholder}
