@@ -55,7 +55,7 @@ const StatusSpecificTasks = forwardRef(({ tasksData }, ref) => {
          {/* tasks container */}
          <div
             ref={tasksContainerRef}
-            className={`overflow-y-auto !overflow-x-visible h-[calc(60vh-6rem)]md:h-[calc(70vh-7.75rem)] lg:h-[calc(60vh-9.375rem)] scrollbar-thin scrollbar-thumb-primary scrollbar-track-white crollbar-thumb-rounded-full  ${
+            className={`overflow-y-auto !overflow-x-visible h-[calc(60vh-6rem)]md:h-[calc(70vh-7.75rem)] lg:h-[calc(60vh-9.375rem)] 2xl:h-[calc(65vh-9.375rem)] scrollbar-thin scrollbar-thumb-primary scrollbar-track-white crollbar-thumb-rounded-full  ${
                hasScrollbar ? 'pr-3 sm:pr-5' : 'pr-0'
             }`}
          >
