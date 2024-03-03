@@ -17,17 +17,18 @@ const PinnedTask = ({ defaultValue = true, task, modifyClasses = '' }) => {
    return (
       <div
          title={task?.title ?? 'No Pinned tasks'}
-         className={`flex items-center gap-3 font-medium text-xl px-4 py-2 rounded-default text-neutral-500 border border-neutral-100 shadow-lg ${modifyClasses}`}
+         className={`flex items-center gap-3 font-medium text-sm md:text-lg lg:text-xl px-4 py-2 rounded-default text-neutral-500 border border-neutral-200 shadow-md ${modifyClasses}`}
       >
          <span className='truncate'>
             {defaultValue ? 'No Pinned Tasks' : task.title}
          </span>
          {!defaultValue && (
             <UnpinBtn
-               onClickFunction={() => {
+               onClickFunction={(e) => {
+                  e.preventDefault()
                   unpinTask(task._id, pinnedTasks);
                }}
-               modifyClasses='!ml-auto'
+               modifyClasses='!ml-auto text-sm md:text-lg lg:text-xl'
             />
          )}
       </div>

@@ -28,6 +28,7 @@ const BrandLogo = ({
             alt='Company Logo'
             className='block w-auto h-[inherit]'
             quality={100}
+            
          />
       </Link>
    );

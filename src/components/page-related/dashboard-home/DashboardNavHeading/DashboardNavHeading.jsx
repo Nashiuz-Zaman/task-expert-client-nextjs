@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const DashboardNavHeading = ({ text, modifyClasses = '' }) => {
    return (
-      <h3 className={`font-bold text-lg text-neutral-500 ${modifyClasses}`}>
+      <h3 className={`font-bold text-base lg:text-lg text-neutral-500 ${modifyClasses}`}>
          {text}
       </h3>
    );

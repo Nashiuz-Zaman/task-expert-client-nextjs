@@ -60,13 +60,13 @@ const DashboardMobileNav = ({
             {/* close nav button */}
             <CloseBtn
                onClickFunction={closeDashboardMobileNav}
-               modifyClasses='mb-customXs'
+               modifyClasses='mb-4 md:mb-7 text-xl md:text-3xl'
             />
 
             {/* brandlogo */}
             <BrandLogo
                onClickFunction={closeDashboardMobileNav}
-               modifyClasses='h-[3rem] mb-12'
+               modifyClasses='h-6 mb-6 md:mb-12 xl:h-10'
             />
 
             <DashboardNavContent />
