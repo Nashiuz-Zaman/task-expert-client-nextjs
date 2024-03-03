@@ -32,7 +32,7 @@ const StatusSpecificTasks = forwardRef(({ tasksData }, ref) => {
    return (
       <div
          id={name}
-         className='bg-white !overflow-x-visible h-full rounded-2xl px-3 py-4 drop-target animate-fadeIn border border-neutral-300'
+         className='bg-white overflow-y-hidden h-full rounded-2xl px-3 py-4 drop-target animate-fadeIn border border-neutral-300'
          // ref collection
          ref={el => {
             if (!ref.current.includes(el) && el !== null) {
