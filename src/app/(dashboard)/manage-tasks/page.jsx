@@ -12,12 +12,12 @@ const ManageTasks = () => {
    return (
       <div className='h-full flex flex-col'>
          {/* make this section's postion relative for the forms below */}
-         <section className='mb-customSm relative'>
+         <section className='mb-8 md:mb-12 lg:mb-14 xl:mb-16 relative'>
             <TaskUtilsHeader />
             <TaskCreateForm />
             <TaskEditForm />
             <TaskDetailsPanel />
-         </section>        
+         </section>
 
          <section className='grow overflow-x-auto xl:!overflow-hidden px-4 md:px-8 xl:px-16'>
             <TaskDragDropProvider>

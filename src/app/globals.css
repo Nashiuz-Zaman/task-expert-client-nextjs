@@ -7,6 +7,10 @@ html {
    scroll-padding-top: 2.5rem;
 }
 
+body {
+   line-height: 1 !important;
+}
+
 ::selection {
    @apply bg-primaryLightest;
 }

@@ -17,6 +17,7 @@ import DotsMenuBtn from '@/components/buttons/DotsMenuBtn/DotsMenuBtn';
 import MenuPanel from '@/components/shared/MenuPanel/MenuPanel';
 import MoveToOngoingBtn from '@/components/buttons/MoveToOngoingBtn/MoveToOngoingBtn';
 import MoveToCompletedBtn from '@/components/buttons/MoveToCompletedBtn/MoveToCompletedBtn';
+import MoveToTodoBtn from '@/components/buttons/MoveToTodoBtn/MoveToTodoBtn';
 
 // hook
 import useTaskDatabaseMethods from '@/hooks/useTaskDatabaseMethods';
@@ -34,7 +35,6 @@ import {
 // utils
 import { useTaskDragDropProvider } from '@/utils/TaskDragDropUtils';
 import { getDayMonthNameYearStr } from '@/utils/dateTimeMethods';
-import MoveToTodoBtn from '@/components/buttons/MoveToTodoBtn/MoveToTodoBtn';
 
 const Task = ({ taskData }) => {
    // necessary hooks and data extraction
@@ -96,8 +96,8 @@ const Task = ({ taskData }) => {
             setIsDragging(false);
          }}
       >
-         {/* priority and top buttons */}
-         <div className='flex items-center justify-between mb-[1.125rem]'>
+         {/* priority and dot button */}
+         <div className='flex items-center justify-between mb-3 md:mb-4'>
             <PriorityCard priorityLevel={priorityLevel} />
 
             {/* three dotted menu button */}
@@ -105,7 +105,11 @@ const Task = ({ taskData }) => {
                modifyClasses='ml-auto mr-2'
                renderChildren={(show, setShow) => {
                   return (
-                     <MenuPanel show={show} setShow={setShow}>
+                     <MenuPanel
+                        modifyClasses='!text-base 2md:!text-lg xl:!text-xl w-max !space-y-2 2md:!space-y-4'
+                        show={show}
+                        setShow={setShow}
+                     >
                         <ViewDetailsBtn
                            onClickFunction={() => {
                               dispatch(setTaskDetails(taskData));
@@ -171,7 +175,9 @@ const Task = ({ taskData }) => {
          </div>
 
          {/* title */}
-         <h4 className='font-extrabold text-lg mb-2 leading-none'>{title}</h4>
+         <h4 className='font-bold text-base md:text-lg mb-2 !leading-none'>
+            {title}
+         </h4>
 
          {/* deadline */}
          <div title='Deadline' className='flex w-max items-center gap-1'>

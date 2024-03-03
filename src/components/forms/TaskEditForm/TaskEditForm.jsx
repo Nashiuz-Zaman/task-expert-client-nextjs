@@ -66,7 +66,7 @@ const TaskEditForm = () => {
       <div
          className={`${
             taskEditFormOpen ? 'opacity-100 visible' : 'opacity-0 collapse'
-         } transition-all !duration-default shadow-medium w-[19rem] md:w-[25rem] fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 p-4 bg-white z-40 rounded-xl task-edit-form-focus`}
+         } transition-all !duration-default shadow-small w-[90%] 2xs:w-[20rem] md:w-[30rem] border border-neutral-300 fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 p-4 bg-white z-40 rounded-xl task-edit-form-focus`}
       >
          <CloseBtn onClickFunction={handleCloseForm} modifyClasses='!text-xl' />
 

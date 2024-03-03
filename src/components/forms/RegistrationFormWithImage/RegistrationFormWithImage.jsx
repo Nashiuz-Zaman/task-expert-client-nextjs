@@ -12,7 +12,7 @@ import RegistrationForm from './RegistrationForm/RegistrationForm';
 const RegistrationFormWithImage = ({ imageSource }) => {
    return (
       <div
-         className={`grid grid-cols-1 2md:grid-cols-[1fr_max-content] rounded-2xl overflow-hidden mx-auto w-[90%] xs:w-max 2md:w-[90%] lg:w-[56rem] 2xl:w-[60rem] shadow-medium registration-custom-focus`}
+         className={`grid grid-cols-1 2md:grid-cols-[1fr_max-content] rounded-2xl overflow-hidden mx-auto w-[17.875rem] xs:w-max 2md:w-[47.5rem] lg:w-[55rem] shadow-medium registration-custom-focus`}
       >
          {/* image */}
          <div className='hidden 2md:block w-full h-full overflow-hidden'>

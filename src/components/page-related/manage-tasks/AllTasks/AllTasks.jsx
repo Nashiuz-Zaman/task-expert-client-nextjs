@@ -49,7 +49,7 @@ const AllTasks = ({ modifyClasses = '' }) => {
 
    return (
       <div
-         className={`h-[57vh] md:h-[70vh] bg-white mx-auto w-[65rem] md:w-[70rem] xl:max-w-[89.5rem] xl:w-full shadow-small rounded-2xl ${modifyClasses}`}
+         className={`h-[60vh] md:h-[70vh] lg:h-[60vh] bg-white mx-auto w-[50rem] xs:w-[60rem] sm:w-[70rem] xl:max-w-[89.5rem] xl:w-full shadow-small rounded-2xl ${modifyClasses}`}
       >
          {isLoading && (
             <LoadingSpinner
@@ -61,7 +61,7 @@ const AllTasks = ({ modifyClasses = '' }) => {
          )}
 
          {!isLoading && (
-            <div className={`grid grid-cols-3 h-full gap-4 p-7`}>
+            <div className={`grid grid-cols-3 h-full gap-2 xs:gap-3 sm:gap-4 p-3 md:p-5 lg:p-7`}>
                {tasksToShow?.map(singleCollection => {
                   return (
                      <StatusSpecificTasks

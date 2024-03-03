@@ -18,7 +18,7 @@ const SortForm = ({ params, curCheckedParam, setCurCheckedParam }) => {
    };
 
    return (
-      <div>
+      <div className='space-y-2'>
          {params.map(option => {
             return (
                <InputRadioField
