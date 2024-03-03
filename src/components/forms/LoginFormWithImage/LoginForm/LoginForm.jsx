@@ -37,7 +37,7 @@ const LoginForm = ({ modifyClasses = '' }) => {
 
    return (
       <div
-         className={`w-full bg-white mx-auto py-7 px-5 xs:px-8 sm:px-10 2md:px-12 2md:py-12 lg:px-10 ${modifyClasses}`}
+         className={`w-full bg-white mx-auto py-7 px-5 2md:px-6 2md:py-12 ${modifyClasses}`}
       >
          {/* heading */}
          <h2 className='capitalize mb-4 text-center text-lg 2md:text-xl xl:text-2xl font-bold'>
