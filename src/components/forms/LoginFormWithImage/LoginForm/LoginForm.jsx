@@ -37,10 +37,10 @@ const LoginForm = ({ modifyClasses = '' }) => {
 
    return (
       <div
-         className={`w-full bg-white mx-auto py-12 px-5 xs:px-8 sm:px-10 2md:px-12 lg:px-10 ${modifyClasses}`}
+         className={`w-full bg-white mx-auto py-7 px-5 xs:px-8 sm:px-10 2md:px-12 2md:py-12 lg:px-10 ${modifyClasses}`}
       >
          {/* heading */}
-         <h2 className='capitalize mb-custom2xs text-center text-2xl font-semibold'>
+         <h2 className='capitalize mb-4 text-center text-lg 2md:text-xl xl:text-2xl font-bold'>
             Login to your account
          </h2>
 
@@ -51,7 +51,7 @@ const LoginForm = ({ modifyClasses = '' }) => {
             onSubmit={handleLoginEmail}
             className='w-full'
          >
-            <div className='w-full space-y-5 xs:w-[17rem] 2md:w-full 2md:mx-0 mx-auto'>
+            <div className='w-full space-y-3 md:space-y-5 xs:w-[17rem] 2md:w-full 2md:mx-0 mx-auto'>
                {/* email */}
                <InputField1 type='email' name='email' placeholder='Email' />
 
@@ -61,7 +61,7 @@ const LoginForm = ({ modifyClasses = '' }) => {
 
             {/* show errors here */}
             {loginErrors?.length > 0 && (
-               <div className='space-y-1 mt-4'>
+               <div className='space-y-1 mt-3 md:mt-4'>
                   {loginErrors.map(error => {
                      return (
                         <p
@@ -78,10 +78,10 @@ const LoginForm = ({ modifyClasses = '' }) => {
             <ButtonBtn
                loading={loginLoading}
                text='Sign In'
-               modifyClasses='mx-auto block my-custom2xs'
+               modifyClasses='mx-auto block my-5'
             />
 
-            <p className='text-sm text-center xl:text-base'>
+            <p className='text-sm text-center xl:text-base mb-3 md:mb-4'>
                Don&apos;t have an account?{' '}
                <button
                   onClick={e => {
@@ -96,7 +96,7 @@ const LoginForm = ({ modifyClasses = '' }) => {
             </p>
          </form>
 
-         <p className='text-center my-4'>Or</p>
+         <p className='text-center mb-3 md:mb-4'>Or</p>
 
          <GoogleLoginBtn
             onClickFunction={handleLoginGoogle}

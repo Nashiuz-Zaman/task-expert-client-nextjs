@@ -43,10 +43,10 @@ const RegistrationForm = ({ modifyClasses }) => {
 
    return (
       <div
-         className={`w-full bg-white mx-auto py-12 px-5 xs:px-8 sm:px-10 2md:px-12 lg:px-10 ${modifyClasses}`}
+         className={`w-full bg-white mx-auto py-7 px-5 xs:px-8 sm:px-10 2md:px-12 2md:py-12 lg:px-10 ${modifyClasses}`}
       >
          {/* heading */}
-         <h2 className='capitalize mb-custom2xs text-center text-2xl font-semibold'>
+         <h2 className='capitalize mb-custom2xs text-center font-bold text-lg 2md:text-xl xl:text-2xl'>
             Sign up. It&apos;s <span className='text-primary'>Free!</span>
          </h2>
 
@@ -57,7 +57,7 @@ const RegistrationForm = ({ modifyClasses }) => {
             onSubmit={handleSignup}
             className='w-full'
          >
-            <div className='w-full space-y-5 xs:w-[17rem] 2md:w-full 2md:mx-0 mx-auto'>
+            <div className='w-full space-y-3 md:space-y-5 xs:w-[17rem] 2md:w-full 2md:mx-0 mx-auto'>
                {/* username field */}
                <InputField1 name='name' placeholder='Username' />
 
@@ -96,10 +96,10 @@ const RegistrationForm = ({ modifyClasses }) => {
             <ButtonBtn
                loading={registrationLoading}
                text='Sign Up'
-               modifyClasses='mx-auto block my-custom2xs'
+               modifyClasses='mx-auto block my-5'
             />
 
-            <p className='text-sm text-center xl:text-base'>
+            <p className='text-sm text-center xl:text-base mb-3 md:mb-4'>
                Already have an account?{' '}
                <button
                   onClick={e => {
@@ -114,7 +114,7 @@ const RegistrationForm = ({ modifyClasses }) => {
             </p>
          </form>
 
-         <p className='text-center  my-4'>Or</p>
+         <p className='text-center mb-3 md:mb-4'>Or</p>
 
          <GoogleLoginBtn
             text='Sign up with Google'
