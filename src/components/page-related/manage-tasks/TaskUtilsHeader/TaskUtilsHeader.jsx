@@ -36,7 +36,7 @@ const TaskUtilsHeader = ({ modifyClasses = '' }) => {
 
    return (
       <div
-         className={`grid grid-cols-1 xs:grid-cols-[1fr_max-content] gap-4 xs:gap-2 items-center bg-white py-4 xs:py-2 px-4 md:px-8 ${modifyClasses}`}
+         className={`grid grid-cols-1 xs:grid-cols-[1fr_max-content] gap-2 md:gap-4 items-center bg-white py-2 md:py-4 xs:py-2 px-4 md:px-8 ${modifyClasses}`}
       >
          {/* add, filter, search */}
          <div className='flex items-center'>
