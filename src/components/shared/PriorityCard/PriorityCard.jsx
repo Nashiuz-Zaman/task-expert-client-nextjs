@@ -28,7 +28,7 @@ const PriorityCard = ({ priorityLevel = 0, modifyClasses = '' }) => {
 
    return (
       <p
-         className={`w-max px-3 py-[6px] font-semibold rounded-md text-sm ${priorityBgColor} ${priorityTextColor} ${modifyClasses}`}
+         className={`w-max px-3 py-[6px] font-semibold rounded-md text-xs sm:text-sm ${priorityBgColor} ${priorityTextColor} ${modifyClasses}`}
          title={`${priorityText} priority task`}
       >
          {priorityText}

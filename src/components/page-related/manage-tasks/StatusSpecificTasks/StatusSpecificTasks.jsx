@@ -45,8 +45,8 @@ const StatusSpecificTasks = forwardRef(({ tasksData }, ref) => {
          }}
       >
          {/* task status label and count */}
-         <div className='flex items-center gap-3 mb-7'>
-            <h3 className='font-semibold text-2xl'>{name}</h3>
+         <div className='flex items-center gap-3 mb-2 md:mb-5 lg:mb-7'>
+            <h3 className='font-bold text-lg md:text-xl lg:text-2xl'>{name}</h3>
             <p className='min-w-8 py-2 flex items-center justify-center bg-neutral-100 rounded-lg font-semibold !leading-none text-sm'>
                {statusSpecificTasks.length}
             </p>
@@ -55,8 +55,8 @@ const StatusSpecificTasks = forwardRef(({ tasksData }, ref) => {
          {/* tasks container */}
          <div
             ref={tasksContainerRef}
-            className={`overflow-y-auto !overflow-x-visible rounded-2xl py-2 h-[calc(57vh-9.5rem)] md:h-[calc(70vh-9.5rem)] scrollbar-thin scrollbar-thumb-primary scrollbar-track-white crollbar-thumb-rounded-full ${
-               hasScrollbar ? 'pr-3' : 'pr-0'
+            className={`overflow-y-auto !overflow-x-visible h-[calc(60vh-6rem)]md:h-[calc(70vh-7.75rem)] lg:h-[calc(60vh-9.375rem)] scrollbar-thin scrollbar-thumb-primary scrollbar-track-white crollbar-thumb-rounded-full  ${
+               hasScrollbar ? 'pr-3 sm:pr-5' : 'pr-0'
             }`}
          >
             {/* if tasks available */}
