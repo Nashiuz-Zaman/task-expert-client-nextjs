@@ -11,12 +11,12 @@ const EditBtn = ({ onClickFunction, text, modifyClasses = '' }) => {
       <button
          title='Edit'
          aria-label='Edit button'
-         className={`flex items-center gap-2 text-neutral-500 text-xl hover:text-primary ${modifyClasses}`}
+         className={`flex items-center gap-2 text-neutral-500 hover:text-primary ${modifyClasses}`}
          onClick={onClickFunction}
       >
-         <Icon className='text-inherit' icon='ic:round-edit' />
+         <Icon style={{fontSize: 'inherit'}} className='text-inherit' icon='ic:round-edit' />
 
-         {text && <span className='text-inherit capitalize'>{text}</span>}
+         {text && <span style={{fontSize: 'inherit'}} className='text-inherit capitalize'>{text}</span>}
       </button>
    );
 };

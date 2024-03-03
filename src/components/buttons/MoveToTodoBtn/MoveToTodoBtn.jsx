@@ -11,15 +11,23 @@ const MoveToTodoBtn = ({ onClickFunction, text, modifyClasses = '' }) => {
       <button
          title='Move to Todo'
          aria-label='Move to Todo button'
-         className={`flex items-center gap-2 text-neutral-500 text-xl hover:text-primary ${modifyClasses}`}
+         className={`flex items-center gap-2 text-neutral-500 hover:text-primary ${modifyClasses}`}
          onClick={onClickFunction}
       >
          <Icon
+            style={{ fontSize: 'inherit' }}
             className='text-inherit'
             icon='fluent:clipboard-task-list-ltr-24-filled'
          />
 
-         {text && <span className='text-inherit capitalize'>{text}</span>}
+         {text && (
+            <span
+               style={{ fontSize: 'inherit' }}
+               className='text-inherit capitalize'
+            >
+               {text}
+            </span>
+         )}
       </button>
    );
 };
