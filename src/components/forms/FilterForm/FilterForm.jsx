@@ -28,7 +28,7 @@ const FilterForm = ({ params, curCheckedParams, setCurCheckedParams }) => {
    };
 
    return (
-      <div>
+      <div className='space-y-2'>
          {params.map(option => {
             return (
                <InputCheckboxField
