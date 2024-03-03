@@ -13,6 +13,7 @@ import ButtonBtn from '../../buttons/ButtonBtn/ButtonBtn';
 
 // hooks
 import useClickOutside from '@/hooks/useClickOutside';
+import useEscapeClose from '@/hooks/useEscapeClose';
 
 //  icon
 import { Icon } from '@iconify/react';
@@ -32,6 +33,9 @@ const UserProfile = ({ profileData, logoutFunction, modifyClasses = '' }) => {
       }
    };
    useClickOutside(showInfoPanel, handleClickOutside);
+   useEscapeClose(() => {
+      setShowInfoPanel(false);
+   });
 
    // declare name and photo variables
    let name, image;

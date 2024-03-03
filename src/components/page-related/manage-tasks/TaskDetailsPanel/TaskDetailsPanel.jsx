@@ -51,25 +51,26 @@ const TaskDetailsPanel = () => {
                showTaskDetailsPanel
                   ? 'opacity-100 visible'
                   : 'opacity-0 collapse'
-            } transition-all !duration-default shadow-medium fixed top-1/2 w-[90%] sm:w-[30rem] -translate-y-1/2 left-1/2 -translate-x-1/2 py-6 px-5 bg-white z-40 rounded-xl task-details-panel-focus`}
+            } transition-all !duration-default shadow-small border border-neutral-300 fixed top-1/2 w-[90%] sm:w-[30rem] -translate-y-1/2 left-1/2 -translate-x-1/2 p-6 bg-white z-40 rounded-xl task-details-panel-focus`}
          >
             {/* close button */}
             <CloseBtn
+               modifyClasses='bg-primaryLight text-white text-xl rounded-defaultLg p-1 mb-3'
                onClickFunction={() => {
                   dispatch(setShowTaskDetailsPanel(false));
                }}
             />
 
+            {/* title */}
+            <h3 className='text-xl lg:text-2xl !leading-none font-extrabold mb-5'>
+               {taskDetails.title}
+            </h3>
+
             {/* priority card */}
             <PriorityCard
                priorityLevel={taskDetails.priorityLevel}
-               modifyClasses='mb-5'
+               modifyClasses='mb-4'
             />
-
-            {/* title */}
-            <h3 className='text-xl lg:text-2xl !leading-none font-extrabold mb-4'>
-               {taskDetails.title}
-            </h3>
 
             {/* deadline  */}
             <div className='text-sm md:text-base 3xl:text-lg flex items-center gap-1 mb-1'>
