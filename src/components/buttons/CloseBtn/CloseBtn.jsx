@@ -7,6 +7,8 @@ import { AiOutlineClose } from 'react-icons/ai';
 const CloseBtn = ({ theme = 'light', onClickFunction, modifyClasses = '' }) => {
    return (
       <button
+         title='Close'
+         aria-label='Close button'
          className={`ml-auto w-max block text-3xl ${
             theme === 'light' ? 'text-textPrimary' : 'text-white'
          } ${modifyClasses}`}
