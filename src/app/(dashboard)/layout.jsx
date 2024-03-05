@@ -13,10 +13,7 @@ const DashboardLayout = ({ children }) => {
          <div className='h-full'>
             <DashboardHeader />
 
-            <div
-               
-               className='h-[calc(100vh-3.5rem)] md:h-[calc(100vh-4rem)] 2md:h-[calc(100vh-5.8rem)] relative overflow-y-auto !bg-cover !bg-no-repeat !bg-center'
-            >
+            <div className='h-[calc(100vh-3.5rem)] md:h-[calc(100vh-4rem)] 2md:h-[calc(100vh-5.8rem)] relative overflow-y-auto !bg-cover !bg-no-repeat !bg-center'>
                {/* page  */}
                {children}
             </div>
