@@ -3,34 +3,39 @@
 // react
 import PropTypes from 'prop-types';
 
+// icons
+import { Icon } from '@iconify/react';
+
 // component
 import ProfilePhoto from '../ProfilePhoto/ProfilePhoto';
+import FileUploadBtn from '../../../buttons/FileUploadBtn/FileUploadBtn';
 
 // redux
 import useRedux from '@/hooks/useRedux';
-import FileUploadBtn from './../../../buttons/FileUploadBtn/FileUploadBtn';
-import { Icon } from '@iconify/react';
 
-const ProfileInformation = ({ modifyClasses = '' }) => {
+const ProfilePhotoChanger = ({ modifyClasses = '' }) => {
    const { useSelector } = useRedux();
    const { profileData } = useSelector(store => store.auth);
 
    return (
-      <div className={`p-5 ${modifyClasses}`}>
+      <section className={`mx-5 border-b border-neutral-200 pb-8 ${modifyClasses}`}>
          <ProfilePhoto
             imageSource={profileData?.imageSource}
-            modifyClasses='mb-6'
+            modifyClasses='mb-5'
          />
 
-         <FileUploadBtn modifyClasses='w-max mx-auto' colorTheme='primaryOutlined'>
+         <FileUploadBtn
+            modifyClasses='w-max mx-auto'
+            colorTheme='primaryOutlined'
+         >
             <Icon icon='mdi:camera' /> <span>Upload New Photo</span>
          </FileUploadBtn>
-      </div>
+      </section>
    );
 };
 
-ProfileInformation.propTypes = {
+ProfilePhotoChanger.propTypes = {
    modifyClasses: PropTypes.string,
 };
 
-export default ProfileInformation;
+export default ProfilePhotoChanger;

@@ -7,7 +7,7 @@ import Image from 'next/image';
 const ProfilePhoto = ({ imageSource, modifyClasses = '' }) => {
    return (
       <div
-         className={`w-32 border border-neutral-200 mx-auto aspect-square rounded-full overflow-hidden ${modifyClasses}`}
+         className={`w-28 border border-neutral-200 mx-auto aspect-square rounded-full overflow-hidden ${modifyClasses}`}
       >
          {/* image */}
          <Image
