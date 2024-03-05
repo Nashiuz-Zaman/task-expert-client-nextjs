@@ -50,8 +50,3 @@ export const targetAudienceTextContent = {
    ],
 };
 
-export const socialLinks = {
-   githubLink: 'https://github.com/Nashiuz-Zaman',
-   linkedInLink: 'https://www.linkedin.com/in/nashiuz-zaman',
-   facebookLink: 'https://www.facebook.com/nashiuzzZaman',
-};

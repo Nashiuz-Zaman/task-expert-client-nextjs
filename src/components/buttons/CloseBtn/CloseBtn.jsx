@@ -14,7 +14,7 @@ const CloseBtn = ({ theme = 'light', onClickFunction, modifyClasses = '' }) => {
          } ${modifyClasses}`}
          onClick={onClickFunction}
       >
-         <AiOutlineClose></AiOutlineClose>
+         <AiOutlineClose style={{fontSize: 'inherit'}}></AiOutlineClose>
       </button>
    );
 };

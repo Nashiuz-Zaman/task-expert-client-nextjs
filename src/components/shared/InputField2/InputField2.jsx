@@ -22,7 +22,7 @@ const InputField2 = ({
             defaultValue={defaultValueData}
             className={`${
                theme === 'light' ? 'text-textMediumLight' : 'text-white'
-            } block rounded-default !w-full text-sm lg:text-base p-1 md:p-2 font-inherit bg-lightGray`}
+            } block rounded-default !w-full text-sm lg:text-base p-1 md:p-2 font-inherit bg-neutral-100`}
             type={type}
             name={name}
          />

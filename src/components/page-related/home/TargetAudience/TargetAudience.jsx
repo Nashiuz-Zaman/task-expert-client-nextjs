@@ -14,7 +14,7 @@ const TargetAudience = () => {
          {/* heading */}
          <SectionHeading
             text={heading}
-            modifyClasses='text-center text-5xl !font-extrabold mb-customXs'
+            modifyClasses='text-center !font-extrabold mb-customXs'
          />
 
          <PhotoGallery2 imagesData={images} modifyClasses='mb-customSm' />

@@ -51,7 +51,7 @@ const Task = ({ taskData }) => {
 
    return (
       <div
-         className={`border border-neutral-300 hover:border-primaryLight transition-all duration-default rounded-lg p-3 pb-4 text-lg flex flex-col cursor-grab shadow-sm ${
+         className={`border border-neutral-300 rounded-lg p-3 pb-4 text-lg flex flex-col cursor-grab shadow-sm ${
             isDragging
                ? 'opacity-30 !cursor-grabbing'
                : 'opacity-100 !cursor-pointer'
@@ -106,7 +106,7 @@ const Task = ({ taskData }) => {
                renderChildren={(show, setShow) => {
                   return (
                      <MenuPanel
-                        modifyClasses='!text-base 2md:!text-lg xl:!text-xl w-max !space-y-2 2md:!space-y-4'
+                        modifyClasses='!text-sm sm:!text-base 2md:!text-lg xl:!text-xl w-max !space-y-2 2md:!space-y-4'
                         show={show}
                         setShow={setShow}
                      >

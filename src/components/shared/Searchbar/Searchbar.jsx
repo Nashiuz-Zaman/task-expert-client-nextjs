@@ -13,7 +13,7 @@ const Searchbar = ({
 }) => {
    return (
       <div
-         className={`flex items-center gap-3 bg-neutral-100 px-2 py-1 rounded-default ${modifyClasses}`}
+         className={`flex items-center gap-3 bg-neutral-100 px-2 py-2 md:py-1 rounded-default ${modifyClasses}`}
       >
          <Icon
             className='inline-block text-xl text-neutral-500'
@@ -22,7 +22,7 @@ const Searchbar = ({
 
          <input
             onChange={onChangeFunction}
-            className='w-[15rem] text-lg bg-inherit placeholder:text-neutral-500 placeholder:capitalize focus:outline-none'
+            className='w-[15rem] text-sm md:text-base lg:text-lg bg-inherit placeholder:text-neutral-500 placeholder:capitalize focus:outline-none'
             type='text'
             placeholder={placeholder}
          />

@@ -11,12 +11,12 @@ const UnpinBtn = ({ onClickFunction, text, modifyClasses = '' }) => {
       <button
          title='Unpin Task'
          aria-label='Unpin button'
-         className={`flex items-center gap-2 text-neutral-500 text-2xl ${modifyClasses}`}
+         className={`flex items-center gap-2 text-neutral-500 ${modifyClasses}`}
          onClick={onClickFunction}
       >
-         <Icon className='text-inherit' icon='iconoir:pin-slash-solid' />
+         <Icon style={{fontSize: 'inherit'}} className='text-inherit' icon='iconoir:pin-slash-solid' />
 
-         {text && <span className='text-inherit capitalize'>{text}</span>}
+         {text && <span style={{fontSize: 'inherit'}} className='text-inherit capitalize'>{text}</span>}
       </button>
    );
 };
