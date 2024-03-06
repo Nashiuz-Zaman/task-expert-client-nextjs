@@ -81,14 +81,14 @@ module.exports = {
             textLight: '#1c1b1b99',
             lightGray: '#f5f5f5',
             lightBorder: '#ddd',
-            blackLight: '#111',
+            blackLight: '#222',
             darkThemeBg: '#202124',
          },
 
          borderRadius: {
             default: '5px',
             defaultLg: '10px',
-         },
+         },        
       },
    },
    plugins: [
