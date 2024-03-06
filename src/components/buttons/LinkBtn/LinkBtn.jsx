@@ -9,42 +9,13 @@ const LinkBtn = ({
    url,
    colorTheme = '',
    modifyClasses = '',
-   theme = 'light',
+   // theme = 'light',
 }) => {
-   // common classes
-   const outlinedClasses =
-      'bg-transparent border border-gray-300 hover:border-white text-gray-300 hover:text-white';
-
-   const oulinedPrimaryClasses = `bg-transparent border ${
-      theme === 'dark'
-         ? 'border-white text-white'
-         : 'border-primary text-primary '
-   }  hover:text-primaryDark hover:border-primaryDark`;
-
-   const primaryClasses = `border ${
-      theme === 'dark'
-         ? 'bg-primaryDarkTheme border-primaryDarkTheme'
-         : 'bg-primary border-primary'
-   } hover:border-primaryDark hover:bg-primaryDark text-white`;
-
-   const blackClasses =
-      'bg-blackLight border border-blackLight hover:bg-textPrimary hover:border-textPrimary text-white';
-
-   const allClasses = `block w-max transition-all duration-default rounded-defaultLg text-center px-6 py-3 3xl:text-xl active:scale-[0.98] font-medium ${modifyClasses}`;
+   const colorThemeClass = `${colorTheme}Classes`;
+   const allClasses = `block w-max transition-all duration-default rounded-defaultLg text-center px-4 py-2 text-sm sm:text-base active:scale-[0.98] font-medium ${colorThemeClass} ${modifyClasses}`;
 
    return (
-      <Link
-         className={`${
-            colorTheme === 'outlined'
-               ? outlinedClasses
-               : colorTheme === 'outlinedPrimary'
-               ? oulinedPrimaryClasses
-               : colorTheme === 'black'
-               ? blackClasses
-               : primaryClasses
-         } ${allClasses} ${modifyClasses}`}
-         href={url}
-      >
+      <Link className={allClasses} href={url}>
          {text}
       </Link>
    );
@@ -55,7 +26,7 @@ LinkBtn.propTypes = {
    url: PropTypes.string,
    colorTheme: PropTypes.string,
    modifyClasses: PropTypes.string,
-   theme: PropTypes.string,
+   // theme: PropTypes.string,
 };
 
 export default LinkBtn;
