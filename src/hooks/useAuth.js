@@ -53,7 +53,8 @@ const useAuth = () => {
                dispatch(setUserLoading(false));
             }
          } catch (error) {
-            if (error?.response?.status === 401) {
+            dispatch(setUserLoading(false));
+            if (error?.response?.status === 401) {              
                logout(false);
             }
          }

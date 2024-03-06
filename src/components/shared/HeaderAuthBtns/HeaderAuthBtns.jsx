@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 // next
 import Link from 'next/link';
 
+// icon
+import { Icon } from '@iconify/react';
+
 // hooks
 import useFirebaseMethods from '@/hooks/useFirebaseMethods';
 import useFormVisiblity from '@/hooks/useFormVisiblity';
@@ -28,7 +31,7 @@ const HeaderAuthBtns = ({ modifyClasses = '' }) => {
                : 'flex-row gap-4'
          } justify-center items-center 2md:justify-end text-sm xs:text-base lg:text-lg font-medium ${modifyClasses}`}
       >
-         {userLoading && <p className='text-primary'>Loading User...</p>}
+         {userLoading && <Icon className='text-4xl mr-8' icon="eos-icons:bubble-loading" />}
 
          {/* if no user then login and registration btns are shown */}
          {!userLoading && !profileData && (
