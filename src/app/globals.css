@@ -31,3 +31,23 @@ a:visited::selection {
    -moz-backface-visibility: hidden;
    -webkit-backface-visibility: hidden;
 }
+
+.primaryClasses{
+   @apply bg-primary border-primary lg:hover:bg-primaryLight lg:hover:border-primaryLight text-white;
+}
+
+.primaryOutlinedClasses{
+   @apply border-primary active:border-black lg:hover:border-black text-primary active:text-black lg:hover:text-black;
+}
+
+.blackClasses {
+   @apply bg-blackLight border-blackLight text-white;
+}
+
+.whiteNeutralClasses{
+   @apply bg-white border-neutral-300 shadow-small text-blackLight
+}
+
+.dangerClasses{
+   @apply bg-red-600 border-red-600 text-white hover:bg-red-500 hover:border-red-500
+}
