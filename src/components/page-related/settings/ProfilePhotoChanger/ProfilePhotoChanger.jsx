@@ -74,7 +74,7 @@ const ProfilePhotoChanger = ({ modifyClasses = '' }) => {
                imageSource={
                   selectedImage ? selectedImage : profileData?.imageSource
                }
-               modifyClasses={`mb-5 2md:mb-8 shadow-small ${
+               modifyClasses={`mb-5 2md:mb-8 ${
                   loading ? 'opacity-30' : 'opacity-100'
                }`}
             />

@@ -30,7 +30,7 @@ const useAuth = () => {
 
    // if true, then user should exist
    useEffect(() => {
-      if (localStorage.getItem('tokenExists')) {
+      if (localStorage.getItem('token')) {
          dispatch(setUserShouldExist(true));
       }
    }, [dispatch]);
@@ -53,7 +53,8 @@ const useAuth = () => {
                dispatch(setUserLoading(false));
             }
          } catch (error) {
-            if (error?.response?.status === 401) {
+            dispatch(setUserLoading(false));
+            if (error?.response?.status === 401) {              
                logout(false);
             }
          }

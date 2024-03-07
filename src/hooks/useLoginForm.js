@@ -67,14 +67,14 @@ const useLoginForm = () => {
             googleUser
          );
 
-         if (googleLoginResponse.data.success) {
+         if (googleLoginResponse.data.status === 'success') {
             const profileData = googleLoginResponse.data.user;
             // set profile data, user should exist and the jwt token
             dispatch(setProfileData(profileData));
             dispatch(setUserShouldExist(true));
             localStorage.setItem(
-               'tokenExists',
-               googleLoginResponse.data.tokenExists
+               'token',
+               googleLoginResponse.data.token
             );
 
             closeLoginFormWithBackdrop();
@@ -115,7 +115,7 @@ const useLoginForm = () => {
       try {
          dispatch(setLoginLoading(true));
          // firebase login api call
-         const result = await loginEmail(dataObject.email, dataObject.password);
+         const result = await loginEmail(dataObject.email, dataObject.password);         
 
          //  if firebase login is successful, check database for profile data
          if (result.user) {
@@ -123,14 +123,14 @@ const useLoginForm = () => {
                email: result.user.email,
             });
 
-            if (loginResponse.data.success) {
+            if (loginResponse.data.status === 'success') {
                const profileData = loginResponse.data.user;
                dispatch(setProfileData(profileData));
                dispatch(setUserShouldExist(true));
                // set profile and the jwt token in the localstorage
                localStorage.setItem(
-                  'tokenExists',
-                  loginResponse.data.tokenExists
+                  'token',
+                  loginResponse.data.token
                );
 
                closeLoginFormWithBackdrop();

@@ -12,16 +12,16 @@ import useFormVisiblity from '@/hooks/useFormVisiblity';
 
 const BannerTextBtns = ({ modifyClasses = '' }) => {
    const { openSignupFormWithBackdrop } = useFormVisiblity();
+
    return (
       <div
-         className={`flex flex-col xs:flex-row gap-2 justify-center items-center lg:justify-start lg:gap-3 ${modifyClasses}`}
+         className={`flex flex-col xs:flex-row gap-4 xs:gap-3 justify-center items-center lg:justify-start lg:gap-3 ${modifyClasses}`}
       >
          <LinkBtn text="Let's Explore" url='#learn-more' />
          <ButtonBtn
             onClickFunction={openSignupFormWithBackdrop}
             text="Sign Up - It's Free!"
-            colorTheme='outlinedPrimary'
-            hashed={true}
+            colorTheme='primaryOutlined'           
          />
       </div>
    );

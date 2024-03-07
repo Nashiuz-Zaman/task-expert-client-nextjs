@@ -20,6 +20,9 @@ import {
    signOut,
    updateProfile,
    signInWithPopup,
+   deleteUser,
+   updatePassword,
+   sendPasswordResetEmail,
 } from 'firebase/auth';
 
 // utils
@@ -58,11 +61,12 @@ const useFirebaseMethods = () => {
    // logout function
    const logout = useCallback(
       (manual = true) => {
+         router.push('/');
          signOut(auth)
             .then(() => {
                dispatch(setProfileData(null));
                dispatch(setUserShouldExist(false));
-               localStorage.removeItem('tokenExists');
+               localStorage.removeItem('token');
 
                if (manual) {
                   showToast('Signed Out Successfully', 'success');
@@ -76,10 +80,49 @@ const useFirebaseMethods = () => {
                }
             })
             .catch(() => console.error('Error occurred'));
-         router.push('/');
       },
       [dispatch, router]
    );
+
+   // update password
+   const updateUserPassword = useCallback(password => {
+      const user = auth.currentUser;
+
+      return updatePassword(user, password)
+         .then(() => {
+            return { status: 'success' };
+         })
+         .catch(error => {
+            throw new Error(error.message);
+         });
+   }, []);
+
+   // password reset email
+   const sendUserPasswordResetEmail = useCallback(email => {
+     return sendPasswordResetEmail(auth, email)
+         .then(() => {
+           return {status: 'success'}
+         })
+         .catch(error => {
+            throw new Error(error.message);
+         });
+   }, []);
+
+   // delete user
+   const deleteUserAccount = useCallback(() => {
+      const user = auth.currentUser;
+
+      return deleteUser(user)
+         .then(() => {
+            dispatch(setProfileData(null));
+            dispatch(setUserShouldExist(false));
+            localStorage.removeItem('token');
+            return { status: 'success' };
+         })
+         .catch(error => {
+            throw new Error(error.message);
+         });
+   }, [dispatch]);
 
    return {
       loginEmail,
@@ -87,6 +130,9 @@ const useFirebaseMethods = () => {
       logout,
       signup,
       updateFirebaseProfile,
+      deleteUserAccount,
+      updateUserPassword,
+      sendUserPasswordResetEmail,
    };
 };
 

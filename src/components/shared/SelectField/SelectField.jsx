@@ -9,6 +9,8 @@ const SelectField = ({
    options,
    defaultValueData,
    modifyClasses = '',
+   labelModifyClasses = '',
+   inputModifyClasses = ''
 }) => {
    const [value, setValue] = useState('');
 
@@ -28,9 +30,9 @@ const SelectField = ({
          <label
             className={`${
                theme === 'light' ? 'text-textPrimary' : 'text-white'
-            } block mb-1 font-bold capitalize`}
+            } block mb-1 font-bold capitalize text-sm xs:text-base md:text-lg ${labelModifyClasses}`}
          >
-            {label}:
+            {label}
          </label>
 
          {/* select options */}
@@ -41,7 +43,7 @@ const SelectField = ({
             }}
             value={value}
             name={name}
-            className={`block w-full text-sm lg:text-base rounded-default p-[5px] md:p-[8.5px] lg:p-[9px] bg-neutral-100 ${
+            className={`block w-full text-xs xs:text-sm md:text-base rounded-default p-[5px] md:p-[8.5px] lg:p-[9px] bg-neutral-100 ${inputModifyClasses} ${
                theme === 'light' ? 'text-textPrimary' : 'text-gray-500'
             }`}
          >
@@ -63,6 +65,8 @@ SelectField.propTypes = {
    name: PropTypes.string,
    options: PropTypes.array,
    defaultValueData: PropTypes.any,
+   inputModifyClasses: PropTypes.string,
+   labelModifyClasses: PropTypes.string,
    modifyClasses: PropTypes.string,
 };
 
