@@ -9,16 +9,11 @@ import useFirebaseMethods from './useFirebaseMethods';
 import useFormVisiblity from './useFormVisiblity';
 
 // axios
-import axios from 'axios';
 import { axiosPublic } from './useAxios';
-
-// img bb api related
-const imageUploadAPIKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY;
-const imageUploadAPI = `https://api.imgbb.com/1/upload?key=${imageUploadAPIKey}`;
 
 // redux
 import { useDispatch } from 'react-redux';
-import {  
+import {
    setUserAlreadyRegistered,
    setUserShouldExist,
    setProfileData,
@@ -93,13 +88,11 @@ const useRegistrationForm = () => {
 
       const form = e.target;
       const userName = form.name.value;
-      const photo = form.file.files[0];
       const email = form.email.value;
       const password = form.password.value;
 
       const dataObject = {
          userName,
-         photo,
          email,
          password,
       };
@@ -127,62 +120,43 @@ const useRegistrationForm = () => {
             dispatch(setUserAlreadyRegistered(true));
             dispatch(setRegistrationLoading(false));
          } else {
-            // if user doesn't exist
-            // upload image to imgbb first
-            const image = { image: dataObject.photo };
-            const imageUploadResponse = await axios.post(
-               imageUploadAPI,
-               image,
-               {
-                  headers: {
-                     'content-type': 'multipart/form-data',
-                  },
-               }
+            const signupResponse = await signup(
+               dataObject.email,
+               dataObject.password
             );
 
-            // if upload to imgbb is successful then proceed to sign up in firebase
-            if (imageUploadResponse.data.success) {
-               const signupResponse = await signup(
-                  dataObject.email,
-                  dataObject.password
+            if (signupResponse.user) {
+               // if firebase sign up successful update the profile first
+               await updateFirebaseProfile(dataObject.userName, '');
+
+               // save new user object to database
+               const user = {
+                  name: dataObject.userName,
+                  password: dataObject.password,
+                  email: dataObject.email,
+                  imageSource: null,
+                  role: 'user',
+               };
+
+               // create user api call
+               const userCreationResponse = await axiosPublic.post(
+                  '/users',
+                  user
                );
 
-               if (signupResponse.user) {
-                  // if firebase sign up successful update the profile first
-                  await updateFirebaseProfile(
-                     dataObject.userName,
-                     imageUploadResponse.data.data.display_url
+               // if success
+               if (userCreationResponse.data.success) {
+                  const profileData = userCreationResponse.data.user;
+                  dispatch(setProfileData(profileData));
+                  dispatch(setUserShouldExist(true));
+                  localStorage.setItem(
+                     'tokenExists',
+                     userCreationResponse.data.tokenExists
                   );
 
-                  // save new user object to database
-                  const user = {
-                     name: dataObject.userName,
-                     password: dataObject.password,
-                     email: dataObject.email,
-                     imageSource: imageUploadResponse.data.data.display_url,
-                     role: 'user',
-                  };
-
-                  // create user api call
-                  const userCreationResponse = await axiosPublic.post(
-                     '/users',
-                     user
-                  );
-
-                  // if success
-                  if (userCreationResponse.data.success) {
-                     const profileData = userCreationResponse.data.user;
-                     dispatch(setProfileData(profileData));
-                     dispatch(setUserShouldExist(true));
-                     localStorage.setItem(
-                        'tokenExists',
-                        userCreationResponse.data.tokenExists
-                     );
-
-                     closeSignupFormWithBackdrop();
-                     router.push('/');
-                     dispatch(setRegistrationLoading(false));
-                  }
+                  closeSignupFormWithBackdrop();
+                  router.push('/');
+                  dispatch(setRegistrationLoading(false));
                }
             }
          }
