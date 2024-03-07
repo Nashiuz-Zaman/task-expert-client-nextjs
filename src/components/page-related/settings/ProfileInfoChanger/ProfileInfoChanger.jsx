@@ -8,9 +8,6 @@ import ButtonBtn from '@/components/buttons/ButtonBtn/ButtonBtn';
 import InputField1 from '@/components/shared/InputField1/InputField1';
 import SectionHeading from '@/components/shared/SectionHeading/SectionHeading';
 
-// hooks
-import useFirebaseMethods from '@/hooks/useFirebaseMethods';
-
 // redux
 import useRedux from '@/hooks/useRedux';
 import { setProfileData } from '@/lib/redux/features/auth/authSlice';
@@ -19,21 +16,18 @@ import { setProfileData } from '@/lib/redux/features/auth/authSlice';
 import { axiosSecure } from '@/hooks/useAxios';
 import { showToast } from '@/utils/toastify';
 
-
 const ProfileInfoChanger = ({ modifyClasses = '' }) => {
    const { dispatch, useSelector } = useRedux();
    const { profileData } = useSelector(store => store.auth);
-   const { updateFirebaseProfile } = useFirebaseMethods();
 
    // name change function
    const handleNameChange = async e => {
-    
+      try {
          e.preventDefault();
-         const username = e.target.name;
-         await updateFirebaseProfile(username, profileData?.imageSource);
+         const username = e.target.name.value;
 
          const updatedUser = {
-            name:username,
+            name: username,
          };
 
          const res = await axiosSecure.patch(
@@ -46,7 +40,9 @@ const ProfileInfoChanger = ({ modifyClasses = '' }) => {
             dispatch(setProfileData(res.data.user));
             e.target.reset();
          }
-     
+      } catch (error) {
+         showToast('Something went wrong, try again', 'error');
+      }
    };
 
    return (

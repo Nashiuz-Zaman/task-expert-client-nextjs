@@ -35,7 +35,7 @@ const UserProfile = ({ profileData, logoutFunction, modifyClasses = '' }) => {
    });
 
    const optionsClasses =
-      'flex font-semibold items-center gap-2 hover:text-primary transition-all duration-200';
+      'flex font-semibold text-neutral-500 items-center gap-2 hover:text-primary transition-all duration-200';
 
    // declare name and photo variables
    let name, image;
