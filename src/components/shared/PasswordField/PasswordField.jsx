@@ -18,7 +18,7 @@ const PasswordField = ({
    const [showPassword, setShowPassword] = useState(false);
 
    return (
-      <label className={`block text-textPrimary ${modifyClasses}`}>
+      <label className={`block w-full text-textPrimary ${modifyClasses}`}>
          {label && (
             <span
                className={`block font-bold text-sm xs:text-base md:text-lg mb-2 md:mb-4 ${labelModifyClasses}`}
@@ -48,7 +48,7 @@ const PasswordField = ({
                }}
             >
                <Icon
-                  className='block text-xl'
+                  className='block'
                   icon={showPassword ? 'mdi:eye-off' : 'mdi:eye'}
                />
             </button>
