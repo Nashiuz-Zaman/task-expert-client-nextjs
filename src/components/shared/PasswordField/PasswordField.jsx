@@ -16,7 +16,7 @@ const PasswordField = ({
 
    return (
       <div
-         className={`w-full pl-4 py-2 items-center rounded-default border border-textLight grid grid-cols-[1fr_max-content] ${modifyClasses}`}
+         className={`w-full pl-4 py-2 items-center rounded-default border border-neutral-400 grid grid-cols-[1fr_max-content] ${modifyClasses}`}
       >
          <input
             className='w-full pr-4 text-textPrimary focus:outline-none'

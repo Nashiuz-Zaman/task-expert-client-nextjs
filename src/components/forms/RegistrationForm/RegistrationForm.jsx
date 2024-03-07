@@ -1,68 +1,73 @@
-'use client';
-
-// react imports
+// react
 import PropTypes from 'prop-types';
 import { useEffect, useRef } from 'react';
 
-// component
+// components
 import ButtonBtn from '@/components/buttons/ButtonBtn/ButtonBtn';
 import GoogleLoginBtn from '@/components/buttons/GoogleLoginBtn/GoogleLoginBtn';
-import PasswordField from '@/components/shared/PasswordField/PasswordField';
 import InputField1 from '@/components/shared/InputField1/InputField1';
+import PasswordField from '@/components/shared/PasswordField/PasswordField';
 
 // hooks
+import useRegistrationForm from '@/hooks/useRegistrationForm';
 import useLoginForm from '@/hooks/useLoginForm';
 import useResetForm from '@/hooks/useResetForm';
 import useFormVisiblity from '@/hooks/useFormVisiblity';
 
 // redux
 import { useSelector } from 'react-redux';
-import { setLoginErrors } from '@/lib/redux/features/auth/authSlice';
+import { setRegistrationErrors } from '@/lib/redux/features/auth/authSlice';
 
-const LoginForm = ({ modifyClasses = '' }) => {
-   const { loginErrors, loginLoading } = useSelector(store => store.auth);
-   const { loginFormOpen } = useSelector(store => store.form);
-   const { handleLoginEmail, handleLoginGoogle } = useLoginForm();
+const RegistrationForm = ({ modifyClasses }) => {
+   const { handleSignup } = useRegistrationForm();
+   const { registrationErrors, registrationLoading } = useSelector(
+      store => store.auth
+   );
+   const { registrationFormOpen } = useSelector(store => store.form);
+   const { handleLoginGoogle } = useLoginForm();
    const { resetFormFieldsAndErrors } = useResetForm();
-   const { closeLoginFormWithBackdrop, openSignupFormWithBackdrop } =
+   const { closeSignupFormWithBackdrop, openLoginFormWithBackdrop } =
       useFormVisiblity();
    const formEl = useRef();
 
    // clear form fields and errors when it disappears
    useEffect(() => {
-      if (!loginFormOpen) {
-         resetFormFieldsAndErrors(formEl, setLoginErrors);
+      if (!registrationFormOpen) {
+         resetFormFieldsAndErrors(formEl, setRegistrationErrors);
       }
-   }, [loginFormOpen, resetFormFieldsAndErrors]);
+   }, [registrationFormOpen, resetFormFieldsAndErrors]);
 
    return (
       <div
-         className={`w-full bg-white mx-auto py-7 px-5 2md:px-6 2md:py-12 ${modifyClasses}`}
+         className={`w-full bg-white mx-auto p-5 md:py-7 2md:px-6 2md:py-12 ${modifyClasses}`}
       >
          {/* heading */}
-         <h2 className='capitalize mb-4 text-center text-lg 2md:text-xl xl:text-2xl font-bold'>
-            Login to your account
+         <h2 className='capitalize mb-custom2xs text-center font-bold text-lg 2md:text-xl xl:text-2xl'>
+            Sign up. It&apos;s <span className='text-primary'>Free!</span>
          </h2>
 
          {/* form */}
          <form
             ref={formEl}
             noValidate
-            onSubmit={handleLoginEmail}
+            onSubmit={handleSignup}
             className='w-full'
          >
             <div className='w-full space-y-3 md:space-y-5 xs:w-[17rem] 2md:w-full 2md:mx-0 mx-auto'>
-               {/* email */}
+               {/* username field */}
+               <InputField1 name='name' placeholder='Username' />
+
+               {/* email field */}
                <InputField1 type='email' name='email' placeholder='Email' />
 
-               {/* password */}
+               {/* password field */}
                <PasswordField name='password' placeholder='Password' />
             </div>
 
             {/* show errors here */}
-            {loginErrors?.length > 0 && (
-               <div className='space-y-1 mt-3 md:mt-4'>
-                  {loginErrors.map(error => {
+            {registrationErrors?.length > 0 && (
+               <div className='space-y-1 mt-4'>
+                  {registrationErrors.map(error => {
                      return (
                         <p
                            key={error}
@@ -76,22 +81,22 @@ const LoginForm = ({ modifyClasses = '' }) => {
             )}
 
             <ButtonBtn
-               loading={loginLoading}
-               text='Sign In'
+               loading={registrationLoading}
+               text='Sign Up'
                modifyClasses='mx-auto block my-5'
             />
 
             <p className='text-sm text-center xl:text-base mb-3 md:mb-4'>
-               Don&apos;t have an account?{' '}
+               Already have an account?{' '}
                <button
                   onClick={e => {
                      e.preventDefault();
-                     closeLoginFormWithBackdrop(false);
-                     openSignupFormWithBackdrop(false);
+                     closeSignupFormWithBackdrop(false);
+                     openLoginFormWithBackdrop(false);
                   }}
                   className='text-primary font-semibold'
                >
-                  Register
+                  Log In
                </button>
             </p>
          </form>
@@ -99,6 +104,7 @@ const LoginForm = ({ modifyClasses = '' }) => {
          <p className='text-center mb-3 md:mb-4'>Or</p>
 
          <GoogleLoginBtn
+            text='Sign up with Google'
             onClickFunction={handleLoginGoogle}
             modifyClasses='w-max mx-auto'
          />
@@ -106,8 +112,8 @@ const LoginForm = ({ modifyClasses = '' }) => {
    );
 };
 
-LoginForm.propTypes = {
+RegistrationForm.propTypes = {
    modifyClasses: PropTypes.string,
 };
 
-export default LoginForm;
+export default RegistrationForm;

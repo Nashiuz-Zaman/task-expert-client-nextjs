@@ -9,21 +9,11 @@ const FileUploadBtn = ({
 }) => {
    const [selected, setSelected] = useState(false);
 
-   const primaryColors =
-      'bg-primary border-primary hover:bg-primaryLight hover:border-primaryLight text-white';
-
-   const primaryOutlined =
-      'border-primary hover:border-black text-primary hover:text-black';
+   const colorThemeClass = `${colorTheme}Classes`
 
    return (
       <div
-         className={`rounded-defaultLg border transition-all duration-default px-4 py-3 cursor-pointer ${
-            colorTheme === 'primary'
-               ? primaryColors
-               : colorTheme === 'primaryOutlined'
-               ? primaryOutlined
-               : ''
-         } ${modifyClasses}`}
+         className={`rounded-defaultLg border transition-all duration-default px-4 py-3 cursor-pointer ${colorThemeClass} ${modifyClasses}`}
       >
          <label
             style={{ fontSize: 'inherit' }}

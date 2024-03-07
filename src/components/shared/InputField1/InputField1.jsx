@@ -8,7 +8,7 @@ const InputField1 = ({
    modifyClasses = '',
 }) => {
    return (
-      <label className={`w-full text-textPrimary ${modifyClasses}`}>
+      <label className={`w-full block text-textPrimary ${modifyClasses}`}>
          {label && <span className='block font-bold text-sm sm:text-base mb-2 md:mb-4'>{label}</span>}
 
          <input

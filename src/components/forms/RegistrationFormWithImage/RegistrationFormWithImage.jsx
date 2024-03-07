@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import Image from 'next/image';
 
 // components
-import RegistrationForm from './RegistrationForm/RegistrationForm';
+import RegistrationForm from '../RegistrationForm/RegistrationForm';
 
 const RegistrationFormWithImage = ({ imageSource }) => {
    return (

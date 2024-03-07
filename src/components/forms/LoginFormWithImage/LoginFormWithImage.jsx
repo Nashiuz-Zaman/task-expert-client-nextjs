@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Image from 'next/image';
 
 // components
-import LoginForm from './LoginForm/LoginForm';
+import LoginForm from '../LoginForm/LoginForm';
 
 const LoginFormWithImage = ({ imageSource }) => {
    return (
