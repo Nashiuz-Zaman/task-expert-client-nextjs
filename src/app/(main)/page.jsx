@@ -4,6 +4,7 @@ import Banner from '@/components/page-related/home/Banner/Banner';
 import TargetAudience from '@/components/page-related/home/TargetAudience/TargetAudience';
 import LoginModal from '@/components/forms/LoginModal/LoginModal';
 import RegistrationModal from '@/components/forms/RegistrationModal/RegtistrationModal';
+import PasswordResetModal from '@/components/forms/PasswordResetModal/PasswordResetModal';
 
 const Home = () => {
    return (
@@ -24,6 +25,7 @@ const Home = () => {
          <InnerContainer>
             <LoginModal />
             <RegistrationModal />
+            <PasswordResetModal/>
          </InnerContainer>
       </>
    );

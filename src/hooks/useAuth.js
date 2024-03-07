@@ -30,7 +30,7 @@ const useAuth = () => {
 
    // if true, then user should exist
    useEffect(() => {
-      if (localStorage.getItem('tokenExists')) {
+      if (localStorage.getItem('token')) {
          dispatch(setUserShouldExist(true));
       }
    }, [dispatch]);

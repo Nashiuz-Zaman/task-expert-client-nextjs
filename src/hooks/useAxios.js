@@ -16,6 +16,29 @@ export const axiosSecure = axios.create({
    withCredentials: true,
 });
 
-const useAxios = () => {};
+axiosSecure.interceptors.request.use(
+   config => {
+      const token = localStorage.getItem('token');
 
-export default useAxios;
+      // Add token to headers
+      if (token) {
+         config.headers.Authorization = `Bearer ${token}`;
+      }
+
+      return config;
+   },
+   error => {
+      // Handle request error
+      return Promise.reject(error);
+   }
+);
+
+axiosSecure.interceptors.response.use(
+   response => {
+      return response;
+   },
+   error => {
+      return Promise.reject(error);
+   }
+);
+

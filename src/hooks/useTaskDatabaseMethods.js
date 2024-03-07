@@ -184,7 +184,7 @@ const useTaskDatabaseMethods = () => {
          `/tasks/delete/${_id}?email=${profileData.email}`
       );
 
-      if (res.data.success) {
+      if (res.data.status === 'success') {
          showToast('Task Deleted', 'success');
       }
    };

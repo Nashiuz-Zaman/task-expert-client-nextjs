@@ -145,7 +145,7 @@ const useRegistrationForm = () => {
                );
 
                // if success
-               if (userCreationResponse.data.success) {
+               if (userCreationResponse.data.status === 'success') {
                   const profileData = userCreationResponse.data.user;
                   dispatch(setProfileData(profileData));
                   dispatch(setUserShouldExist(true));
