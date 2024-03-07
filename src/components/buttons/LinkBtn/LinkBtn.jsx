@@ -7,7 +7,7 @@ import Link from 'next/link';
 const LinkBtn = ({
    text,
    url,
-   colorTheme = '',
+   colorTheme = 'primary',
    modifyClasses = '',
    // theme = 'light',
 }) => {

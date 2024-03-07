@@ -115,7 +115,7 @@ const useLoginForm = () => {
       try {
          dispatch(setLoginLoading(true));
          // firebase login api call
-         const result = await loginEmail(dataObject.email, dataObject.password);
+         const result = await loginEmail(dataObject.email, dataObject.password);         
 
          //  if firebase login is successful, check database for profile data
          if (result.user) {
