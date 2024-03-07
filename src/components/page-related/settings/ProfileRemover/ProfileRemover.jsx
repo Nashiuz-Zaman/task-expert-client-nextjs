@@ -27,13 +27,13 @@ const ProfileRemover = ({ modifyClasses = '' }) => {
 
    const handleDelete = async () => {
       try {
-         const id = profileData._id;
+         const email = profileData.email;
          router.push('/');
          
          const res = await deleteUserAccount();
 
          if (res.status === 'success') {
-            const userDeleteRes = await axiosSecure.delete(`/users/${id}`);
+            const userDeleteRes = await axiosSecure.delete(`/users/${email}`);
             if (userDeleteRes.data.status === 'success') {
                showToast('Account Deleted', 'success');
             }
