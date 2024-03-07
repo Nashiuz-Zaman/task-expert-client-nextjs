@@ -10,8 +10,10 @@ const initialState = {
    userLoading: true,
    loginErrors: [],
    registrationErrors: [],
+   passwordResetErrors: [],
    loginLoading: false,
    registrationLoading: false,
+   passwordResetLoading: false,
 };
 
 const authSlice = createSlice({
@@ -42,6 +44,12 @@ const authSlice = createSlice({
       setRegistrationLoading: (state, { payload }) => {
          state.registrationLoading = payload;
       },
+      setPasswordResetErrors:(state, { payload }) => {
+         state.passwordResetErrors = payload;
+      },
+      setPasswordResetLoading: (state, { payload }) => {
+         state.passwordResetLoading = payload;
+      },
    },
 });
 
@@ -56,4 +64,6 @@ export const {
    setRegistrationErrors,
    setLoginLoading,
    setRegistrationLoading,
+   setPasswordResetLoading,
+   setPasswordResetErrors
 } = actions;

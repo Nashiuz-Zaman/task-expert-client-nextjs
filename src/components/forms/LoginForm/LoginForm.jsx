@@ -24,11 +24,11 @@ const LoginForm = ({ modifyClasses = '' }) => {
    const { loginFormOpen } = useSelector(store => store.form);
    const { handleLoginEmail, handleLoginGoogle } = useLoginForm();
    const { resetFormFieldsAndErrors } = useResetForm();
-   const { closeLoginFormWithBackdrop, openSignupFormWithBackdrop } =
+   const { closeLoginFormWithBackdrop, openSignupFormWithBackdrop, openPasswordResetFormWithBackdrop } =
       useFormVisiblity();
    const formEl = useRef();
 
-   // clear form fields and errors when it disappears
+     // clear form fields and errors when it disappears
    useEffect(() => {
       if (!loginFormOpen) {
          resetFormFieldsAndErrors(formEl, setLoginErrors);
@@ -44,7 +44,6 @@ const LoginForm = ({ modifyClasses = '' }) => {
             Login to your account
          </h2>
 
-         {/* form */}
          <form
             ref={formEl}
             noValidate
@@ -56,7 +55,19 @@ const LoginForm = ({ modifyClasses = '' }) => {
                <InputField1 type='email' name='email' placeholder='Email' />
 
                {/* password */}
-               <PasswordField name='password' placeholder='Password' />
+               <div className='space-y-3'>
+                  <PasswordField name='password' placeholder='Password' />
+                  <button
+                   onClick={(e)=>{
+                     e.preventDefault()
+                     closeLoginFormWithBackdrop(false)
+                     openPasswordResetFormWithBackdrop(false)
+                   }}
+                     className='w-max block ml-auto text-primary text-sm xl:text-base'
+                  >
+                     Forgot password?
+                  </button>
+               </div>
             </div>
 
             {/* show errors here */}

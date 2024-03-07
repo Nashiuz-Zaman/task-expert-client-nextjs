@@ -8,6 +8,7 @@ const initialState = {
    registrationFormOpen: false,
    taskCreateFormOpen: false,
    taskEditFormOpen: false,
+   passwordResetFormOpen: false,
 };
 
 const formSlice = createSlice({
@@ -26,6 +27,9 @@ const formSlice = createSlice({
       setTaskEditFormOpen: (state, { payload }) => {
          state.taskEditFormOpen = payload;
       },
+      setPasswordResetFormOpen: (state, { payload }) => {
+         state.passwordResetFormOpen = payload;
+      },
    },
 });
 
@@ -36,4 +40,5 @@ export const {
    setRegistrationFormOpen,
    setTaskCreateFormOpen,
    setTaskEditFormOpen,
+   setPasswordResetFormOpen,
 } = actions;

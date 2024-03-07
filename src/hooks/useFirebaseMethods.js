@@ -22,6 +22,7 @@ import {
    signInWithPopup,
    deleteUser,
    updatePassword,
+   sendPasswordResetEmail,
 } from 'firebase/auth';
 
 // utils
@@ -65,7 +66,7 @@ const useFirebaseMethods = () => {
             .then(() => {
                dispatch(setProfileData(null));
                dispatch(setUserShouldExist(false));
-               localStorage.removeItem('tokenExists');
+               localStorage.removeItem('token');
 
                if (manual) {
                   showToast('Signed Out Successfully', 'success');
@@ -96,6 +97,17 @@ const useFirebaseMethods = () => {
          });
    }, []);
 
+   // password reset email
+   const sendUserPasswordResetEmail = useCallback(email => {
+     return sendPasswordResetEmail(auth, email)
+         .then(() => {
+           return {status: 'success'}
+         })
+         .catch(error => {
+            throw new Error(error.message);
+         });
+   }, []);
+
    // delete user
    const deleteUserAccount = useCallback(() => {
       const user = auth.currentUser;
@@ -104,7 +116,7 @@ const useFirebaseMethods = () => {
          .then(() => {
             dispatch(setProfileData(null));
             dispatch(setUserShouldExist(false));
-            localStorage.removeItem('tokenExists');
+            localStorage.removeItem('token');
             return { status: 'success' };
          })
          .catch(error => {
@@ -120,6 +132,7 @@ const useFirebaseMethods = () => {
       updateFirebaseProfile,
       deleteUserAccount,
       updateUserPassword,
+      sendUserPasswordResetEmail,
    };
 };
 
