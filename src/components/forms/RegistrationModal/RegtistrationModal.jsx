@@ -30,7 +30,8 @@ const RegistrationModal = () => {
       e => {
          if (
             e.target.closest('.registration-custom-focus') ||
-            e.target.closest('.password-custom-focus')
+            e.target.tagName.toLowerCase() === 'svg' ||
+            e.target.tagName.toLowerCase() === 'path'
          ) {
             return;
          }

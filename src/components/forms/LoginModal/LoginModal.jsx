@@ -30,7 +30,7 @@ const LoginModal = () => {
       e => {
          if (
             e.target.closest('.login-custom-focus') ||
-            e.target.closest('.password-custom-focus')
+            e.target.tagName.toLowerCase() === 'svg' || e.target.tagName.toLowerCase() === 'path'
          ) {
             return;
          }
