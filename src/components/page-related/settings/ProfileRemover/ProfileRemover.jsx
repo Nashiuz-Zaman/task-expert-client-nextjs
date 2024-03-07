@@ -3,11 +3,47 @@
 // react
 import PropTypes from 'prop-types';
 
+// next
+import { useRouter } from 'next/navigation';
+
 // components
 import ButtonBtn from '@/components/buttons/ButtonBtn/ButtonBtn';
 import SectionHeading from '@/components/shared/SectionHeading/SectionHeading';
 
+// hooks
+import useFirebaseMethods from '@/hooks/useFirebaseMethods';
+
+// redux
+import { useSelector } from 'react-redux';
+
+// utils
+import { axiosSecure } from '@/hooks/useAxios';
+import { showToast } from '@/utils/toastify';
+
 const ProfileRemover = ({ modifyClasses = '' }) => {
+   const { profileData } = useSelector(store => store.auth);
+   const { deleteUserAccount } = useFirebaseMethods();
+   const router = useRouter();
+
+   const handleDelete = async () => {
+      try {
+         const id = profileData._id;
+         router.push('/');
+         
+         const res = await deleteUserAccount();
+
+         if (res.status === 'success') {
+            const userDeleteRes = await axiosSecure.delete(`/users/${id}`);
+            if (userDeleteRes.data.status === 'success') {
+               showToast('Account Deleted', 'success');
+            }
+         }
+      } catch (error) {
+         console.log(error);
+         showToast('Something went wrong', 'error');
+      }
+   };
+
    return (
       <section className={`mx-5 ${modifyClasses}`}>
          <SectionHeading
@@ -21,7 +57,12 @@ const ProfileRemover = ({ modifyClasses = '' }) => {
                delete your account, the action cannot be undone.
             </p>
 
-            <ButtonBtn text='Delete Account' modifyClasses='2md:mr-auto' colorTheme='danger' />
+            <ButtonBtn
+               onClickFunction={handleDelete}
+               text='Delete Account'
+               modifyClasses='2md:mr-auto'
+               colorTheme='danger'
+            />
          </div>
       </section>
    );

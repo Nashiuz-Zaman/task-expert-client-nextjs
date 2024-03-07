@@ -20,6 +20,7 @@ import {
    signOut,
    updateProfile,
    signInWithPopup,
+   deleteUser
 } from 'firebase/auth';
 
 // utils
@@ -27,6 +28,7 @@ import { showToast } from '@/utils/toastify';
 
 // auth and google auth provider
 import { auth, googleAuthProvider } from '@/hooks/useAuth';
+
 
 const useFirebaseMethods = () => {
    const dispatch = useDispatch();
@@ -58,6 +60,7 @@ const useFirebaseMethods = () => {
    // logout function
    const logout = useCallback(
       (manual = true) => {
+         router.push('/');
          signOut(auth)
             .then(() => {
                dispatch(setProfileData(null));
@@ -76,10 +79,25 @@ const useFirebaseMethods = () => {
                }
             })
             .catch(() => console.error('Error occurred'));
-         router.push('/');
       },
       [dispatch, router]
    );
+
+   // delete user
+   const deleteUserAccount = useCallback(() => {
+      const user = auth.currentUser
+      
+      return deleteUser(user)
+         .then(() => {
+            dispatch(setProfileData(null));
+            dispatch(setUserShouldExist(false));
+            localStorage.removeItem('tokenExists');
+            return {status: 'success'}
+         })
+         .catch(error => {
+            throw new Error(error.message);
+         });
+   }, [dispatch]);
 
    return {
       loginEmail,
@@ -87,6 +105,7 @@ const useFirebaseMethods = () => {
       logout,
       signup,
       updateFirebaseProfile,
+      deleteUserAccount,
    };
 };
 
