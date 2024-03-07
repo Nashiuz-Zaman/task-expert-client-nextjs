@@ -10,19 +10,21 @@ const InputField2 = ({
    maxLength = null,
    modifyClasses = '',
    defaultValueData = '',
+   labelModifyClasses = '',
+   inputModifyClasses = ''
 }) => {
    return (
       <div className={`${modifyClasses}`}>
-         <label className='block mb-1 font-bold capitalize'>{label}</label>
+         <label className={`block text-sm xs:text-base md:text-lg mb-1 font-bold capitalize ${labelModifyClasses}`}>{label}</label>
          {/* input field */}
-         <input
+         <input        
             required
             placeholder={placeholder}
             maxLength={maxLength}
             defaultValue={defaultValueData}
             className={`${
                theme === 'light' ? 'text-textMediumLight' : 'text-white'
-            } block rounded-default !w-full text-sm lg:text-base p-1 md:p-2 font-inherit bg-neutral-100`}
+            } block rounded-default !w-full text-xs xs:text-sm md:text-base p-1 md:p-2 font-inherit bg-neutral-100 ${inputModifyClasses}`}
             type={type}
             name={name}
          />
@@ -36,6 +38,8 @@ InputField2.propTypes = {
    label: PropTypes.string,
    placeholder: PropTypes.string,
    defaultValueData: PropTypes.string,
+   inputModifyClasses: PropTypes.string,
+   labelModifyClasses: PropTypes.string,
    name: PropTypes.string,
    maxLength: PropTypes.number,
    modifyClasses: PropTypes.string,
