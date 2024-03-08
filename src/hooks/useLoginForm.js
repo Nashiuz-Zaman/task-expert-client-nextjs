@@ -115,7 +115,7 @@ const useLoginForm = () => {
 
          //  if firebase login is successful, check database for profile data
          if (result.user) {
-            const loginResponse = await axiosPublic.post('/login', {
+            const loginResponse = await axiosPublic.post('/email-login', {
                email: result.user.email,
             });
 

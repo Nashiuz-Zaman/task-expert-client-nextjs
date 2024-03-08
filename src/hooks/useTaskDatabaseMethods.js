@@ -22,7 +22,7 @@ import { statusOptions } from '@/uiData/formsUiData';
 const useTaskDatabaseMethods = () => {
    const { dispatch, useSelector } = useRedux();
    const { profileData } = useSelector(store => store.auth);
-   const { axiosPublic, axiosSecure } = useAxios();
+   const { axiosSecure } = useAxios();
 
    const sortByLatest = useCallback(arr => {
       const sortedArr = [...arr].sort(
@@ -59,7 +59,7 @@ const useTaskDatabaseMethods = () => {
          dispatch(setTotalTasks(updatedTasksAfterEdit));
 
          // update in the database
-         const res = await axiosPublic.put(
+         const res = await axiosSecure.put(
             `/tasks/edit/${editedTaskId}`,
             editedTaskData
          );
@@ -68,7 +68,7 @@ const useTaskDatabaseMethods = () => {
             showToast('Task Edited', 'success');
          }
       },
-      [dispatch]
+      [dispatch, axiosSecure]
    );
 
    const updateTaskStatus = useCallback(
@@ -93,8 +93,8 @@ const useTaskDatabaseMethods = () => {
             lastUpdated,
          };
 
-         const res = await axiosPublic.patch(
-            `/tasks/update/${taskId}`,
+         const res = await axiosSecure.patch(
+            `/tasks/update-status/${taskId}`,
             updatedTask
          );
 
@@ -106,7 +106,7 @@ const useTaskDatabaseMethods = () => {
 
          return false;
       },
-      [dispatch, sortByLatest]
+      [dispatch, sortByLatest, axiosSecure]
    );
 
    const pinTask = useCallback(
@@ -145,7 +145,7 @@ const useTaskDatabaseMethods = () => {
             showToast('Something went wrong. Try again', 'error');
          }
       },
-      [dispatch]
+      [dispatch, axiosSecure]
    );
 
    const unpinTask = useCallback(
@@ -158,7 +158,7 @@ const useTaskDatabaseMethods = () => {
             dispatch(setPinnedTasks(newPinnedTasks));
 
             const res = await axiosSecure.delete(
-               `/pinned-tasks/${pinnedTaskId}`
+               `/pinned-tasks/${pinnedTaskId}?email=${profileData.email}`
             );
 
             if (res.data.status === 'success') {
@@ -168,27 +168,30 @@ const useTaskDatabaseMethods = () => {
             showToast('Something went wrong. Try again', 'error');
          }
       },
-      [dispatch]
+      [dispatch, axiosSecure, profileData]
    );
 
-   const deleteTask = async (_id, tasks, pinnedTasks) => {
-      const pinnedTask = pinnedTasks.find(task => task.taskId === _id);
+   const deleteTask = useCallback(
+      async (_id, tasks, pinnedTasks) => {
+         const pinnedTask = pinnedTasks.find(task => task.taskId === _id);
 
-      if (pinnedTask?._id) {
-         unpinTask(pinnedTask._id, pinnedTasks);
-      }
+         if (pinnedTask?._id) {
+            unpinTask(pinnedTask._id, pinnedTasks);
+         }
 
-      const remainingTasks = tasks.filter(task => task._id !== _id);
-      dispatch(setTotalTasks(remainingTasks));
+         const remainingTasks = tasks.filter(task => task._id !== _id);
+         dispatch(setTotalTasks(remainingTasks));
 
-      const res = await axiosPublic.delete(
-         `/tasks/delete/${_id}?email=${profileData.email}`
-      );
+         const res = await axiosSecure.delete(
+            `/tasks/delete/${_id}?email=${profileData.email}`
+         );
 
-      if (res.data.status === 'success') {
-         showToast('Task Deleted', 'success');
-      }
-   };
+         if (res.data.status === 'success') {
+            showToast('Task Deleted', 'success');
+         }
+      },
+      [dispatch, profileData, axiosSecure, unpinTask]
+   );
 
    return {
       sortByLatest,

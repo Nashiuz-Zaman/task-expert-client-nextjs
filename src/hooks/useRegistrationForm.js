@@ -127,7 +127,6 @@ const useRegistrationForm = () => {
                // if firebase sign up successful update the profile first
                await updateFirebaseProfile(dataObject.userName, '');
 
-               // save new user object to database
                const user = {
                   name: dataObject.userName,
                   password: dataObject.password,
@@ -136,7 +135,7 @@ const useRegistrationForm = () => {
                   role: 'user',
                };
 
-               // create user api call
+               // create user in database
                const userCreationResponse = await axiosPublic.post(
                   '/users',
                   user
