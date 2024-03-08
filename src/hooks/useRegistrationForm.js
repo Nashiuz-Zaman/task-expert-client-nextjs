@@ -5,11 +5,8 @@ import { useRouter } from 'next/navigation';
 
 // hooks
 import useFirebaseMethods from './useFirebaseMethods';
-
+import useAxios from './useAxios';
 import useFormVisiblity from './useFormVisiblity';
-
-// axios
-import { axiosPublic } from './useAxios';
 
 // redux
 import { useDispatch } from 'react-redux';
@@ -28,6 +25,7 @@ const useRegistrationForm = () => {
    const { signup, updateFirebaseProfile } = useFirebaseMethods();
    const router = useRouter();
    const { closeSignupFormWithBackdrop } = useFormVisiblity();
+   const { axiosPublic } = useAxios();
 
    // registration password validation
    const validatePassword = password => {
@@ -129,7 +127,6 @@ const useRegistrationForm = () => {
                // if firebase sign up successful update the profile first
                await updateFirebaseProfile(dataObject.userName, '');
 
-               // save new user object to database
                const user = {
                   name: dataObject.userName,
                   password: dataObject.password,
@@ -138,7 +135,7 @@ const useRegistrationForm = () => {
                   role: 'user',
                };
 
-               // create user api call
+               // create user in database
                const userCreationResponse = await axiosPublic.post(
                   '/users',
                   user

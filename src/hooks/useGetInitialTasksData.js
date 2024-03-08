@@ -4,7 +4,7 @@
 import { useEffect } from 'react';
 
 // hooks
-import { axiosSecure } from './useAxios';
+import useAxios from './useAxios';
 
 // redux
 import useRedux from './useRedux';
@@ -17,6 +17,7 @@ import {
 const useGetInitialTasksData = () => {
    const { dispatch, useSelector } = useRedux();
    const { profileData } = useSelector(store => store.auth);
+   const { axiosSecure } = useAxios();
 
    useEffect(() => {
       const getInitialTasks = async email => {

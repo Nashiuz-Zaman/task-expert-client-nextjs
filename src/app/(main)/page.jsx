@@ -25,7 +25,7 @@ const Home = () => {
          <InnerContainer>
             <LoginModal />
             <RegistrationModal />
-            <PasswordResetModal/>
+            <PasswordResetModal />
          </InnerContainer>
       </>
    );

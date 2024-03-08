@@ -4,8 +4,8 @@
 import { useEffect } from 'react';
 
 // hook
-import { axiosSecure } from './useAxios';
 import useFirebaseMethods from './useFirebaseMethods';
+import useAxios from './useAxios';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,6 +19,9 @@ import {
 import app from '@/lib/firebase/firebase.config';
 import { getAuth, onAuthStateChanged, GoogleAuthProvider } from 'firebase/auth';
 
+// utils
+import { showToast } from '@/utils/toastify';
+
 // create auth & google provider instance
 export const auth = getAuth(app);
 export const googleAuthProvider = new GoogleAuthProvider();
@@ -27,13 +30,14 @@ const useAuth = () => {
    const dispatch = useDispatch();
    const { userShouldExist, profileData } = useSelector(store => store.auth);
    const { logout } = useFirebaseMethods();
+   const { axiosSecure } = useAxios();
 
    // if true, then user should exist
    useEffect(() => {
       if (localStorage.getItem('token')) {
          dispatch(setUserShouldExist(true));
       }
-   }, [dispatch]);
+   }, [dispatch, logout]);
 
    // set up observer for users, if there an user, update the user state and set loading to false, if there is none set user to null and set loading to false
    useEffect(() => {
@@ -46,17 +50,13 @@ const useAuth = () => {
                   const validationRes = await axiosSecure.get('/validate');
                   dispatch(setProfileData(validationRes.data.user));
                   dispatch(setUserLoading(false));
-               } else {
-                  dispatch(setUserLoading(false));
                }
-            } else {
-               dispatch(setUserLoading(false));
             }
          } catch (error) {
+            logout(false);
+            showToast('Network error', 'error');
+         } finally {
             dispatch(setUserLoading(false));
-            if (error?.response?.status === 401) {              
-               logout(false);
-            }
          }
       });
 
@@ -64,7 +64,7 @@ const useAuth = () => {
       return () => {
          unSubscribe();
       };
-   }, [dispatch, userShouldExist, profileData, logout]);
+   }, [dispatch, userShouldExist, axiosSecure, profileData, logout]);
 };
 
 export default useAuth;

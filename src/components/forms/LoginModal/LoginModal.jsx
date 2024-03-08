@@ -10,6 +10,7 @@ import LoginFormWithImage from '../LoginFormWithImage/LoginFormWithImage';
 import useClickOutside from '@/hooks/useClickOutside';
 import useFormVisiblity from '@/hooks/useFormVisiblity';
 import useStopScrolling from '@/hooks/useStopScrolling';
+import useEnterPress from '@/hooks/useEnterPress';
 
 // redux
 import { useSelector } from 'react-redux';
@@ -30,7 +31,8 @@ const LoginModal = () => {
       e => {
          if (
             e.target.closest('.login-custom-focus') ||
-            e.target.tagName.toLowerCase() === 'svg' || e.target.tagName.toLowerCase() === 'path'
+            e.target.tagName.toLowerCase() === 'svg' ||
+            e.target.tagName.toLowerCase() === 'path'
          ) {
             return;
          }
@@ -40,6 +42,7 @@ const LoginModal = () => {
       [closeLoginFormWithBackdrop]
    );
    useClickOutside(loginFormOpen, handleClickOutside);
+   useEnterPress(loginFormOpen);
 
    return (
       <div

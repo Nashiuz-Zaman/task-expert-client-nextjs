@@ -32,22 +32,30 @@ a:visited::selection {
    -webkit-backface-visibility: hidden;
 }
 
-.primaryClasses{
-   @apply bg-primary border-primary lg:hover:bg-primaryLight lg:hover:border-primaryLight text-white;
+.primaryClasses {
+   @apply bg-primary border-primary active:bg-primaryDark active:border-primaryDark lg:hover:bg-primaryDark lg:hover:border-primaryDark text-white;
 }
 
-.primaryOutlinedClasses{
-   @apply border-primary active:border-black lg:hover:border-black text-primary active:text-black lg:hover:text-black;
+.primaryOutlinedClasses {
+   @apply border-primary active:border-primaryDark lg:hover:border-primaryDark text-primary active:text-primaryDark lg:hover:text-primaryDark;
 }
 
 .blackClasses {
    @apply bg-blackLight border-blackLight text-white;
 }
 
-.whiteNeutralClasses{
-   @apply bg-white border-neutral-300 shadow-small text-blackLight
+.whiteNeutralClasses {
+   @apply bg-white border-neutral-300 shadow-small text-blackLight;
 }
 
-.dangerClasses{
-   @apply bg-red-600 border-red-600 text-white hover:bg-red-500 hover:border-red-500
+.dangerClasses {
+   @apply bg-red-600 border-red-600 text-white hover:bg-red-500 hover:border-red-500;
+}
+
+.primaryGradientClasses {
+   @apply bg-gradient-to-r from-primaryLight to-primary text-white hover:bg-gradient-to-r hover:from-primary hover:to-primaryDark;
+}
+
+.primarySecondaryGradientClasses{
+   @apply bg-gradient-to-br from-primary to-secondary hover:from-secondary hover:to-primary  text-white;
 }

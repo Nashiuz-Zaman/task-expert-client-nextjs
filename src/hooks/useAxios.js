@@ -3,42 +3,56 @@
 // axios
 import axios from 'axios';
 
+// hooks
+import useFirebaseMethods from './useFirebaseMethods';
+
 // server url
 import { serverUrl } from '@/uiData/serverUrl';
 
-export const axiosPublic = axios.create({
+const axiosPublic = axios.create({
    baseURL: serverUrl,
-   withCredentials: true,
 });
 
-export const axiosSecure = axios.create({
+const axiosSecure = axios.create({
    baseURL: serverUrl,
-   withCredentials: true,
 });
 
-axiosSecure.interceptors.request.use(
-   config => {
-      const token = localStorage.getItem('token');
+const useAxios = () => {
+   const { logout } = useFirebaseMethods();
 
-      // Add token to headers
-      if (token) {
-         config.headers.Authorization = `Bearer ${token}`;
+   // request
+   axiosSecure.interceptors.request.use(
+      config => {
+         const token = localStorage.getItem('token');
+         if (token) {
+            config.headers.authorization = `Bearer ${token}`;
+         }
+         return config;
+      },
+      error => {
+         return Promise.reject(error);
       }
+   );
 
-      return config;
-   },
-   error => {
-      // Handle request error
-      return Promise.reject(error);
-   }
-);
+   // response
+   axiosSecure.interceptors.response.use(
+      response => {
+         console.log(response);
+         return response;
+      },
+      error => {
+         const statusCode = error.response.status;
 
-axiosSecure.interceptors.response.use(
-   response => {
-      return response;
-   },
-   error => {
-      return Promise.reject(error);
-   }
-);
+         if (statusCode === 401 || statusCode === 403) {
+            logout(false);
+            return;
+         }
 
+         return Promise.reject(error);
+      }
+   );
+
+   return { axiosPublic, axiosSecure };
+};
+
+export default useAxios;

@@ -6,9 +6,7 @@ import { useRouter } from 'next/navigation';
 // custom hook
 import useFirebaseMethods from '@/hooks/useFirebaseMethods';
 import useFormVisiblity from './useFormVisiblity';
-
-// axios
-import { axiosPublic } from './useAxios';
+import useAxios from './useAxios';
 
 // redux
 import { useDispatch } from 'react-redux';
@@ -28,6 +26,7 @@ const useLoginForm = () => {
    const { closeLoginFormWithBackdrop, closeSignupFormWithBackdrop } =
       useFormVisiblity();
    const router = useRouter();
+   const { axiosPublic } = useAxios();
 
    const validateInputs = inputs => {
       const { email, password } = inputs;
@@ -72,10 +71,7 @@ const useLoginForm = () => {
             // set profile data, user should exist and the jwt token
             dispatch(setProfileData(profileData));
             dispatch(setUserShouldExist(true));
-            localStorage.setItem(
-               'token',
-               googleLoginResponse.data.token
-            );
+            localStorage.setItem('token', googleLoginResponse.data.token);
 
             closeLoginFormWithBackdrop();
             closeSignupFormWithBackdrop();
@@ -115,11 +111,11 @@ const useLoginForm = () => {
       try {
          dispatch(setLoginLoading(true));
          // firebase login api call
-         const result = await loginEmail(dataObject.email, dataObject.password);         
+         const result = await loginEmail(dataObject.email, dataObject.password);
 
          //  if firebase login is successful, check database for profile data
          if (result.user) {
-            const loginResponse = await axiosPublic.post('/login', {
+            const loginResponse = await axiosPublic.post('/email-login', {
                email: result.user.email,
             });
 
@@ -128,10 +124,7 @@ const useLoginForm = () => {
                dispatch(setProfileData(profileData));
                dispatch(setUserShouldExist(true));
                // set profile and the jwt token in the localstorage
-               localStorage.setItem(
-                  'token',
-                  loginResponse.data.token
-               );
+               localStorage.setItem('token', loginResponse.data.token);
 
                closeLoginFormWithBackdrop();
 
