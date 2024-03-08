@@ -8,7 +8,7 @@ import DashboardNav from '@/components/page-related/dashboard-home/DashboardNav/
 const DashboardLayout = ({ children }) => {
    return (
       <div className='max-w-[120rem] mx-auto h-screen grid grid-cols-1 2xl:grid-cols-[22.5rem_1fr]'>
-         <DashboardNav modifyClasses='hidden 2xl:block border-r border-lightBorder' />
+         <DashboardNav modifyClasses='hidden 2xl:block border-r border-neutral-200' />
 
          <div className='h-full'>
             <DashboardHeader />

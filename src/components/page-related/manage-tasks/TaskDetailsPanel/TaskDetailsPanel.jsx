@@ -55,7 +55,7 @@ const TaskDetailsPanel = () => {
          >
             {/* close button */}
             <CloseBtn
-               modifyClasses='bg-primaryLight text-white text-xl rounded-defaultLg p-1 mb-3'
+               modifyClasses='text-neutral-400 text-xl mb-3'
                onClickFunction={() => {
                   dispatch(setShowTaskDetailsPanel(false));
                }}
@@ -69,23 +69,22 @@ const TaskDetailsPanel = () => {
             {/* priority card */}
             <PriorityCard
                priorityLevel={taskDetails.priorityLevel}
-               modifyClasses='mb-4'
+               modifyClasses='mb-5'
             />
 
             {/* deadline  */}
-            <div className='text-sm md:text-base 3xl:text-lg flex items-center gap-1 mb-1'>
+            <div className='text-sm md:text-base 3xl:text-lg flex items-center gap-1 mb-3 text-neutral-500 font-medium !leading-none'>
                <Icon icon='ph:calendar-fill' className='block' />
-               <p className='font-semibold'>
+               <p className="!leading-inherit">
                   <span>Deadline: </span>
                   <span>{getDayMonthNameYearStr(taskDetails.deadline)}</span>
                </p>
             </div>
 
             {/* time remaining */}
-
             <TimeRemainingCard
                text='Time Left: '
-               modifyClasses='text-sm font-semibold md:text-base 3xl:text-lg mb-7'
+               modifyClasses='text-sm font-medium md:text-base 3xl:text-lg mb-7 text-neutral-500 !leading-none'
                deadline={taskDetails.deadline}
             />
 
@@ -95,7 +94,7 @@ const TaskDetailsPanel = () => {
                <h4 className='text-lg lg:text-xl font-extrabold mb-2'>
                   Description
                </h4>
-               <p className='lg:text-lg font-medium'>
+               <p className='lg:text-lg font-medium text-neutral-500'>
                   {taskDetails.description}
                </p>
             </div>
