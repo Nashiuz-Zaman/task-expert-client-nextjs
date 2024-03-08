@@ -11,19 +11,20 @@ import PasswordField from '@/components/shared/PasswordField/PasswordField';
 
 // hooks
 import useFirebaseMethods from '@/hooks/useFirebaseMethods';
+import useAxios from '@/hooks/useAxios';
 
 // redux
 import useRedux from '@/hooks/useRedux';
 import { setProfileData } from '@/lib/redux/features/auth/authSlice';
 
 // utils
-import { axiosSecure } from '@/hooks/useAxios';
 import { showToast } from '@/utils/toastify';
 
 const ProfileInfoChanger = ({ modifyClasses = '' }) => {
    const { dispatch, useSelector } = useRedux();
    const { profileData } = useSelector(store => store.auth);
    const { updateUserPassword } = useFirebaseMethods();
+   const { axiosSecure } = useAxios();
 
    // name change function
    const handleNameChange = async e => {
@@ -52,7 +53,7 @@ const ProfileInfoChanger = ({ modifyClasses = '' }) => {
 
    const handlePasswordChange = async e => {
       try {
-         e.preventDefault()
+         e.preventDefault();
          const password = e.target.password.value;
          const res = await updateUserPassword(password);
 
@@ -71,8 +72,11 @@ const ProfileInfoChanger = ({ modifyClasses = '' }) => {
                e.target.reset();
             }
          }
-      } catch (error) {       
-         showToast('Please logout and login again to change your password', 'warning');
+      } catch (error) {
+         showToast(
+            'Please logout and login again to change your password',
+            'warning'
+         );
       }
    };
 
@@ -102,10 +106,10 @@ const ProfileInfoChanger = ({ modifyClasses = '' }) => {
          <form onSubmit={handlePasswordChange}>
             <div className='flex flex-col sm:flex-row gap-5 items-center sm:items-end sm:w-[25rem] 2md:w-full lg:w-[25rem] mb-5'>
                <PasswordField
-                 label='New Password'
-                 placeholder='password'
-                 name='password'
-                 modifyClasses='rounded-default text-center sm:text-left'
+                  label='New Password'
+                  placeholder='password'
+                  name='password'
+                  modifyClasses='rounded-default text-center sm:text-left'
                />
 
                <ButtonBtn text='Save' modifyClasses='!px-4 !py-2' />

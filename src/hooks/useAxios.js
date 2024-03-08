@@ -3,42 +3,52 @@
 // axios
 import axios from 'axios';
 
+// hooks
+import useFirebaseMethods from './useFirebaseMethods';
+
 // server url
 import { serverUrl } from '@/uiData/serverUrl';
 
-export const axiosPublic = axios.create({
+const axiosPublic = axios.create({
+   baseURL: serverUrl,
+});
+
+const axiosSecure = axios.create({
    baseURL: serverUrl,
    withCredentials: true,
 });
 
-export const axiosSecure = axios.create({
-   baseURL: serverUrl,
-   withCredentials: true,
-});
+const useAxios = () => {
+   const { logout } = useFirebaseMethods();
 
-axiosSecure.interceptors.request.use(
-   config => {
-      const token = localStorage.getItem('token');
+   axiosSecure.interceptors.request.use(
+      config => {
+         const token = localStorage.getItem('token');         
 
-      // Add token to headers
-      if (token) {
-         config.headers.Authorization = `Bearer ${token}`;
+         // Add token to headers
+         if (token) {
+            config.headers.authorization = `Bearer ${token}`;
+         }
+
+         return config;
+      },
+      error => {
+         // Handle request error
+         return Promise.reject(error);
       }
+   );
 
-      return config;
-   },
-   error => {
-      // Handle request error
-      return Promise.reject(error);
-   }
-);
+   axiosSecure.interceptors.response.use(
+      response => {
+         console.log(response)
+         return response;
+      },
+      error => {
+         console.log(error);
+      }
+   );
 
-axiosSecure.interceptors.response.use(
-   response => {
-      return response;
-   },
-   error => {
-      return Promise.reject(error);
-   }
-);
+   return { axiosPublic, axiosSecure };
+};
 
+export default useAxios;

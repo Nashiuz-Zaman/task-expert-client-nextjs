@@ -12,24 +12,25 @@ import SectionHeading from '@/components/shared/SectionHeading/SectionHeading';
 
 // hooks
 import useFirebaseMethods from '@/hooks/useFirebaseMethods';
+import useAxios from '@/hooks/useAxios';
 
 // redux
 import { useSelector } from 'react-redux';
 
 // utils
-import { axiosSecure } from '@/hooks/useAxios';
 import { showToast } from '@/utils/toastify';
 
 const ProfileRemover = ({ modifyClasses = '' }) => {
    const { profileData } = useSelector(store => store.auth);
    const { deleteUserAccount } = useFirebaseMethods();
+   const { axiosSecure } = useAxios();
    const router = useRouter();
 
    const handleDelete = async () => {
       try {
          const email = profileData.email;
          router.push('/');
-         
+
          const res = await deleteUserAccount();
 
          if (res.status === 'success') {

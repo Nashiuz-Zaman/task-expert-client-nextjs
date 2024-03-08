@@ -11,13 +11,11 @@ import ButtonBtn from '@/components/buttons/ButtonBtn/ButtonBtn';
 
 // hooks
 import useFirebaseMethods from '@/hooks/useFirebaseMethods';
+import useAxios from '@/hooks/useAxios';
 
 // redux
 import useRedux from '@/hooks/useRedux';
 import { setProfileData } from '@/lib/redux/features/auth/authSlice';
-
-// axios
-import { axiosSecure } from '@/hooks/useAxios';
 
 // utils
 import { uploadImage } from '@/utils/uploadImage';
@@ -35,6 +33,7 @@ const ProfilePhotoChanger = ({ modifyClasses = '' }) => {
    const { dispatch, useSelector } = useRedux();
    const { profileData } = useSelector(store => store.auth);
    const { updateFirebaseProfile } = useFirebaseMethods();
+   const {axiosSecure} = useAxios()
 
    const handleConfirm = async () => {
       setLoading(true);

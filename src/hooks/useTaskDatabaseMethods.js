@@ -3,8 +3,8 @@
 // react
 import { useCallback } from 'react';
 
-// axios
-import { axiosPublic, axiosSecure } from './useAxios';
+// hooks
+import useAxios from './useAxios';
 
 // redux
 import useRedux from './useRedux';
@@ -22,6 +22,7 @@ import { statusOptions } from '@/uiData/formsUiData';
 const useTaskDatabaseMethods = () => {
    const { dispatch, useSelector } = useRedux();
    const { profileData } = useSelector(store => store.auth);
+   const { axiosPublic, axiosSecure } = useAxios();
 
    const sortByLatest = useCallback(arr => {
       const sortedArr = [...arr].sort(

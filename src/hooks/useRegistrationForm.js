@@ -5,11 +5,8 @@ import { useRouter } from 'next/navigation';
 
 // hooks
 import useFirebaseMethods from './useFirebaseMethods';
-
+import useAxios from './useAxios';
 import useFormVisiblity from './useFormVisiblity';
-
-// axios
-import { axiosPublic } from './useAxios';
 
 // redux
 import { useDispatch } from 'react-redux';
@@ -28,6 +25,7 @@ const useRegistrationForm = () => {
    const { signup, updateFirebaseProfile } = useFirebaseMethods();
    const router = useRouter();
    const { closeSignupFormWithBackdrop } = useFormVisiblity();
+   const { axiosPublic } = useAxios();
 
    // registration password validation
    const validatePassword = password => {
