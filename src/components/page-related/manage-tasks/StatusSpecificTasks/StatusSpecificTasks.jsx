@@ -9,6 +9,7 @@ import Task from '../Task/Task';
 
 // redux
 import { useSelector } from 'react-redux';
+import { Icon } from '@iconify/react';
 
 const StatusSpecificTasks = forwardRef(({ tasksData }, ref) => {
    const tasksContainerRef = useRef();
@@ -29,11 +30,10 @@ const StatusSpecificTasks = forwardRef(({ tasksData }, ref) => {
       setHasScrollbar(false);
    }, [statusSpecificTasks.length]);
 
-   console.log(hasScrollbar)
    return (
       <div
          id={name}
-         className='bg-white overflow-y-hidden h-full rounded-2xl px-3 py-4 drop-target animate-fadeIn border border-neutral-300'
+         className='bg-white overflow-y-hidden h-full rounded-2xl px-3 py-4 drop-target animate-fadeIn border border-neutral-200'
          // ref collection
          ref={el => {
             if (!ref.current.includes(el) && el !== null) {
@@ -46,11 +46,11 @@ const StatusSpecificTasks = forwardRef(({ tasksData }, ref) => {
          }}
       >
          {/* task status label and count */}
-         <div className='flex items-center gap-3 mb-2 md:mb-5 lg:mb-7'>
+         <div className='flex items-center border-b pb-3 border-neutral-200 gap-3 mb-2 md:mb-5 lg:mb-7'>
             <h3 className='font-bold text-lg md:text-xl lg:text-2xl'>{name}</h3>
-            <p className='min-w-8 py-2 flex items-center justify-center bg-neutral-100 rounded-lg font-semibold !leading-none text-sm'>
+            <span className='min-w-8 py-2 flex items-center justify-center bg-neutral-100 rounded-lg font-semibold !leading-none text-sm'>
                {statusSpecificTasks.length}
-            </p>
+            </span>
          </div>
 
          {/* tasks container */}
@@ -72,12 +72,18 @@ const StatusSpecificTasks = forwardRef(({ tasksData }, ref) => {
                   })}
                </ul>
             )}
-         </div>
 
-         {/* if no task */}
-         {!isLoading && statusSpecificTasks?.length < 1 && (
-            <p className='text-primary font-semibold mt-[14rem] text-center py-elementGapSm'>{`No ${name} Tasks`}</p>
-         )}
+            {/* if no task */}
+            {!isLoading && statusSpecificTasks?.length < 1 && (
+               <div className='flex flex-col gap-3 items-center py-4 px-5 font-medium mt-10 2xs:mt-20 md:mt-28 lg:mt-20 md:text-lg lg:text-xl text-center text-neutral-400'>
+                  <Icon
+                     className='block text-xl md:text-2xl lg:text-4xl'
+                     icon='ph:clock-counter-clockwise-fill'
+                  />
+                  <span>{`No ${name} Tasks`}</span>{' '}
+               </div>
+            )}
+         </div>
       </div>
    );
 });

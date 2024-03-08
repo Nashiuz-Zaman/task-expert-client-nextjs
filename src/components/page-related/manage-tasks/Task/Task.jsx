@@ -51,7 +51,7 @@ const Task = ({ taskData }) => {
 
    return (
       <div
-         className={`border border-neutral-300 rounded-lg p-3 pb-4 text-lg flex flex-col cursor-grab shadow-sm ${
+         className={`border border-neutral-200 shadow-sm rounded-lg p-3 pb-4 text-lg flex flex-col cursor-grab ${
             isDragging
                ? 'opacity-30 !cursor-grabbing'
                : 'opacity-100 !cursor-pointer'
