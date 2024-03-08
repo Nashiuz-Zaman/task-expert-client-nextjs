@@ -37,7 +37,6 @@ const useAxios = () => {
    // response
    axiosSecure.interceptors.response.use(
       response => {
-         console.log(response);
          return response;
       },
       error => {
