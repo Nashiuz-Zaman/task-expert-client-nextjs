@@ -19,6 +19,9 @@ import {
 import app from '@/lib/firebase/firebase.config';
 import { getAuth, onAuthStateChanged, GoogleAuthProvider } from 'firebase/auth';
 
+// utils
+import { showToast } from '@/utils/toastify';
+
 // create auth & google provider instance
 export const auth = getAuth(app);
 export const googleAuthProvider = new GoogleAuthProvider();
@@ -50,9 +53,8 @@ const useAuth = () => {
                }
             }
          } catch (error) {
-            if (error?.response?.status === 401) {
-               logout(false);
-            }
+            logout(false);
+            showToast('Network error', 'error');
          } finally {
             dispatch(setUserLoading(false));
          }
