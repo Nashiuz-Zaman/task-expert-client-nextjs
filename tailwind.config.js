@@ -73,8 +73,8 @@ module.exports = {
          colors: {
             primary: '#ff8631',
             secondary: '#DB5937',
-            primaryDark: '#e6792c',
-            primaryLight: '#ff9246',
+            primaryDark: '#b35e22',
+            primaryLight: '#ffaa6f',
             primaryLightest: '#ffdbc1',
             textPrimary: '#1C1B1B',
             textMediumLight: '#1c1b1bcc',
