@@ -15,7 +15,7 @@ function BannerText({ heading, subheading, modifyClasses = '' }) {
                {heading}
             </h1>
 
-            <p className='text-lg md:text-lg 2xl:text-[1.6rem] xs:w-[80%] md:w-[60%] lg:w-full mx-auto mb-5 2md:mb-6 font-medium !leading-snug'>
+            <p className='text-lg 2xl:text-[1.6rem] xs:w-[80%] md:w-[60%] lg:w-full mx-auto mb-5 2md:mb-6 font-medium !leading-snug text-neutral-600'>
                {subheading}
             </p>
 
