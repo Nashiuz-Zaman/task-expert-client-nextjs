@@ -64,12 +64,12 @@ const MobileNav = ({ modifyClasses = '' }) => {
             {/* X cross button to close nav */}
             <CloseBtn
                onClickFunction={closeMobileNav}
-               modifyClasses='mb-customXs'
+               modifyClasses='mb-11'
             />
 
             {/* brand logo */}
             <BrandLogo
-               modifyClasses='block w-max mx-auto sm:mx-0 sm:mr-auto mb-customXs h-9'
+               modifyClasses='block w-max mx-auto sm:mx-0 sm:mr-auto mb-11 h-9'
                onClickFunction={closeMobileNav}
             />
 
@@ -116,7 +116,7 @@ const MobileNav = ({ modifyClasses = '' }) => {
                      logout();
                      closeMobileNav();
                   }}
-                  modifyClasses='mt-customXs mx-auto sm:mx-0'
+                  modifyClasses='mt-11 mx-auto sm:mx-0'
                />
             )}
          </nav>

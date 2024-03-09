@@ -14,10 +14,10 @@ const TargetAudience = () => {
          {/* heading */}
          <SectionHeading
             text={heading}
-            modifyClasses='text-center !font-extrabold mb-customXs'
+            modifyClasses='text-center !font-extrabold mb-11'
          />
 
-         <PhotoGallery2 imagesData={images} modifyClasses='mb-customSm' />
+         <PhotoGallery2 imagesData={images} modifyClasses='mb-16' />
 
          {/* subheading */}
          <p className='font-semibold text-3xl text-center mb-4 text-primary'>
@@ -25,7 +25,7 @@ const TargetAudience = () => {
          </p>
 
          {/* description */}
-         <p className='w-full md:w-[80%] lg:w-[60%] lg:text-xl font-medium mx-auto text-center leading-[1.6] mb-customXs'>
+         <p className='w-full md:w-[80%] lg:w-[60%] lg:text-xl font-medium mx-auto text-center leading-[1.6] mb-11'>
             {description}
          </p>
       </div>
