@@ -27,10 +27,10 @@ export default function useMediaQueryMatcher() {
       isSmallScreen,
    } = useSelector(state => state.mediaQuery);
 
-   const customSizeDetector = size => {
+   const customSizeDetector = useCallback(size => {
       const matches = window.matchMedia(size).matches;
       return matches;
-   };
+   }, []);
 
    const setMobileMatched = useCallback(
       e => {

@@ -45,8 +45,7 @@ const TaskCreateForm = () => {
       const deadline = new Date(form.deadline.value).toISOString();
       const priorityLevel = parseInt(form.priority.value);
       const date = new Date().toISOString();
-      console.log(deadline);
-
+     
       // Task data
       const taskData = {
          title,

@@ -5,6 +5,7 @@ import TargetAudience from '@/components/page-related/home/TargetAudience/Target
 import LoginModal from '@/components/forms/LoginModal/LoginModal';
 import RegistrationModal from '@/components/forms/RegistrationModal/RegtistrationModal';
 import PasswordResetModal from '@/components/forms/PasswordResetModal/PasswordResetModal';
+import About from '@/components/page-related/home/About/About';
 
 const Home = () => {
    return (
@@ -12,6 +13,12 @@ const Home = () => {
          <section className='mt-customXs lg:mt-customMd xl:mt-custom2md mb-customXl md:mb-custom2xl'>
             <InnerContainer>
                <Banner />
+            </InnerContainer>
+         </section>
+
+         <section className='mb-customXl md:mb-custom2xl'>
+            <InnerContainer>
+               <About />
             </InnerContainer>
          </section>
 

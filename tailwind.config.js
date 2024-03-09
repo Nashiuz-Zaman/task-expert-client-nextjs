@@ -78,10 +78,8 @@ module.exports = {
             primaryLightest: '#ffdbc1',
             textPrimary: '#1C1B1B',
             textMediumLight: '#1c1b1bcc',
-            textLight: '#1c1b1b99',
-            lightGray: '#f5f5f5',
-            lightBorder: '#ddd',
-            blackLight: '#222',
+            textLight: '#1c1b1b99',                       
+            blackLight: '#151515',
             darkThemeBg: '#202124',
          },
 

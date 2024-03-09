@@ -8,6 +8,15 @@ export const homeTopBannerTextContent = {
    subheading: <>Effortless Task Management for a Seamless Workflow</>,
 };
 
+export const aboutContent = {
+   images: [
+      { id: 0, imageSource: 'https://i.ibb.co/0QmjnK1/about-1.webp' },
+      { id: 1, imageSource: 'https://i.ibb.co/HHRWNL0/about-2.webp' },
+      { id: 2, imageSource: 'https://i.ibb.co/Jd2RpJr/about-3.webp' },
+      { id: 3, imageSource: 'https://i.ibb.co/qdSCyWn/about-4.webp' },
+   ],
+};
+
 export const targetAudienceTextContent = {
    heading: (
       <>
@@ -49,4 +58,3 @@ export const targetAudienceTextContent = {
       },
    ],
 };
-
