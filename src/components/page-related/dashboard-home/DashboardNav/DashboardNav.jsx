@@ -9,7 +9,7 @@ const DashboardNav = ({ modifyClasses = '' }) => {
    return (
       <div className={`py-9 px-6 ${modifyClasses}`}>
          {/* website logo */}
-         <BrandLogo modifyClasses='mb-customSm lg:!h-10' />
+         <BrandLogo modifyClasses='mb-16 lg:!h-10' />
 
          <DashboardNavContent />
       </div>

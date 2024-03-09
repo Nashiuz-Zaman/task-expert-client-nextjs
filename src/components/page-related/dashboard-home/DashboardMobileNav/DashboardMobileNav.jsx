@@ -78,7 +78,7 @@ const DashboardMobileNav = ({
                   logout();
                   closeDashboardMobileNav();
                }}
-               modifyClasses='mt-customXs'
+               modifyClasses='mt-11'
             />
          </nav>
       </div>

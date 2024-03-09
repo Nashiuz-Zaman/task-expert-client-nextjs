@@ -42,7 +42,7 @@ const RegistrationForm = ({ modifyClasses }) => {
          className={`w-full bg-white mx-auto p-5 md:py-7 2md:px-6 2md:py-12 ${modifyClasses}`}
       >
          {/* heading */}
-         <h2 className='capitalize mb-custom2xs text-center font-bold text-lg 2md:text-xl xl:text-2xl'>
+         <h2 className='capitalize mb-7 text-center font-bold text-lg 2md:text-xl xl:text-2xl'>
             Sign up. It&apos;s <span className='text-primary'>Free!</span>
          </h2>
 

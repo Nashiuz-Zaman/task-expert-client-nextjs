@@ -10,19 +10,19 @@ import About from '@/components/page-related/home/About/About';
 const Home = () => {
    return (
       <>
-         <section className='mt-customXs lg:mt-customMd xl:mt-custom2md mb-customXl md:mb-custom2xl'>
+         <section className='mt-11 lg:mt-24 xl:mt-[7.5rem] mb-sectionGapMd md:mb-sectionGapLg'>
             <InnerContainer>
                <Banner />
             </InnerContainer>
          </section>
 
-         <section className='mb-customXl md:mb-custom2xl'>
+         <section className='mb-sectionGapMd md:mb-sectionGapLg'>
             <InnerContainer>
                <About />
             </InnerContainer>
          </section>
 
-         <section id='learn-more' className='mb-customXl md:mb-custom3xl'>
+         <section id='learn-more' className='mb-sectionGapMd md:mb-sectionGapLg'>
             <InnerContainer>
                <TargetAudience />
             </InnerContainer>
