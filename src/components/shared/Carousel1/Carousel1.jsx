@@ -3,9 +3,6 @@
 // react
 import PropTypes from 'prop-types';
 
-// next
-import Image from 'next/image';
-
 // custom hook
 import useCarousel1 from './useCarousel1';
 
@@ -35,6 +32,7 @@ const Carousel1 = ({ imagesData, interval = 3000 }) => {
                         backfaceVisibility: 'hidden',
                         MozBackfaceVisibility: 'hidden',
                         WebkitBackfaceVisibility: 'hidden',
+                        backgroundImage: `url(${imageSource})`,
                         top: '50%',
                         transform: `translateY(-50%) translateX(${
                            id === centerSlide
@@ -54,7 +52,7 @@ const Carousel1 = ({ imagesData, interval = 3000 }) => {
                               : '0deg'
                         })`,
                      }}
-                     className={`absolute shadow-medium rounded-xl overflow-hidden ease-out ${
+                     className={`absolute bg-cover bg-center bg-no-repeat shadow-medium rounded-xl overflow-hidden ease-out ${
                         id === centerSlide ||
                         id === rightSlide ||
                         id === leftSlide
@@ -63,20 +61,7 @@ const Carousel1 = ({ imagesData, interval = 3000 }) => {
                      } ${
                         id === centerSlide ? 'w-1/2' : 'w-1/4'
                      } aspect-[16/10]`}
-                  >
-                     <Image
-                        style={{
-                           backfaceVisibility: 'hidden',
-                           MozBackfaceVisibility: 'hidden',
-                           WebkitBackfaceVisibility: 'hidden',
-                        }}
-                        width={640}
-                        height={450}
-                        alt={'carousel image'}
-                        src={imageSource}
-                        className='w-full h-full object-cover'
-                     />
-                  </div>
+                  >&nbsp;</div>
                );
             })}
       </div>
