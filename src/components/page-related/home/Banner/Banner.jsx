@@ -13,7 +13,7 @@ const Banner = () => {
    const { heading, subheading } = homeTopBannerTextContent;
 
    return (
-      <div className='grid grid-cols-1 gap-12 sm:gap-[5rem] lg:gap-0 lg:grid-cols-2 items-center'>
+      <div className='grid grid-cols-1 gap-12 sm:gap-20 lg:gap-4 xl:gap-6 2xl:gap-8 3xl:gap-14 lg:grid-cols-2 items-center'>
          {/* banner text part */}
          <BannerText
             heading={heading}
@@ -22,7 +22,7 @@ const Banner = () => {
          />
 
          {/* banner image part */}
-         <div className='w-full h-full sm:w-[80%] lg:w-full mx-auto animate-[fade-in_600ms_ease-out_forwards] lg:animate-fadeInFromRight'>
+         <div className='w-full h-full xs:w-[27rem] sm:w-[30rem] md:w-[40rem] lg:w-full mx-auto animate-[fade-in_600ms_ease-out_forwards] lg:animate-fadeInFromRight'>
             <Image
                width={600}
                height={450}
