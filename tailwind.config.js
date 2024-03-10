@@ -57,7 +57,7 @@ module.exports = {
          boxShadow: {
             large: '0 10px 60px -10px rgba(0,0,0,0.25)',
             medium: '0 5px 40px -5px rgba(0,0,0,0.25)',
-            small: '0 3px 20px -3px rgba(0,0,0,0.2)',
+            small: '0 7px 20px -10px rgba(0,0,0,0.15)',
          },
          transitionDuration: {
             default: '150ms',
@@ -65,8 +65,8 @@ module.exports = {
          colors: {
             primary: '#ff8631',
             secondary: '#DB5937',
-            primaryDark: '#b35e22',
-            primaryLight: '#ffaa6f',
+            primaryDark: '#e6792c',
+            primaryLight: '#ff9246',
             primaryLightest: '#ffdbc1',
             textPrimary: '#1C1B1B',
             textMediumLight: '#1c1b1bcc',

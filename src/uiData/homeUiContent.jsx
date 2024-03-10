@@ -58,3 +58,50 @@ export const targetAudienceTextContent = {
       },
    ],
 };
+
+export const featuresContent = {
+   features: [
+      {
+         id: 0,
+         heading: 'Effortless Task Management',
+         description:
+            "Simplify your day with easy task organization.",
+         icon: 'line-md:check-list-3-filled',
+      },
+      {
+         id: 1,
+         heading: 'User-Friendly Interface',
+         description:
+            'A minimalist yet powerful design for seamless navigation and productivity.',
+         icon: 'streamline:user-check-validate-solid',
+      },
+      {
+         id: 2,
+         heading: 'Quick Task Operations',
+         description:
+            'Effortlessly create, edit, and delete tasks with just a few clicks.',
+         icon: 'carbon:task-tools',
+      },
+      {
+         id: 3,
+         heading: 'Pin/Unpin Tasks',
+         description:
+            "Pin important tasks for quick access and unpin when they're done.",
+         icon: 'solar:pin-list-bold',
+      },
+      {
+         id: 4,
+         heading: 'Countdown to Deadlines',
+         description:
+            'Keep track of time with a countdown feature to stay ahead of deadlines.',
+         icon: 'ph:calendar-fill',
+      },
+      {
+         id: 5,
+         heading: 'Versatile User Base',
+         description:
+            'Perfect for professionals, students, or anyone seeking an organized day.',
+         icon: 'clarity:users-solid',
+      },
+   ],
+};

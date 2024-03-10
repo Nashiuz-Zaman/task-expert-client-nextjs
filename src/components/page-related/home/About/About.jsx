@@ -28,8 +28,8 @@ const About = () => {
       <h2
          className={`text-2xl !leading-snug font-bold 2md:text-3xl xl:text-4xl 3xl:text-5xl md:col-span-2`}
       >
-         Your <span className='text-primary'>Personal</span>{' '}
-         Assistant<span className='text-primary'>.</span>
+         Your <span className='text-primary'>Personal</span> Assistant
+         <span className='text-primary'>.</span>
       </h2>
    );
 
@@ -40,24 +40,27 @@ const About = () => {
       />
    );
 
+   const btn = (
+      <LinkBtn
+         text='Discover Features'
+         url='#features'
+         modifyClasses='mx-auto md:mx-0 md:col-span-2'
+      />
+   );
+
    // if screen is smaller than 1024px
    if (isClient && isComputer === false) {
       return (
          <div className='text-center grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-x-6 md:text-left'>
             {heading}
-
-            <LinkBtn
-               text='Discover Features'
-               url='#'
-               modifyClasses='mx-auto md:mx-0 md:col-span-2'
-            />
+            {btn}
 
             <Carousel2
                imagesData={images}
                modifyClasses='md:order-4 md:self-stretch'
                interval={3500}
             />
-            
+
             {description}
          </div>
       );
@@ -69,7 +72,7 @@ const About = () => {
          <div className='grid gap-4 grid-cols-2 xl:gap-6 2xl:gap-8 3xl:gap-14 items-center'>
             <div className='space-y-7'>
                {heading}
-               <LinkBtn text='Discover Features' url='#' />
+               {btn}
                {description}
             </div>
 
