@@ -9,8 +9,11 @@ import Image from 'next/image';
 // custom hook
 import useCarousel1 from './useCarousel1';
 
-const Carousel1 = ({ imagesData, interval =3000 }) => {
-   const { curSlide, prevSlide, nextSlide } = useCarousel1(imagesData,interval);
+const Carousel1 = ({ imagesData, interval = 3000 }) => {
+   const { centerSlide, leftSlide, rightSlide } = useCarousel1(
+      imagesData,
+      interval
+   );
 
    return (
       <div
@@ -34,28 +37,32 @@ const Carousel1 = ({ imagesData, interval =3000 }) => {
                         WebkitBackfaceVisibility: 'hidden',
                         top: '50%',
                         transform: `translateY(-50%) translateX(${
-                           id === curSlide
+                           id === centerSlide
                               ? '50%'
-                              : id < curSlide
+                              : id === leftSlide
                               ? '0%'
-                              : id > curSlide
+                              : id === rightSlide
                               ? `300%`
-                              : 'auto'
+                              : '50%'
                         }) rotateY(${
-                           id === curSlide
+                           id === centerSlide
                               ? '0deg'
-                              : id > curSlide
-                              ? '-60deg'
-                              : id < curSlide
-                              ? '60deg'
-                              : '0'
+                              : id === rightSlide
+                              ? '-50deg'
+                              : id === leftSlide
+                              ? '50deg'
+                              : '0deg'
                         })`,
                      }}
                      className={`absolute shadow-medium rounded-xl overflow-hidden ease-out ${
-                        id === curSlide || id === nextSlide || id === prevSlide
-                           ? 'transition-all duration-500 opacity-100 visible z-30'
+                        id === centerSlide ||
+                        id === rightSlide ||
+                        id === leftSlide
+                           ? 'transition-all duration-1000 opacity-100 visible z-40'
                            : 'transition-all duration-500 opacity-0 collapse z-10'
-                     } ${id === curSlide ? 'w-1/2' : 'w-1/4'} aspect-[16/10]`}
+                     } ${
+                        id === centerSlide ? 'w-1/2' : 'w-1/4'
+                     } aspect-[16/10]`}
                   >
                      <Image
                         style={{
@@ -78,7 +85,7 @@ const Carousel1 = ({ imagesData, interval =3000 }) => {
 
 Carousel1.propTypes = {
    imagesData: PropTypes.array,
-   interval: PropTypes.number
+   interval: PropTypes.number,
 };
 
 export default Carousel1;

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const InnerContainer = ({ children, modifyClasses = '' }) => {
   return (
     <div
-      className={`w-full px-5 xs:px-6 md:px-8 lg:px-12 xl:px-[3.5rem] 2xl:px-[4.5rem] 3xl:px-[7rem] ${modifyClasses}`}
+      className={`w-full px-4 xs:px-6 md:px-8 lg:px-10 xl:px-14 2xl:px-20 3xl:px-28 ${modifyClasses}`}
     >
       {children}
     </div>

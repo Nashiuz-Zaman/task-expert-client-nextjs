@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Text = ({ text, modifyClasses = '' }) => {
    return (
-      <p className={`!leading-normal text-neutral-600 text-sm 2md:text-base xl:text-xl ${modifyClasses}`}>
+      <p className={` text-neutral-600 text-lg lg:text-base 2xl:text-lg 3xl:text-xl !leading-normal ${modifyClasses}`}>
          {text}
       </p>
    );
