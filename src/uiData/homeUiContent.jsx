@@ -23,7 +23,7 @@ export const targetAudienceTextContent = {
          Who is it <span className='text-primary'>for</span>
       </>
    ),
-   subheading: 'Anyone can use, really!',
+   subheading: 'It is for everyone!',
    description:
       "It is a user-friendly and minimalist web app designed for basic task management in your everyday life. With its simplistic interface, Task Expert empowers users to organize and prioritize their daily tasks. Whether you're a professional, student, or anyone juggling multiple responsibilities.",
    images: [
