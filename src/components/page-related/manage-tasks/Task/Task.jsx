@@ -29,7 +29,6 @@ import useRedux from '@/hooks/useRedux';
 import {
    setTaskToEdit,
    setTaskDetails,
-   setShowTaskDetailsPanel,
 } from '@/lib/redux/features/task/taskSlice';
 
 // utils
@@ -44,7 +43,7 @@ const Task = ({ taskData }) => {
    const { deleteTask, updateTaskStatus, pinTask } = useTaskDatabaseMethods();
    const { findDropzoneElementId, dropzoneElementRefs } =
       useTaskDragDropProvider();
-   const { openTaskEditForm } = useFormVisiblity();
+   const { openTaskEditForm, openTaskDetailsPanel } = useFormVisiblity();
    const { _id, title, statusLevel, deadline, priorityLevel } = taskData;
    const deadlineStr = getDayMonthNameYearStr(deadline);
    const { isComputer } = useMediaQueryMatcher();
@@ -112,8 +111,8 @@ const Task = ({ taskData }) => {
                      >
                         <ViewDetailsBtn
                            onClickFunction={() => {
-                              dispatch(setTaskDetails(taskData));
-                              dispatch(setShowTaskDetailsPanel(true));
+                              dispatch(setTaskDetails(taskData?._id));
+                              openTaskDetailsPanel();
                               setShow(false);
                            }}
                            text='View Details'

@@ -24,7 +24,10 @@ const taskSlice = createSlice({
          state.taskToEdit = payload;
       },
       setTaskDetails: (state, { payload }) => {
-         state.taskDetails = payload;
+         console.log(payload)
+         state.taskDetails = state.totalTasks.find(
+            task => task._id === payload
+         );
       },
       setPinnedTasks: (state, { payload }) => {
          state.pinnedTasks = payload;

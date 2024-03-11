@@ -6,6 +6,7 @@ import RegistrationModal from '@/components/forms/RegistrationModal/Regtistratio
 import PasswordResetModal from '@/components/forms/PasswordResetModal/PasswordResetModal';
 import About from '@/components/page-related/home/About/About';
 import Features from '@/components/page-related/home/Features/Features';
+import Faq from '@/components/page-related/home/Faq/Faq';
 
 const Home = () => {
    return (
@@ -16,19 +17,20 @@ const Home = () => {
             </InnerContainer>
          </section>
 
-         <section className='mb-sectionGapMd md:mb-sectionGapLg'>
+         <section id='learn-more' className='mb-sectionGapMd md:mb-sectionGapLg'>
             <InnerContainer>
                <About />
             </InnerContainer>
          </section>
 
-         <section
-            id='features'
-            className='mb-sectionGapMd md:mb-sectionGapLg'
-         >
-            <InnerContainer>          
+         <section id='features' className='mb-sectionGapMd md:mb-sectionGapLg'>
+            <InnerContainer>
                <Features />
             </InnerContainer>
+         </section>
+
+         <section className='mb-sectionGapMd md:mb-sectionGapLg'>
+            <Faq />
          </section>
 
          {/* forms */}

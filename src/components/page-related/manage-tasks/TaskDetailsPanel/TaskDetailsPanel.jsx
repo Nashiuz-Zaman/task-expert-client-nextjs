@@ -13,11 +13,11 @@ import DeleteBtn from '@/components/buttons/DeleteBtn/DeleteBtn';
 import useClickOutside from '@/hooks/useClickOutside';
 import useEscapeClose from '@/hooks/useEscapeClose';
 import useTaskDatabaseMethods from '@/hooks/useTaskDatabaseMethods';
+import useFormVisiblity from '@/hooks/useFormVisiblity';
 
 // redux
 import useRedux from '@/hooks/useRedux';
 import {
-   setShowTaskDetailsPanel,
    setTaskDetails,
 } from '@/lib/redux/features/task/taskSlice';
 
@@ -29,20 +29,20 @@ const TaskDetailsPanel = () => {
    const { deleteTask } = useTaskDatabaseMethods();
    const { taskDetails, showTaskDetailsPanel, totalTasks, pinnedTasks } =
       useSelector(store => store.task);
-
-   const closeTaskDetailsPanel = () => {
-      dispatch(setShowTaskDetailsPanel(false));
-      dispatch(setTaskDetails(null));
-   };
+   const { closeTaskDetailsPanel } = useFormVisiblity();
 
    const handleClickOutside = e => {
       if (!e.target.closest('.task-details-panel-focus')) {
          closeTaskDetailsPanel();
+         dispatch(setTaskDetails(null));
       }
    };
 
    useClickOutside(showTaskDetailsPanel, handleClickOutside);
-   useEscapeClose(closeTaskDetailsPanel);
+   useEscapeClose(() => {
+      closeTaskDetailsPanel();
+      dispatch(setTaskDetails(null));
+   });
 
    if (taskDetails) {
       return (
@@ -57,7 +57,8 @@ const TaskDetailsPanel = () => {
             <CloseBtn
                modifyClasses='text-neutral-400 text-xl mb-3'
                onClickFunction={() => {
-                  dispatch(setShowTaskDetailsPanel(false));
+                  closeTaskDetailsPanel();
+                  dispatch(setTaskDetails(null));
                }}
             />
 
@@ -75,7 +76,7 @@ const TaskDetailsPanel = () => {
             {/* deadline  */}
             <div className='text-sm md:text-base 3xl:text-lg flex items-center gap-1 mb-3 text-neutral-500 font-medium !leading-none'>
                <Icon icon='ph:calendar-fill' className='block' />
-               <p className="!leading-inherit">
+               <p className='!leading-inherit'>
                   <span>Deadline: </span>
                   <span>{getDayMonthNameYearStr(taskDetails.deadline)}</span>
                </p>

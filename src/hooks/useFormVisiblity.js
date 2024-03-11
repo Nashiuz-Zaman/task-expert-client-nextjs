@@ -10,10 +10,10 @@ import {
    setRegistrationFormOpen,
    setTaskCreateFormOpen,
    setTaskEditFormOpen,
-   setPasswordResetFormOpen
+   setPasswordResetFormOpen,
 } from '@/lib/redux/features/form/formSlice';
-
 import { setBackdropOpen } from '@/lib/redux/features/backdrop/backdropSlice';
+import { setShowTaskDetailsPanel } from '@/lib/redux/features/task/taskSlice';
 
 const useFormVisiblity = () => {
    const dispatch = useDispatch();
@@ -80,8 +80,6 @@ const useFormVisiblity = () => {
       dispatch(setBackdropOpen(false));
    }, [dispatch]);
 
-
-   
    const openPasswordResetFormWithBackdrop = useCallback(
       (withBackdrop = true) => {
          dispatch(setPasswordResetFormOpen(true));
@@ -104,6 +102,28 @@ const useFormVisiblity = () => {
       [dispatch]
    );
 
+   const openTaskDetailsPanel = useCallback(
+      (withBackdrop = true) => {
+         dispatch(setShowTaskDetailsPanel(true));
+
+         if (withBackdrop) {
+            dispatch(setBackdropOpen(true));
+         }
+      },
+      [dispatch]
+   );
+
+   const closeTaskDetailsPanel = useCallback(
+      (withBackdrop = true) => {
+         dispatch(setShowTaskDetailsPanel(false));
+
+         if (withBackdrop) {
+            dispatch(setBackdropOpen(false));
+         }
+      },
+      [dispatch]
+   );
+
    return {
       openLoginFormWithBackdrop,
       openSignupFormWithBackdrop,
@@ -114,7 +134,9 @@ const useFormVisiblity = () => {
       openTaskEditForm,
       closeTaskEditForm,
       openPasswordResetFormWithBackdrop,
-      closePasswordResetFormWithBackdrop
+      closePasswordResetFormWithBackdrop,
+      openTaskDetailsPanel,
+      closeTaskDetailsPanel,
    };
 };
 
