@@ -20,10 +20,12 @@ const PinnedTask = ({ defaultValue = true, task, modifyClasses = '' }) => {
 
    return (
       <div
-         onClick={() => {
+         onClick={e => {
             if (!defaultValue) {
-               dispatch(setTaskDetails(task.taskId));
-               openTaskDetailsPanel();
+               if (!e.target.closest('.unpin-custom-focus')) {
+                  dispatch(setTaskDetails(task.taskId));
+                  openTaskDetailsPanel();
+               }
             }
          }}
          title={task?.title ?? 'No Pinned tasks'}
@@ -41,7 +43,7 @@ const PinnedTask = ({ defaultValue = true, task, modifyClasses = '' }) => {
                   e.preventDefault();
                   unpinTask(task._id, pinnedTasks);
                }}
-               modifyClasses='!ml-auto text-sm md:text-lg lg:text-xl'
+               modifyClasses='!ml-auto text-sm md:text-lg lg:text-xl unpin-custom-focus'
             />
          )}
       </div>
