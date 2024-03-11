@@ -64,8 +64,7 @@ export const featuresContent = {
       {
          id: 0,
          heading: 'Effortless Task Management',
-         description:
-            "Simplify your day with easy task organization.",
+         description: 'Simplify your day with easy task organization.',
          icon: 'line-md:check-list-3-filled',
       },
       {
@@ -102,6 +101,51 @@ export const featuresContent = {
          description:
             'Perfect for professionals, students, or anyone seeking an organized day.',
          icon: 'clarity:users-solid',
+      },
+   ],
+};
+
+export const faqContent = {
+   bgImg: 'https://i.ibb.co/Ps2D7MC/faq.webp',
+   set1: [
+      {
+         id: 0,
+         question: 'How do I organize tasks in Task Expert?',
+         answer:
+            "Task organization is easy! Simply categorize tasks into 'Todo,' 'Completed,' or 'Ongoing' states for a streamlined view of your progress.",
+      },
+      {
+         id: 1,
+         question: 'Can I pin tasks for quick access?',
+         answer:
+            "Absolutely! Task Expert allows you to pin important tasks for quick access. Simply mark tasks as 'pinned' to keep them at the forefront of your task list.",
+      },
+      {
+         id: 2,
+         question:
+            'Is Task Expert suitable for both professionals and students?',
+         answer:
+            "Yes, Task Expert is designed for everyone! Whether you're a professional managing work tasks or a student organizing assignments, Task Expert adapts to your needs.",
+      },
+   ],
+   set2: [
+      {
+         id: 3,
+         question: 'How do I set deadlines for my tasks?',
+         answer:
+            'Setting deadlines is a breeze. Just click the edit task option, and you can easily assign and track deadlines to stay on top of your schedule. You can also set the deadline while creating the task.',
+      },
+      {
+         id: 4,
+         question: 'Can I use Task Expert on different devices?',
+         answer:
+            'Certainly! Task Expert is accessible across various devices. Seamlessly transition between your desktop, tablet, and mobile to manage tasks from anywhere.',
+      },
+      {
+         id: 5,
+         question: 'What makes Task Expert stand out in task management apps?',
+         answer:
+            "Task Expert stands out with its user-friendly interface, efficient task operations, and versatile features like pinning tasks, detailed views, and countdowns to deadlines. It's the perfect blend of simplicity and productivity and also it's completely free!",
       },
    ],
 };
