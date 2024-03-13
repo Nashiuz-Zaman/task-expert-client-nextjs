@@ -9,7 +9,7 @@ import useFormVisiblity from './useFormVisiblity';
 import useAxios from './useAxios';
 
 // redux
-import { useDispatch } from 'react-redux';
+import useRedux from './useRedux';
 import {
    setUserShouldExist,
    setProfileData,
@@ -20,9 +20,10 @@ import {
 // utils
 import { showToast } from '@/utils/toastify';
 
-const useLoginForm = () => {
-   const dispatch = useDispatch();
-   const { loginEmail, loginGoogle } = useFirebaseMethods();
+const useLoginMethods = () => {
+   const { dispatch, useSelector } = useRedux();
+   const { profileData } = useSelector(store => store.auth);
+   const { loginEmail, loginGoogle, logout } = useFirebaseMethods();
    const { closeLoginFormWithBackdrop, closeSignupFormWithBackdrop } =
       useFormVisiblity();
    const router = useRouter();
@@ -140,10 +141,33 @@ const useLoginForm = () => {
       }
    };
 
+   const handleLogout = async (manual = true) => {
+      const res = await logout();
+
+      if (res.status === 'success') {
+         const logoutRes = await axiosPublic.patch('/logout', { email: profileData?.email });
+
+         if (logoutRes.data.status === 'success') {
+            dispatch(setProfileData(null));
+            dispatch(setUserShouldExist(false));
+            localStorage.removeItem('token');
+
+            if (manual) {
+               showToast('Signed Out Successfully', 'success');
+            }
+
+            if (!manual) {
+               showToast('You Were Signed Out, Please Sign In Again', 'error');
+            }
+         }
+      }
+   };
+
    return {
       handleLoginEmail,
       handleLoginGoogle,
+      handleLogout,
    };
 };
 
-export default useLoginForm;
+export default useLoginMethods;
