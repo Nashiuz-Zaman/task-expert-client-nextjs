@@ -25,9 +25,6 @@ import {
    sendPasswordResetEmail,
 } from 'firebase/auth';
 
-// utils
-import { showToast } from '@/utils/toastify';
-
 // auth and google auth provider
 import { auth, googleAuthProvider } from '@/hooks/useAuth';
 
@@ -59,30 +56,14 @@ const useFirebaseMethods = () => {
    };
 
    // logout function
-   const logout = useCallback(
-      (manual = true) => {
-         router.push('/');
-         signOut(auth)
-            .then(() => {
-               dispatch(setProfileData(null));
-               dispatch(setUserShouldExist(false));
-               localStorage.removeItem('token');
-
-               if (manual) {
-                  showToast('Signed Out Successfully', 'success');
-               }
-
-               if (!manual) {
-                  showToast(
-                     'You Were Signed Out, Please Sign In Again',
-                     'error'
-                  );
-               }
-            })
-            .catch(() => console.error('Error occurred'));
-      },
-      [dispatch, router]
-   );
+   const logout = useCallback(() => {
+      router.push('/');
+      return signOut(auth)
+         .then(() => {
+            return { status: 'success' };
+         })
+         .catch(() => console.error('Error occurred'));
+   }, [router]);
 
    // update password
    const updateUserPassword = useCallback(password => {
@@ -99,9 +80,9 @@ const useFirebaseMethods = () => {
 
    // password reset email
    const sendUserPasswordResetEmail = useCallback(email => {
-     return sendPasswordResetEmail(auth, email)
+      return sendPasswordResetEmail(auth, email)
          .then(() => {
-           return {status: 'success'}
+            return { status: 'success' };
          })
          .catch(error => {
             throw new Error(error.message);
