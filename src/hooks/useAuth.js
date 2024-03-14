@@ -4,13 +4,11 @@
 import { useEffect } from 'react';
 
 // hook
-import useFirebaseMethods from './useFirebaseMethods';
 import useAxios from './useAxios';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import {
-   setUserShouldExist,
    setProfileData,
    setUserLoading,
 } from '@/lib/redux/features/auth/authSlice';
@@ -28,50 +26,34 @@ export const googleAuthProvider = new GoogleAuthProvider();
 
 const useAuth = () => {
    const dispatch = useDispatch();
-   const { userShouldExist, profileData } = useSelector(store => store.auth);
-   const { logout } = useFirebaseMethods();
+   const { profileData } = useSelector(store => store.auth);
    const { axiosSecure } = useAxios();
- 
-   // if true, then user should exist
-   useEffect(() => {
-      if (localStorage.getItem('token')) {
-         dispatch(setUserShouldExist(true));
-      }    
-   }, [dispatch]);
 
-   // set up observer for users, if there an user, update the user state and set loading to false, if there is none set user to null and set loading to false
    useEffect(() => {
       const unSubscribe = onAuthStateChanged(auth, async curUser => {
          try {
             if (curUser) {
-               // this code should only run when the website is refreshed and at the start
-
-               if (!profileData && userShouldExist) {
-                  // check which firebase user is logged in, send the email to database and bring their profile data
+               // run this at website refresh
+               if (!profileData && localStorage?.getItem('token')) {
                   const validationRes = await axiosSecure.get('/validate');
-                  dispatch(setProfileData(validationRes.data.user));
-                  dispatch(setUserLoading(false));
+
+                  if (validationRes?.data?.status === 'success') {
+                     dispatch(setProfileData(validationRes.data.user));
+                  }
                }
             }
          } catch (error) {
-            logout(false);
             showToast('Network error', 'error');
          } finally {
             dispatch(setUserLoading(false));
          }
       });
 
-      // clean up function for disconnecting the listener/observer
+      // clean up function for disconnecting the listener
       return () => {
          unSubscribe();
       };
-   }, [
-      dispatch,
-      userShouldExist,
-      axiosSecure,
-      profileData,      
-      logout,
-   ]);
+   }, [dispatch, axiosSecure, profileData]);
 };
 
 export default useAuth;
