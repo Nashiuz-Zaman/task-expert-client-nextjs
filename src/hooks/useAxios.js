@@ -5,9 +5,17 @@ import axios from 'axios';
 
 // hooks
 import useFirebaseMethods from './useFirebaseMethods';
+import useRedux from './useRedux';
+
+// redux
+import {
+   setProfileData,
+   setUserShouldExist,
+} from '@/lib/redux/features/auth/authSlice';
 
 // server url
 import { serverUrl } from '@/uiData/serverUrl';
+import { showToast } from '@/utils/toastify';
 
 const axiosPublic = axios.create({
    baseURL: serverUrl,
@@ -19,6 +27,7 @@ const axiosSecure = axios.create({
 
 const useAxios = () => {
    const { logout } = useFirebaseMethods();
+   const { dispatch } = useRedux();
 
    // request
    axiosSecure.interceptors.request.use(
@@ -35,15 +44,35 @@ const useAxios = () => {
    );
 
    // response
+
    axiosSecure.interceptors.response.use(
       response => {
          return response;
       },
-      error => {
+      async error => {
          const statusCode = error.response.status;
 
          if (statusCode === 401 || statusCode === 403) {
-            logout(false);
+            const res = await logout();
+
+            if (res.status === 'success') {
+               const logoutRes = await axios.patch(`${serverUrl}/logout`, {
+                  email: localStorage.getItem('email'),
+               });
+
+               if (logoutRes.data.status === 'success') {
+                  dispatch(setProfileData(null));
+                  dispatch(setUserShouldExist(false));
+                  localStorage.removeItem('token');
+                  localStorage.removeItem('email');
+
+                  showToast(
+                     'You Were Signed Out, Please Sign In Again',
+                     'error'
+                  );
+               }
+            }
+
             return;
          }
 

@@ -1,7 +1,8 @@
 export const footerOptions = [
-   { id: 0, text: 'Home', url: '/' },
-   { id: 1, text: 'Who can use?', url: '/#learn-more' },
-   { id: 2, text: 'About Developer', url: 'https://nashiuz-zaman.web.app/' },
+   { id: 0, text: 'About The App', url: '/#learn-more' },
+   { id: 1, text: 'Our Features', url: '/#features' },
+   { id: 2, text: 'FAQ', url: '/#faq' },
+   { id: 3, text: 'Meet The Developer', url: 'https://nashiuz-zaman.web.app/' },
 ];
 
 export const currentYear = new Date().getFullYear();

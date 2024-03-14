@@ -50,17 +50,13 @@ const useRegistrationForm = () => {
    };
 
    const validateInputs = inputs => {
-      const { userName, photo, email, password } = inputs;
+      const { userName, email, password } = inputs;
       const emailRegex = /[a-z0-9._]+@[a-z0-9]+.[a-z]+/g;
 
       const foundErrors = [];
 
       if (userName === '') {
          foundErrors.push('Must provide an username');
-      }
-
-      if (!photo) {
-         foundErrors.push('Must provide a photo');
       }
 
       if (email === '') {
@@ -107,7 +103,7 @@ const useRegistrationForm = () => {
       try {
          dispatch(setRegistrationLoading(true));
          const userExistsResponse = await axiosPublic.post(
-            '/users/checkExistence',
+            '/users/check-user',
             {
                email: dataObject.email,
             }
@@ -147,8 +143,12 @@ const useRegistrationForm = () => {
                   dispatch(setProfileData(profileData));
                   dispatch(setUserShouldExist(true));
                   localStorage.setItem(
-                     'tokenExists',
-                     userCreationResponse.data.tokenExists
+                     'token',
+                     userCreationResponse.data.token
+                  );
+                  localStorage.setItem(
+                     'email',
+                     userCreationResponse.data.user.email
                   );
 
                   closeSignupFormWithBackdrop();
