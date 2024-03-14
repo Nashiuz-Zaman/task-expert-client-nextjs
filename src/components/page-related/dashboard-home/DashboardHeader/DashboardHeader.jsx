@@ -8,14 +8,14 @@ import DashboardMobileNav from '../DashboardMobileNav/DashboardMobileNav';
 import UserProfile from '@/components/shared/UserProfile/UserProfile';
 
 // hooks
-import useFirebaseMethods from '@/hooks/useFirebaseMethods';
+import useLoginMethods from '@/hooks/useLoginMethods';
 
 // redux
 import { useSelector } from 'react-redux';
 
 const DashboardHeader = ({ modifyClasses = '' }) => {
    const { profileData } = useSelector(store => store.auth);
-   const { logout } = useFirebaseMethods();
+   const { handleLogout } = useLoginMethods();
 
    return (
       <header
@@ -29,7 +29,7 @@ const DashboardHeader = ({ modifyClasses = '' }) => {
                <UserProfile
                   profileData={profileData}
                   modifyClasses='ml-auto'
-                  logoutFunction={logout}
+                  logoutFunction={handleLogout}
                />
             )}
          </div>

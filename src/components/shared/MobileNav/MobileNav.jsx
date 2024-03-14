@@ -17,7 +17,7 @@ import ButtonBtn from '@/components/buttons/ButtonBtn/ButtonBtn';
 // hook
 import useMobileNavigation from '@/hooks/useMobileNavigation';
 import useEscapeClose from '@/hooks/useEscapeClose';
-import useFirebaseMethods from '@/hooks/useFirebaseMethods';
+import useLoginMethods from '@/hooks/useLoginMethods';
 import useClickOutside from '@/hooks/useClickOutside';
 import useFormVisiblity from '@/hooks/useFormVisiblity';
 import useStopScrolling from '@/hooks/useStopScrolling';
@@ -25,11 +25,12 @@ import useStopScrolling from '@/hooks/useStopScrolling';
 // redux
 import { useSelector } from 'react-redux';
 
+
 const MobileNav = ({ modifyClasses = '' }) => {
    const { profileData } = useSelector(store => store.auth);
    const { mobileNavOpen, openMobileNav, closeMobileNav } =
       useMobileNavigation();
-   const { logout } = useFirebaseMethods();
+   const { handleLogout } = useLoginMethods();
    const router = useRouter();
    const { openLoginFormWithBackdrop } = useFormVisiblity();
    const { stopYAxisScrolling } = useStopScrolling();
@@ -81,6 +82,25 @@ const MobileNav = ({ modifyClasses = '' }) => {
                   </Link>
                </li>
 
+               <li onClick={closeMobileNav}>
+                  <Link className={linkClasses} href={'/#learn-more'}>
+                     About App
+                  </Link>
+               </li>
+
+               <li onClick={closeMobileNav}>
+                  <Link className={linkClasses} href={'/#features'}>
+                     Our Features
+                  </Link>
+               </li>
+
+               <li onClick={closeMobileNav}>
+                  <Link className={linkClasses} href={'/#faq'}>
+                     FAQ
+                  </Link>
+               </li>
+
+
                <li>
                   <button
                      className={linkClasses}
@@ -113,7 +133,7 @@ const MobileNav = ({ modifyClasses = '' }) => {
                <ButtonBtn
                   text='Sign Out'
                   onClickFunction={() => {
-                     logout();
+                     handleLogout()
                      closeMobileNav();
                   }}
                   modifyClasses='mt-11 mx-auto sm:mx-0'

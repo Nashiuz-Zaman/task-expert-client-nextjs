@@ -42,8 +42,8 @@ const UserProfile = ({ profileData, logoutFunction, modifyClasses = '' }) => {
 
    if (profileData) {
       // assign name and photo variables
-      name = profileData.name;
-      image = profileData.imageSource;
+      name = profileData?.name;
+      image = profileData?.imageSource;
 
       return (
          <div
@@ -56,10 +56,12 @@ const UserProfile = ({ profileData, logoutFunction, modifyClasses = '' }) => {
             >
                {/* if no photo provided show default silhoutte photo */}
                {!image && (
-                  <Icon
-                     className='w-full h-full object-contain text-white'
-                     icon='solar:user-circle-bold'
-                  />
+                  <div className='w-full h-full p-2 flex items-center justify-center'>
+                     <Icon
+                        className='w-full h-full text-neutral-300'
+                        icon='mingcute:user-3-fill'
+                     />
+                  </div>
                )}
 
                {/* if there is photo show this part */}

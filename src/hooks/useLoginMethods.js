@@ -73,6 +73,7 @@ const useLoginMethods = () => {
             dispatch(setProfileData(profileData));
             dispatch(setUserShouldExist(true));
             localStorage.setItem('token', googleLoginResponse.data.token);
+            localStorage.setItem('email', googleLoginResponse.data.user.email);
 
             closeLoginFormWithBackdrop();
             closeSignupFormWithBackdrop();
@@ -117,7 +118,7 @@ const useLoginMethods = () => {
          //  if firebase login is successful, check database for profile data
          if (result.user) {
             const loginResponse = await axiosPublic.post('/email-login', {
-               email: result.user.email,
+               email: dataObject.email,
             });
 
             if (loginResponse.data.status === 'success') {
@@ -126,6 +127,7 @@ const useLoginMethods = () => {
                dispatch(setUserShouldExist(true));
                // set profile and the jwt token in the localstorage
                localStorage.setItem('token', loginResponse.data.token);
+               localStorage.setItem('email', loginResponse.data.user.email);
 
                closeLoginFormWithBackdrop();
 
@@ -142,15 +144,19 @@ const useLoginMethods = () => {
    };
 
    const handleLogout = async (manual = true) => {
+      const email = profileData?.email;
+      // firebase logout
       const res = await logout();
 
+      // if firebase logout is successful
       if (res.status === 'success') {
-         const logoutRes = await axiosPublic.patch('/logout', { email: profileData?.email });
+         const logoutRes = await axiosPublic.patch('/logout', { email });
 
          if (logoutRes.data.status === 'success') {
             dispatch(setProfileData(null));
             dispatch(setUserShouldExist(false));
             localStorage.removeItem('token');
+            localStorage.removeItem('email');
 
             if (manual) {
                showToast('Signed Out Successfully', 'success');

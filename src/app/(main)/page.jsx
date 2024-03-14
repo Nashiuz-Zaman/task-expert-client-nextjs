@@ -29,7 +29,7 @@ const Home = () => {
             </InnerContainer>
          </section>
 
-         <section className='mb-sectionGapMd md:mb-sectionGapLg'>
+         <section id='faq' className='mb-sectionGapMd md:mb-sectionGapLg'>
             <Faq />
          </section>
 

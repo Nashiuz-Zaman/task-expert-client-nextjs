@@ -2,13 +2,13 @@
 import AllTasks from '@/components/page-related/manage-tasks/AllTasks/AllTasks';
 import TaskCreateForm from '@/components/forms/TaskCreateForm/TaskCreateForm';
 import TaskUtilsHeader from '@/components/page-related/manage-tasks/TaskUtilsHeader/TaskUtilsHeader';
-
-// utils
-import { TaskDragDropProvider } from '@/utils/TaskDragDropUtils';
 import TaskEditForm from '@/components/forms/TaskEditForm/TaskEditForm';
 import TaskDetailsPanel from '@/components/page-related/manage-tasks/TaskDetailsPanel/TaskDetailsPanel';
 
-const ManageTasks = () => {
+// utils
+import { TaskDragDropProvider } from '@/utils/TaskDragDropUtils';
+
+let ManageTasks = () => {
    return (
       <div
          style={{
