@@ -14,7 +14,7 @@ import DashboardNavContent from '../DashboardNavContent/DashboardNavContent';
 // hook
 import useDashboardMobileNav from '@/hooks/useDashboardMobileNav';
 import useEscapeClose from '@/hooks/useEscapeClose';
-import useFirebaseMethods from '@/hooks/useFirebaseMethods';
+import useLoginMethods from '@/hooks/useLoginMethods';
 import useClickOutside from '@/hooks/useClickOutside';
 import useStopScrolling from '@/hooks/useStopScrolling';
 
@@ -28,7 +28,7 @@ const DashboardMobileNav = ({
       openDashboardMobileNav,
       closeDashboardMobileNav,
    } = useDashboardMobileNav();
-   const { logout } = useFirebaseMethods();
+   const { handleLogout } = useLoginMethods();
    const { stopYAxisScrolling } = useStopScrolling();
 
    useEffect(() => {
@@ -75,7 +75,7 @@ const DashboardMobileNav = ({
             <ButtonBtn
                text='Sign Out'
                onClickFunction={() => {
-                  logout();
+                  handleLogout();
                   closeDashboardMobileNav();
                }}
                modifyClasses='mt-11'

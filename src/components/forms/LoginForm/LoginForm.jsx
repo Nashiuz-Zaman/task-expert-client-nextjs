@@ -11,7 +11,7 @@ import PasswordField from '@/components/shared/PasswordField/PasswordField';
 import InputField1 from '@/components/shared/InputField1/InputField1';
 
 // hooks
-import useLoginForm from '@/hooks/useLoginForm';
+import useLoginMethods from '@/hooks/useLoginMethods';
 import useResetForm from '@/hooks/useResetForm';
 import useFormVisiblity from '@/hooks/useFormVisiblity';
 
@@ -22,7 +22,7 @@ import { setLoginErrors } from '@/lib/redux/features/auth/authSlice';
 const LoginForm = ({ modifyClasses = '' }) => {
    const { loginErrors, loginLoading } = useSelector(store => store.auth);
    const { loginFormOpen } = useSelector(store => store.form);
-   const { handleLoginEmail, handleLoginGoogle } = useLoginForm();
+   const { handleLoginEmail, handleLoginGoogle } = useLoginMethods();
    const { resetFormFieldsAndErrors } = useResetForm();
    const { closeLoginFormWithBackdrop, openSignupFormWithBackdrop, openPasswordResetFormWithBackdrop } =
       useFormVisiblity();

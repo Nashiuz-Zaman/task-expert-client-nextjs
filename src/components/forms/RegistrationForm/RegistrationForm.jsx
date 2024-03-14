@@ -10,7 +10,7 @@ import PasswordField from '@/components/shared/PasswordField/PasswordField';
 
 // hooks
 import useRegistrationForm from '@/hooks/useRegistrationForm';
-import useLoginForm from '@/hooks/useLoginForm';
+import useLoginMethods from '@/hooks/useLoginMethods';
 import useResetForm from '@/hooks/useResetForm';
 import useFormVisiblity from '@/hooks/useFormVisiblity';
 
@@ -24,7 +24,7 @@ const RegistrationForm = ({ modifyClasses }) => {
       store => store.auth
    );
    const { registrationFormOpen } = useSelector(store => store.form);
-   const { handleLoginGoogle } = useLoginForm();
+   const { handleLoginGoogle } = useLoginMethods();
    const { resetFormFieldsAndErrors } = useResetForm();
    const { closeSignupFormWithBackdrop, openLoginFormWithBackdrop } =
       useFormVisiblity();
