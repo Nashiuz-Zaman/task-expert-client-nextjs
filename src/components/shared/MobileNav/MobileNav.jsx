@@ -6,7 +6,6 @@ import { useEffect } from 'react';
 
 // next
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 // components
 import CloseBtn from '@/components/buttons/CloseBtn/CloseBtn';
@@ -19,20 +18,16 @@ import useMobileNavigation from '@/hooks/useMobileNavigation';
 import useEscapeClose from '@/hooks/useEscapeClose';
 import useLoginMethods from '@/hooks/useLoginMethods';
 import useClickOutside from '@/hooks/useClickOutside';
-import useFormVisiblity from '@/hooks/useFormVisiblity';
 import useStopScrolling from '@/hooks/useStopScrolling';
 
 // redux
 import { useSelector } from 'react-redux';
-
 
 const MobileNav = ({ modifyClasses = '' }) => {
    const { profileData } = useSelector(store => store.auth);
    const { mobileNavOpen, openMobileNav, closeMobileNav } =
       useMobileNavigation();
    const { handleLogout } = useLoginMethods();
-   const router = useRouter();
-   const { openLoginFormWithBackdrop } = useFormVisiblity();
    const { stopYAxisScrolling } = useStopScrolling();
 
    useEffect(() => {
@@ -63,10 +58,7 @@ const MobileNav = ({ modifyClasses = '' }) => {
             } p-8 bg-white ${modifyClasses}`}
          >
             {/* X cross button to close nav */}
-            <CloseBtn
-               onClickFunction={closeMobileNav}
-               modifyClasses='mb-11'
-            />
+            <CloseBtn onClickFunction={closeMobileNav} modifyClasses='mb-11' />
 
             {/* brand logo */}
             <BrandLogo
@@ -81,6 +73,17 @@ const MobileNav = ({ modifyClasses = '' }) => {
                      home
                   </Link>
                </li>
+
+               {profileData && (
+                  <li onClick={closeMobileNav}>
+                     <Link
+                        className={linkClasses}
+                        href={`/manage-tasks?id=${profileData?._id}`}
+                     >
+                        Go to Dashboard
+                     </Link>
+                  </li>
+               )}
 
                <li onClick={closeMobileNav}>
                   <Link className={linkClasses} href={'/#learn-more'}>
@@ -100,25 +103,6 @@ const MobileNav = ({ modifyClasses = '' }) => {
                   </Link>
                </li>
 
-
-               <li>
-                  <button
-                     className={linkClasses}
-                     onClick={() => {
-                        if (!profileData) {
-                           closeMobileNav();
-                           openLoginFormWithBackdrop();
-                           return;
-                        }
-
-                        router.push(`/manage-tasks`);
-                        closeMobileNav();
-                     }}
-                  >
-                     Dashboard
-                  </button>
-               </li>
-
                <li onClick={closeMobileNav}>
                   <Link
                      className={linkClasses}
@@ -133,7 +117,7 @@ const MobileNav = ({ modifyClasses = '' }) => {
                <ButtonBtn
                   text='Sign Out'
                   onClickFunction={() => {
-                     handleLogout()
+                     handleLogout();
                      closeMobileNav();
                   }}
                   modifyClasses='mt-11 mx-auto sm:mx-0'
