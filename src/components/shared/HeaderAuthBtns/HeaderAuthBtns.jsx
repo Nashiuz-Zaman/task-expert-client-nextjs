@@ -63,7 +63,7 @@ const HeaderAuthBtns = ({ modifyClasses = '' }) => {
                </p>
 
                <Link
-                  href={'/manage-tasks'}
+                  href={`/manage-tasks?id=${profileData._id}`}
                   className={`${btnClasses} underline text-primary`}
                >
                   Visit Dashboard

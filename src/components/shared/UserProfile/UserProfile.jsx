@@ -88,7 +88,10 @@ const UserProfile = ({ profileData, logoutFunction, modifyClasses = '' }) => {
                   <Icon icon='icon-park-solid:home' /> <span>Home</span>
                </Link>
 
-               <Link href='/settings' className={optionsClasses}>
+               <Link
+                  href={`/settings?id=${profileData?._id}`}
+                  className={optionsClasses}
+               >
                   <Icon icon='iconamoon:settings-fill' /> <span>Settings</span>
                </Link>
 
