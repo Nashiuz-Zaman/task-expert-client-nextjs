@@ -35,7 +35,7 @@ const Faq = () => {
             </h2>
 
             {/* faq questions and answers below */}
-            <InnerContainer paddingSide='right' modifyClasses='grid grid-cols-1 2md:grid-cols-2 lg:grid-cols-1 2xl:grid-cols-2 gap-4 lg:gap-5'>
+            <InnerContainer modifyClasses='grid grid-cols-1 2md:grid-cols-2 lg:grid-cols-1 2xl:grid-cols-2 gap-4 lg:gap-5 lg:!pl-0'>
                <div className='space-y-5'>
                   {set1?.map(question => {
                      return (

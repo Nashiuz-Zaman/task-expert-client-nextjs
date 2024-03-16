@@ -23,7 +23,7 @@ const Footer = () => {
     'text-4xl text-white hover:text-primary transition-all duration-150 cursor-pointer';
 
   return (
-    <footer className='bg-blackLight pt-44 pb-16 relative'>
+    <footer className='bg-blackLight pt-sectionGapSm md:pt-sectionGapMd pb-16 relative'>
       <InnerContainer>
         {/* top part */}
 
@@ -43,7 +43,7 @@ const Footer = () => {
           {/* follow us social media */}
           <div className='justify-self-center'>
             {/* social media icons */}
-            <div className={``}>
+            <div>
               <h2 className='text-xl text-center md:text-left text-white mb-3 2xl:text-3xl font'>
                 Follow Us
               </h2>
