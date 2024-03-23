@@ -15,12 +15,17 @@ import useFirebaseMethods from '@/hooks/useFirebaseMethods';
 import useAxios from '@/hooks/useAxios';
 
 // redux
-import { useSelector } from 'react-redux';
+import useRedux from '@/hooks/useRedux';
+import {
+   setProfileData,
+   setUserShouldExist,
+} from '@/lib/redux/features/auth/authSlice';
 
 // utils
 import { showToast } from '@/utils/toastify';
 
 const ProfileRemover = ({ modifyClasses = '' }) => {
+   const { dispatch, useSelector } = useRedux();
    const { profileData } = useSelector(store => store.auth);
    const { deleteUserAccount } = useFirebaseMethods();
    const { axiosSecure } = useAxios();
@@ -28,14 +33,19 @@ const ProfileRemover = ({ modifyClasses = '' }) => {
 
    const handleDelete = async () => {
       try {
-         const email = profileData.email;
+         const email = profileData?.email;
          router.push('/');
 
          const res = await deleteUserAccount();
 
          if (res.status === 'success') {
             const userDeleteRes = await axiosSecure.delete(`/users/${email}`);
+
             if (userDeleteRes.data.status === 'success') {
+               dispatch(setProfileData(null));
+               dispatch(setUserShouldExist(false));
+               localStorage.removeItem('token');
+               localStorage.removeItem('email');
                showToast('Account Deleted', 'success');
             }
          }
