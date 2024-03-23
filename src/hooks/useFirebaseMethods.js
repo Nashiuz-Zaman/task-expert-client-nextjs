@@ -6,13 +6,6 @@ import { useCallback } from 'react';
 // next js
 import { useRouter } from 'next/navigation';
 
-// redux
-import { useDispatch } from 'react-redux';
-import {
-   setUserShouldExist,
-   setProfileData,
-} from '@/lib/redux/features/auth/authSlice';
-
 // firebase
 import {
    createUserWithEmailAndPassword,
@@ -29,7 +22,6 @@ import {
 import { auth, googleAuthProvider } from '@/hooks/useAuth';
 
 const useFirebaseMethods = () => {
-   const dispatch = useDispatch();
    const router = useRouter();
 
    // login with google
@@ -95,15 +87,12 @@ const useFirebaseMethods = () => {
 
       return deleteUser(user)
          .then(() => {
-            dispatch(setProfileData(null));
-            dispatch(setUserShouldExist(false));
-            localStorage.removeItem('token');
             return { status: 'success' };
          })
          .catch(error => {
             throw new Error(error.message);
          });
-   }, [dispatch]);
+   }, []);
 
    return {
       loginEmail,
